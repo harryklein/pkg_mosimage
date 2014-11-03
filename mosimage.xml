@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.6" method="upgrade">
+    <name>Mosimage</name>
+    <creationDate>DATE</creationDate>
+    <author>Harry Klein</author>
+    <authorEmail>harry.klein@joomla-hklein.de</authorEmail>
+    <authorUrl>http://www.joomla-hklein.de</authorUrl>
+    <copyright>(C) 2009-2012 Harry Klein. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>HEAD</version>
+    <description>COM_MOSIMAGE_DESC</description>   
+    <installfile/>
+    <uninstallfile/>
+    <install>
+    	<sql>
+    		<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+    	</sql>
+    </install>	
+    <uninstall>
+    	<sql></sql>
+    </uninstall>
+    <files/>
+    <languages>
+    </languages>
+    <media/>
+    <administration>
+       <menu view="info" task="info">COM_MOSIMAGE_INFO</menu>
+       <files folder="admin">
+       		<folder>controllers</folder>
+       		<folder>helpers</folder>
+       		<folder>js</folder>
+       		<folder>views</folder>
+       		<folder>language</folder>
+       		<folder>tables</folder>
+       		<folder>sql</folder>
+       		<folder>models</folder>
+            <filename>mosimage.php</filename>
+            <filename>controller.php</filename>
+            <filename>index.html</filename>
+        </files>
+        <languages folder="admin/language">
+            <language tag="de-DE">de-DE/de-DE.com_mosimage.ini</language>
+            <language tag="de-DE">de-DE/de-DE.com_mosimage.sys.ini</language>
+            <language tag="en-GB">en-GB/en-GB.com_mosimage.ini</language>
+            <language tag="en-GB">en-GB/en-GB.com_mosimage.sys.ini</language>
+        </languages>
+    </administration>
+</extension>
