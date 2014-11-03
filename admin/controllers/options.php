@@ -56,7 +56,7 @@ class MosimageControllerOptions extends JControllerForm {
 		}
 		if ($result === true){
 			if ($task == 'apply') {
-				$url = 'index.php?option=' . $this->option . '&view=' . $this->view_item .'&tmpl=component&object=jform_articletext&cid[]=' . $id;
+				$url = 'index.php?option=' . $this->option . '&tmpl=component&task=options.edit&content_id=' . $id;
 				$this->setRedirect(
 						JRoute::_(
 								/*'index.php?option=' . $this->option . '&view=' . $this->view_item . '&tmpl=component&object=jform_articletext&cid[]='.$id*/

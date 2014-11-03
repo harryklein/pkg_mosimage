@@ -33,28 +33,16 @@ class MosimageViewOptions extends JViewLegacy {
 		$this->setLayout('form');
 
 		$this->state = $this->get('State'); 
-		$this->item	= $this->get('Item');
+		$this->item = $this->get('Item');
 		$this->form = $this->get('Form');
-		$this->data = $this->get('Data');
-		
 		
 		$folders =array();
 		$images = array();
 		
-		//$folders[] = JHTML::_('select.option','/');
-		//$imagePath = JPATH_SITE .'/images';
-		//$folderPath = '/';
-		
-		//$this->getFolderAndImageList($imagePath, $folderPath, $folders, $images);
-		$this->getFolderAndImageList($folders, $images);
-		
-		$cid = JRequest::getVar( 'cid', array(0), '', 'array' );
-		JArrayHelper::toInteger($cid, array(0));
-		$id = JRequest::getVar( 'id', $cid[0], '', 'int' );
-		//$imageRootDir = JURI::root() .'/images';
+		$this->getFolderAndImageList($folders, $images);		
 		
 		$this->assignRef('images', $images);
-		$this->assign('id',$id);
+		$this->assign('id',$this->item->content_id);
 		
 		$this->addToolbar();
 		parent::display($tpl);
