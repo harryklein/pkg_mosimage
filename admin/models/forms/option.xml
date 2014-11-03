@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_mosimage/models/fields">
+		<field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
+			readonly="true" class="readonly"
+			description="JGLOBAL_FIELD_ID_DESC"/>
+
+		<field id="_source" name="_source" type="text" class="inputbox" size="25" readonly="true" 
+			label="COM_MOSIMAGE_SOURCE" description="COM_MOSIMAGE_SOURCE_DESC"/>
+		
+		<field name="_align" type="list" default="left" size="1" 
+			label="COM_MOSIMAGE_IMAGE_ALIGN" description="COM_MOSIMAGE_IMAGE_ALIGN_DESC">
+			<option value="">JNONE</option>
+			<option value="left">JGLOBAL_LEFT</option>
+			<option value="right">JGLOBAL_RIGHT</option>
+			<option value="center">JGLOBAL_CENTER</option>
+			
+		</field>
+		
+		<field id="_alt" name="_alt" type="text" class="inputbox" size="25" 
+			label="COM_MOSIMAGE_ALT_TEXT" description="COM_MOSIMAGE_ALT_TEXT_DESC"/>
+			
+		<field id="_border" name="_border" type="list" size="1" 
+			label="COM_MOSIMAGE_BORDER" description="COM_MOSIMAGE_BORDER_DESC">
+			<option value="0">COM_MOSIMAGE_DEFAULT</option>
+			<option value="hidden">COM_MOSIMAGE_HIDDEN</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</field>
+		
+		<field id="_caption" name="_caption" type="text" class="inputbox" size="25" 
+			label="COM_MOSIMAGE_CAPTION" description="COM_MOSIMAGE_CAPTION_DESC"/>
+			
+		<field id="view_imagefiles" name="view_imagefiles" type="image" class="preview" default="../media/system/images/blank.png" alt="COM_MOSIMAGE_PREVIEW" label="COM_MOSIMAGE_PREVIEW" />
+		<field id="view_imagelist"  name="view_imagelist"  type="image" class="preview" default="../media/system/images/blank.png" alt="COM_MOSIMAGE_ACTIVE_IMAGE" label="COM_MOSIMAGE_ACTIVE_IMAGE" />
+			
+		<field id="_caption_position" name="_caption_position" type="list" default=""
+			size="1" label="COM_MOSIMAGE_CAPTION_POSITION"
+			description="COM_MOSIMAGE_CAPTION_POSITION_DESC">
+			<option value="">COM_MOSIMAGE_DEFAULT</option>
+			<option value="bottom">COM_MOSIMAGE_BOTTOM</option>
+			<option value="top">COM_MOSIMAGE_TOP</option>
+			<option value="hide">COM_MOSIMAGE_HIDDEN</option>
+		</field>
+		
+		
+		<!--  Inhalt der Liste wird per JS befüllt -->	
+		<field id="imagefiles" name="imagefiles" type="list" default="" size="10" 
+			onchange="Mosimage.previewImage( 'jform_imagefiles', 'jform_view_imagefiles', JOOMLA_ROOT + '/images/' );" 
+			label="COM_MOSIMAGE_GALLERY_IMAGES" description="COM_MOSIMAGE_GALLERY_IMAGES_DESC" multiple="true" hide_none="true" hide_default="true"></field>
+		
+		<!-- Liste aller Ordner unter /images -->
+		<field id="folder" name="folder" type="folderlistextended" default="" directory="images" size="1" 
+			label="COM_MOSIMAGE_SUBFOLDER" description="COM_MOSIMAGE_SUBFOLDER" 
+			onchange="Mosimage.changeDynaList2( 'jform_imagefiles', folderimages, 'jform_folder', 0, 0);"/>
+			
+		<!-- Liste der Bilder, die einem Artikel zugeordnet sind -->	
+		<field id="images" name="images" type="mosimagelist" size="10" 
+			onchange="Mosimage.showImageProps(JOOMLA_ROOT + '/images/' );" 
+			label="COM_MOSIMAGE_CONTENT_IMAGES" description="COM_MOSIMAGE_GALLERY_IMAGES_DESC" multiple="true"/>
+			
+		<field name="add" type="button" label="COM_MOSIMAGE_ADD_BUTTON_LABEL" description="COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC" 
+			onclick="Mosimage.addSelectedToList2('adminForm','jform_imagefiles','jform_images');"></field>
+		<field name="remove" type="button" label="COM_MOSIMAGE_REMOVE_BUTTON_LABEL" description="COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC" onclick="Mosimage.delSelectedFromList2('adminForm','jform_images');"></field>
+				
+		<field name="pos1" type="button" label="COM_MOSIMAGE_POS1_LABEL" description="COM_MOSIMAGE_POS1_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_images',0)"/>
+		<field name="up"   type="button" label="COM_MOSIMAGE_UP_LABEL"   description="COM_MOSIMAGE_UP_LABEL_DESC"   onclick="Mosimage.moveInList('adminForm','jform_images',-1)"/>
+		<field name="down" type="button" label="COM_MOSIMAGE_DOWN_LABEL" description="COM_MOSIMAGE_DOWN_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_images',+1)"/>
+		<field name="end"  type="button" label="COM_MOSIMAGE_END_LABEL"  description="COM_MOSIMAGE_END_LABEL_DESC"  onclick="Mosimage.moveInList('adminForm','jform_images','end')"/>
+		
+		<field name="applay" type="button" class="btn btn-primary" label="COM_MOSIMAGE_APPLY" onclick="Mosimage.applyImageProps()" />
+	</fieldset>
+</form>
