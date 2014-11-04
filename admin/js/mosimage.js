@@ -54,7 +54,7 @@ Mosimage.setSelectedValue2 = function (srcListName, value) {
 
 
 Mosimage.showImageProps = function(base_path) {
-	var value = Mosimage.getSelectedValue2('jform_images');
+	var value = Mosimage.getSelectedValue2('jform_imageslist');
 	var parts = value.split('|');
 	document.getElementById('jform__source').value = parts[0];
 
@@ -82,7 +82,7 @@ Mosimage.showImageProps = function(base_path) {
 
 Mosimage.applyImageProps = function () {
 	var form = document.adminForm;
-	if (!Mosimage.getSelectedValue2('jform_images')) {
+	if (!Mosimage.getSelectedValue2('jform_imageslist')) {
 		alert("Select and image from the list");
 		return;
 	}
@@ -94,7 +94,7 @@ Mosimage.applyImageProps = function () {
 			+ Mosimage.getSelectedValue2('jform__caption_position') + '|'
 			+ Mosimage.getSelectedValue2('jform__caption_align') + '|'
 			+ form._width.value;
-	Mosimage.chgSelectedValue('jform_images', value);
+	Mosimage.chgSelectedValue('jform_imageslist', value);
 }
 
 Mosimage.chgSelectedValue = function (srcListName, value) {
@@ -254,3 +254,9 @@ Mosimage.changeDynaList2 = function (listname, source, listWithFolderNames, orig
 	list.selectedIndex = 0;
 	Mosimage.previewImage(listname, 'jform_view_imagefiles', JOOMLA_ROOT + 'images/');
 }
+
+Mosimage.closeWindows = function (){
+	window.parent.SqueezeBox.close();
+}
+
+

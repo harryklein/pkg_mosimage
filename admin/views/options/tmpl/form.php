@@ -54,11 +54,11 @@ Joomla.submitbutton = function(task) {
 	}
 	// assemble the images back into one field
 	var temp = new Array;
-	var srcList = document.getElementById('jform_images');
+	var srcList = document.getElementById('jform_imageslist');
 	for (var i=0, n=srcList.options.length; i < n; i++) {
 		temp[i] = srcList.options[i].value;
 	}
-	document.getElementById('images').value = temp.join( '\n' );
+	document.getElementById('jform_images').value = temp.join( '\n' );
 	Joomla.submitform(task);
 }
 
@@ -110,7 +110,7 @@ Joomla.submitbutton = function(task) {
 						</div>
 					</div>
 					<div class="span4">
-						<?php echo $this->form->getControlGroup('images');?>
+						<?php echo $this->form->getControlGroup('imageslist');?>
 					</div>
 				</div>
 				
@@ -162,6 +162,10 @@ Joomla.submitbutton = function(task) {
 							<?php echo $this->form->getControlGroup('applay'); ?>
 						</div>
 					</div>
+					<input type="hidden" name="content_id" value="<?php echo $this->id; ?>" />
+					<!-- input type="hidden" id="jform_content_id" name="jform[content_id]" value="<?php echo $this->id; ?>" /-->
+					<?php echo $this->form->getInput('content_id');?>
+					<?php echo $this->form->getInput('images');?>
 				</fieldset>
 			</div>
 		</div>
@@ -169,9 +173,10 @@ Joomla.submitbutton = function(task) {
 	<input type="hidden" name="_width" value=""/>
 	<input type="hidden" name="option" value="com_mosimage" />
 	<input type="hidden" name="cid[]" value="<?php echo $this->id; ?>" />
+	
 	<input type="hidden" name="task" value="" />
-	<?php echo JHTML::_( 'form.token' ); ?>
-	<input type="hidden" id="images" name="images" value="" /> 		
+	<input type="hidden" name="tmpl" value="component" />
+	<?php echo JHTML::_( 'form.token' ); ?> 		
 </form>
 </div>
 <script type="text/javascript">

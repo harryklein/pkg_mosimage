@@ -56,19 +56,21 @@
 			onchange="Mosimage.changeDynaList2( 'jform_imagefiles', folderimages, 'jform_folder', 0, 0);"/>
 			
 		<!-- Liste der Bilder, die einem Artikel zugeordnet sind -->	
-		<field id="images" name="images" type="mosimagelist" size="10" 
+		<field id="imageslist" name="imageslist" type="mosimagelist" size="10" 
 			onchange="Mosimage.showImageProps(JOOMLA_ROOT + '/images/' );" 
 			label="COM_MOSIMAGE_CONTENT_IMAGES" description="COM_MOSIMAGE_GALLERY_IMAGES_DESC" multiple="true"/>
 			
 		<field name="add" type="button" label="COM_MOSIMAGE_ADD_BUTTON_LABEL" description="COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC" 
-			onclick="Mosimage.addSelectedToList2('adminForm','jform_imagefiles','jform_images');"></field>
-		<field name="remove" type="button" label="COM_MOSIMAGE_REMOVE_BUTTON_LABEL" description="COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC" onclick="Mosimage.delSelectedFromList2('adminForm','jform_images');"></field>
+			onclick="Mosimage.addSelectedToList2('adminForm','jform_imagefiles','jform_imageslist');"></field>
+		<field name="remove" type="button" label="COM_MOSIMAGE_REMOVE_BUTTON_LABEL" description="COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC" onclick="Mosimage.delSelectedFromList2('adminForm','jform_imageslist');"></field>
 				
-		<field name="pos1" type="button" label="COM_MOSIMAGE_POS1_LABEL" description="COM_MOSIMAGE_POS1_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_images',0)"/>
-		<field name="up"   type="button" label="COM_MOSIMAGE_UP_LABEL"   description="COM_MOSIMAGE_UP_LABEL_DESC"   onclick="Mosimage.moveInList('adminForm','jform_images',-1)"/>
-		<field name="down" type="button" label="COM_MOSIMAGE_DOWN_LABEL" description="COM_MOSIMAGE_DOWN_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_images',+1)"/>
-		<field name="end"  type="button" label="COM_MOSIMAGE_END_LABEL"  description="COM_MOSIMAGE_END_LABEL_DESC"  onclick="Mosimage.moveInList('adminForm','jform_images','end')"/>
+		<field name="pos1" type="button" label="COM_MOSIMAGE_POS1_LABEL" description="COM_MOSIMAGE_POS1_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_imageslist',0)"/>
+		<field name="up"   type="button" label="COM_MOSIMAGE_UP_LABEL"   description="COM_MOSIMAGE_UP_LABEL_DESC"   onclick="Mosimage.moveInList('adminForm','jform_imageslist',-1)"/>
+		<field name="down" type="button" label="COM_MOSIMAGE_DOWN_LABEL" description="COM_MOSIMAGE_DOWN_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_imageslist',+1)"/>
+		<field name="end"  type="button" label="COM_MOSIMAGE_END_LABEL"  description="COM_MOSIMAGE_END_LABEL_DESC"  onclick="Mosimage.moveInList('adminForm','jform_imageslist','end')"/>
 		
 		<field name="applay" type="button" class="btn btn-primary" label="COM_MOSIMAGE_APPLY" onclick="Mosimage.applyImageProps()" />
+		<field id="content_id" name="content_id" type="hidden"/>
+		<field id="images" name="images" type="hidden"/>
 	</fieldset>
 </form>

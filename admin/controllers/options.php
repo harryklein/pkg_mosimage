@@ -29,62 +29,23 @@ class MosimageControllerOptions extends JControllerForm {
 	}
 	
 	public function save($key = null, $urlVar = null){
-
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-		
+		$result =  parent::save($key, $urlVar);
 		$task = $this->getTask();
 		
-		$images = JRequest::getString('images');
-		$cid = JRequest::getVar( 'cid', array(0), '', 'array' );
-		JArrayHelper::toInteger($cid, array(0));
-		$id = JRequest::getVar( 'id', $cid[0], '', 'int' );
-		$db	= JFactory::getDBO();
-		if ($id == 0){
-			$result = false;
-		} else {
-			JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_mosimage/tables');
-			$row = JTable::getInstance('mosimage');
-			$row->load($id);
-			$row->images=$images;
-			if ($row->content_id != 0) {
-				$result = $db->updateObject('#__mosimage', $row, 'content_id');
-			}
-			else {
-				$row->content_id = $id;
-				$result = $db->insertObject('#__mosimage', $row, 'content_id');
-			}
-		}
-		if ($result === true){
-			if ($task == 'apply') {
-				$url = 'index.php?option=' . $this->option . '&tmpl=component&task=options.edit&content_id=' . $id;
-				$this->setRedirect(
-						JRoute::_(
-								/*'index.php?option=' . $this->option . '&view=' . $this->view_item . '&tmpl=component&object=jform_articletext&cid[]='.$id*/
-								$url
-								, false)
-						);
-				//http://localhost/cms/administrator/index.php?option=com_mosimage&view=options&tmpl=component&object=jform_articletext&cid[]=99
-			} else {
-			?>
-<script type="text/javascript">
-				window.parent.SqueezeBox.close();
-				</script>
-		<?php 		}
-		} else {
-			if ($error = $db->getErrorMsg()) {
-					    JError::raiseWarning(500, $error);
-			} else {
-				 echo JText::_('COM_MOSIMAGE_ERROR_OCCURRED');
-			}
-			?>
-<br />
-<button type="button" onclick="window.parent.SqueezeBox.close();">
-	<?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE');?>
-</button>
-<?php
-}
-		return true;
-
+		switch ( $task){
+			case 'save': 
+				$document = JFactory::getDocument();
+				$document->addScript(JURI::root() .'/administrator/components/com_mosimage/js/mosimage.js');
+				?>
+				<script type="text/javascript">
+					window.parent.SqueezeBox.close();	
+				</script> <?php
+				// Der Aufruf von parent::save() setzt ein Redirect, der aber wegen
+				// dem Modal-Dialog hier  nicht gewüscht ist.
+				$this->setRedirect(null);
+				break;
+		}	
+		return $result;
 	}
 
 

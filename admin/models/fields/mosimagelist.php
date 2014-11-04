@@ -37,29 +37,19 @@ class JFormFieldMosimageList extends JFormFieldList {
 		
 		$a1 = ' onkeyup="' . "Mosimage.showImageProps( '". $baseURL ."' );";
 		$a2 = ' onclick="' . "Mosimage.showImageProps( '". $baseURL ."' );";
-		
+		 
+		// wir misbrauchen iher onchange, da Fieldlist kein onclick und 
+		// onkeyup unterstützt
 		$this->onchange = '" ' . $a1 . '"' . $a2;
 		return parent::getInput();
 	}
 
 
 	protected function getOptions() {
-		
 		$value = $this->value;
-		
-		// String -> array
-		if (trim( $value )) {
-			$images = preg_replace("#(\n\r)+#",'',$value);
-			$images = preg_replace("#(\r)*#",'',$images);
-			$images = explode( "\n",$images);
-		} else {
-			$images = array();
-		}
-		
-		// Option zusammenbauen
 		$options= array();
 		$i = 0;
-		foreach( $images as $file ) {
+		foreach( $value as $file ) {
 			$temp = explode( '|', $file );
 			if( strrchr($temp[0], '/') ) {
 				$filename = substr( strrchr($temp[0], '/' ), 1 );

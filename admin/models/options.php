@@ -55,6 +55,15 @@ class MosimageModelOptions extends JModelAdmin {
 	
 	public function getItem($pk = null){
 		$item = parent::getItem($pk);
+		// String -> array
+		if (trim( $item->images )) {
+			$imageslist = preg_replace("#(\n\r)+#",'',$item->images);
+			$imageslist = preg_replace("#(\r)*#",'',$imageslist);
+			$imageslist = explode( "\n",$imageslist);
+		} else {
+			$imageslist = array();
+		}
+		$item->imageslist = $imageslist;
 		return $item;
 	}
 }
