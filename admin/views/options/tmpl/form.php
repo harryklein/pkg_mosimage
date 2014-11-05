@@ -75,7 +75,7 @@ Joomla.submitbutton = function(task) {
 	</div>
 	</div>
 	<div class="modal-form">
-	<form action="index.php" method="post" name="adminForm" id="adminForm">
+	<form action="<?php echo JRoute::_('index.php?option=com_mosimage&layout=formt&tmpl=component&content_id=' . (int) $this->item->content_id);?>" method="post" name="adminForm" id="adminForm">
 	
 		<!-- Titel und Botton Save/Cancel	  -->
 		<div class="row">
@@ -156,12 +156,8 @@ Joomla.submitbutton = function(task) {
 					<?php echo $this->form->getControlGroup('_border')?>
 					<?php echo $this->form->getControlGroup('_caption')?>
 					<?php echo $this->form->getControlGroup('_caption_position')?>
-									
-					<div class="row">
-						<div class="span3">
-							<?php echo $this->form->getControlGroup('applay'); ?>
-						</div>
-					</div>
+					<?php echo $this->form->getControlGroup('applay'); ?>
+					<!-- hidden fields -->
 					<?php echo $this->form->getInput('content_id');?>
 					<?php echo $this->form->getInput('images');?>
 				</fieldset>
@@ -169,14 +165,7 @@ Joomla.submitbutton = function(task) {
 		</div>
 	<input type="hidden" name="_caption_align" value="right" />
 	<input type="hidden" name="_width" value=""/>
-	<input type="hidden" name="option" value="com_mosimage" />
-	<?php 
-// @TODO content_id in die URL des Forms aufnehmen, analog zu 
-//	echo JRoute::_('index.php?option=com_weblinks&layout=edit&id=' . (int) $this->item->id); 
-	?>
-	<input type="hidden" name="content_id" value="<?php echo $this->item->content_id; ?>" />
 	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="tmpl" value="component" />
 	<?php echo JHTML::_( 'form.token' ); ?> 		
 </form>
 </div>
