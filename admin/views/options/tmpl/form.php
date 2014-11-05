@@ -170,6 +170,10 @@ Joomla.submitbutton = function(task) {
 	<input type="hidden" name="_caption_align" value="right" />
 	<input type="hidden" name="_width" value=""/>
 	<input type="hidden" name="option" value="com_mosimage" />
+	<?php 
+// @TODO content_id in die URL des Forms aufnehmen, analog zu 
+//	echo JRoute::_('index.php?option=com_weblinks&layout=edit&id=' . (int) $this->item->id); 
+	?>
 	<input type="hidden" name="content_id" value="<?php echo $this->item->content_id; ?>" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="tmpl" value="component" />
