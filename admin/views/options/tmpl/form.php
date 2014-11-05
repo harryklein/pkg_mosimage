@@ -69,7 +69,6 @@ Joomla.submitbutton = function(task) {
 <?php 
 	JHtml::_('bootstrap.tooltip');
 	echo JToolbar::getInstance('toolbar')->render();
-
 ?>	
 	</div>
 	</div>
@@ -171,6 +170,11 @@ Joomla.submitbutton = function(task) {
 </div>
 <script type="text/javascript">
 	Mosimage.changeDynaList2( 'jform_imagefiles', folderimages, 'jform_folder' , 0, 0);
-	Mosimage.showImageProps( JOOMLA_ROOT + 'images/' );
+
+	var messages = new Array("<?php echo JText::_('COM_MOSIMAGE_APLAY_CHANGED_VALUES');?>");
+	Mosimage.initShowImageProps( JOOMLA_ROOT + 'images/', messages );
 	Mosimage.previewImage('jform_imagefiles', 'jform_view_imagefiles', JOOMLA_ROOT + 'images/');
+
+
+	
 </script>

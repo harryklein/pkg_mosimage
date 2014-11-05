@@ -48,12 +48,22 @@ Mosimage.setSelectedValue2 = function (srcListName, value) {
 		srcList.options[i].selected = false;
 		if (srcList.options[i].value == value) {
 			srcList.options[i].selected = true;
+			srcList.options[i].defaultSelected = true;
 		}
 	}
 }
 
 
-Mosimage.showImageProps = function(base_path) {
+
+
+Mosimage.initShowImageProps = function(base_path, messages) {
+	this.messages = messages;
+	var list = document.getElementById('jform_imageslist');
+	list.previousSelectedIndex = list.selectedIndex;
+}
+
+
+Mosimage.showImagePropsWithoutChecks  = function(base_path){
 	var value = Mosimage.getSelectedValue2('jform_imageslist');
 	var parts = value.split('|');
 	document.getElementById('jform__source').value = parts[0];
@@ -64,11 +74,20 @@ Mosimage.showImageProps = function(base_path) {
 		value = parts[1] || '';
 	}
 	Mosimage.setSelectedValue2('jform__align', value);
+	
 	document.getElementById('jform__alt').value = parts[2] || '';
+	document.getElementById('jform__alt').defaultValue = parts[2] || '';
+	
 	document.getElementById('jform__border').value = parts[3] || '0';
+	document.getElementById('jform__border').defaultValue = parts[3] || '0';
+	
 	document.getElementById('jform__caption').value = parts[4] || '';
+	document.getElementById('jform__caption').defaultValue = parts[4] || '';
+	
 	Mosimage.setSelectedValue2('jform__caption_position', parts[5] || '');
+	
 	Mosimage.setSelectedValue2('jform__caption_align', parts[6] || '');
+	
 	var form = document.adminForm;
 	form._width.value = parts[7] || '';
 
@@ -80,13 +99,39 @@ Mosimage.showImageProps = function(base_path) {
 	}
 }
 
-Mosimage.applyImageProps = function () {
-	var form = document.adminForm;
-	if (!Mosimage.getSelectedValue2('jform_imageslist')) {
-		alert("Select and image from the list");
-		return;
+
+Mosimage.isValueChanged = function(elementId){
+	var defaultValue = document.getElementById(elementId).defaultValue;
+	var currentValue = document.getElementById(elementId).value;
+	if (defaultValue == currentValue ) {
+		return false;
+	} 
+	return true;
+}
+
+
+Mosimage.showImageProps = function(base_path) {
+	var list = document.getElementById('jform_imageslist');
+	if (Mosimage.isValueChanged('jform__caption') || Mosimage.isValueChanged('jform__alt') /*|| Mosimage.isValueChanged('jform__border')*/){  
+			if (confirm(this.messages[0])){
+				Mosimage.applyImageProps(true);
+			} else {
+				// nun doch zu den alten Daten zurück, die noch in den Feldern zu sehen ist
+				list.selectedIndex = list.previousSelectedIndex;
+				return;
+			}
 	}
-	value = document.getElementById('jform__source').value + '|'
+	Mosimage.showImagePropsWithoutChecks(base_path);
+	list.previousSelectedIndex = list.selectedIndex;
+}
+
+Mosimage.applyImageProps = function (previous) {
+	if ('undefined' === typeof previous) {
+		previous = false;
+    }
+	
+	var form = document.adminForm;
+	var value = document.getElementById('jform__source').value + '|'
 			+ Mosimage.getSelectedValue2('jform__align') + '|'
 			+ document.getElementById('jform__alt').value + '|'
 			+ Mosimage.getSelectedValue2('jform__border') + '|'
@@ -94,13 +139,19 @@ Mosimage.applyImageProps = function () {
 			+ Mosimage.getSelectedValue2('jform__caption_position') + '|'
 			+ Mosimage.getSelectedValue2('jform__caption_align') + '|'
 			+ form._width.value;
-	Mosimage.chgSelectedValue('jform_imageslist', value);
+	Mosimage.chgSelectedValue('jform_imageslist', value, previous);
 }
 
-Mosimage.chgSelectedValue = function (srcListName, value) {
+Mosimage.chgSelectedValue = function (srcListName, value, previous) {
+	if ('undefined' === typeof previous) {
+		previous = false;
+    }
 	var srcList = document.getElementById(srcListName);
-
-	i = srcList.selectedIndex;
+	if (previous){
+		var i = srcList.previousSelectedIndex;
+	} else {
+		var i = srcList.selectedIndex;
+	}
 	if (i != null && i > -1) {
 		srcList.options[i].value = value;
 		return true;
