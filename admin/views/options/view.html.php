@@ -35,14 +35,8 @@ class MosimageViewOptions extends JViewLegacy {
 		$this->state = $this->get('State'); 
 		$this->item = $this->get('Item');
 		$this->form = $this->get('Form');
-		
-		$folders =array();
-		$images = array();
-		
-		$this->getFolderAndImageList($folders, $images);		
-		
-		$this->assignRef('images', $images);
-		$this->assign('id',$this->item->content_id);
+				
+		$this->allAvailableImages = $this->get('AllAvailableImages');
 		
 		$this->addToolbar();
 		parent::display($tpl);
@@ -54,47 +48,4 @@ class MosimageViewOptions extends JViewLegacy {
 		JToolbarHelper::save('options.save');
 		JToolbarHelper::cancel('options.cancel', 'JTOOLBAR_CLOSE');
 	} 
-	
-	private function getFolderAndImageList( &$folders, &$images){
-		$folders[] = JHTML::_('select.option','/');
-		$imagePath = JPATH_SITE .'/images';
-		$folderPath = '/';
-		$this->readImagesList($imagePath, $folderPath, $folders, $images);
-		
-	}
-	
-
-	/**
-	 * Internal function to recursive scan the media manager directories
-	 * @param string Path to scan
-	 * @param string root path of this folder
-	 * @param array  Value array of all existing folders
-	 * @param array  Value array of all existing images
-	 */
-	private function readImagesList( $imagePath, $folderPath, &$folders, &$images ) {
-	    
-	    jimport('joomla.filesystem.file');
-	    jimport('joomla.filesystem.folder');
-		$imgFiles=JFolder::files($imagePath);
-		foreach ($imgFiles as $file) {
-			$ff 	= $folderPath . $file;
-			$i_f 	= $imagePath .'/'. $file;
-			if ( preg_match( '/\.gif$|\.jpg$|\.jpeg$|\.png$/i', $file ) && is_file( $i_f ) ) {
-				// leading / we don't need
-				$imageFile = substr( $ff, 1 );
-				$images[$folderPath][] = JHTML::_('select.option',$imageFile, $file );
-			}
-		}
-		
-		$imgDirs=JFolder::folders($imagePath);
-		foreach ($imgDirs as $dir) {
-		    $i_f 	= $imagePath .'/'. $dir;
-		    $ff_ 	= $folderPath . $dir .'/';
-		    if ( is_dir( $i_f )) {
-				$folders[] = JHTML::_('select.option',$ff_);
-				$this->readImagesList( $i_f, $ff_, $folders, $images );
-		    }
-		}
-	}
-
 }

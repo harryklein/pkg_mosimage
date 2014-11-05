@@ -28,6 +28,10 @@ class MosimageModelOptions extends JModelAdmin {
 
 	protected $text_prefix = 'COM_MOSIMAGE';
 	
+	private $allAvailableImageFolders;
+	private $allAvailableImages;
+	
+	
 	public function getTable($type = 'Mosimage', $prefix = 'JTable', $config = array()) {
 		return JTable::getInstance($type, $prefix, $config);
 	}	
@@ -66,6 +70,68 @@ class MosimageModelOptions extends JModelAdmin {
 		$item->imageslist = $imageslist;
 		return $item;
 	}
+	
+	public function getAllAvailableImages(){
+		if ( $this->allAvailableImages == null) {
+			$this->allAvailableImages = array();
+			$this->allAvailableImageFolders = array();
+			$this->getFolderAndImageList($this->allAvailableImageFolders , $this->allAvailableImages);
+		}
+		return $this->allAvailableImages;
+	}
+	
+	public function getAllAvailableImageFolders(){
+		if ( $this->allAvailableImageFolders == null) {
+			$this->allAvailableImages = array();
+			$this->allAvailableImageFolders = array();
+			$this->getFolderAndImageList($this->allAvailableImageFolders , $this->allAvailableImages);
+		}
+		return $this->allAvailableImageFolders;
+	}
+	
+	
+	private function getFolderAndImageList( &$folders, &$images){
+		$folders[] = JHTML::_('select.option','/');
+		$imagePath = JPATH_SITE .'/images';
+		$folderPath = '/';
+		$this->readImagesList($imagePath, $folderPath, $folders, $images);
+	}
+	
+	/**
+	 * Internal function to recursive scan the media manager directories
+	 * @param string Path to scan
+	 * @param string root path of this folder
+	 * @param array  Value array of all existing folders
+	 * @param array  Value array of all existing images
+	 */
+	private function readImagesList( $imagePath, $folderPath, &$folders, &$images ) {
+		 
+		jimport('joomla.filesystem.file');
+		jimport('joomla.filesystem.folder');
+		$imgFiles=JFolder::files($imagePath);
+		foreach ($imgFiles as $file) {
+			$ff 	= $folderPath . $file;
+			$i_f 	= $imagePath .'/'. $file;
+			if ( preg_match( '/\.gif$|\.jpg$|\.jpeg$|\.png$/i', $file ) && is_file( $i_f ) ) {
+				// leading / we don't need
+				$imageFile = substr( $ff, 1 );
+				$images[$folderPath][] = JHTML::_('select.option',$imageFile, $file );
+			}
+		}
+	
+		$imgDirs=JFolder::folders($imagePath);
+		foreach ($imgDirs as $dir) {
+			$i_f 	= $imagePath .'/'. $dir;
+			$ff_ 	= $folderPath . $dir .'/';
+			if ( is_dir( $i_f )) {
+				$folders[] = JHTML::_('select.option',$ff_);
+				$this->readImagesList( $i_f, $ff_, $folders, $images );
+			}
+		}
+	}
+	
+	
+	
 }
 
 

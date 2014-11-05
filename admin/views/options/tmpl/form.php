@@ -40,7 +40,7 @@ $document->addStyleDeclaration($css);
 	var folderimages = new Array;
 <?php
 	$i = 0;
-	foreach ($this->images as $k=>$items) {
+	foreach ($this->allAvailableImages as $k=>$items) {
 		foreach ($items as $v) {
 			echo "folderimages[".$i++."] = new Array( '$k','".addslashes( $v->value )."','".addslashes( $v->text )."' );\t";
 		}
@@ -162,8 +162,6 @@ Joomla.submitbutton = function(task) {
 							<?php echo $this->form->getControlGroup('applay'); ?>
 						</div>
 					</div>
-					<input type="hidden" name="content_id" value="<?php echo $this->id; ?>" />
-					<!-- input type="hidden" id="jform_content_id" name="jform[content_id]" value="<?php echo $this->id; ?>" /-->
 					<?php echo $this->form->getInput('content_id');?>
 					<?php echo $this->form->getInput('images');?>
 				</fieldset>
@@ -172,8 +170,7 @@ Joomla.submitbutton = function(task) {
 	<input type="hidden" name="_caption_align" value="right" />
 	<input type="hidden" name="_width" value=""/>
 	<input type="hidden" name="option" value="com_mosimage" />
-	<input type="hidden" name="cid[]" value="<?php echo $this->id; ?>" />
-	
+	<input type="hidden" name="content_id" value="<?php echo $this->item->content_id; ?>" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="tmpl" value="component" />
 	<?php echo JHTML::_( 'form.token' ); ?> 		
