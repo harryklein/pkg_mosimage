@@ -42,24 +42,21 @@ Mosimage.setSelectedValue2 = function (srcListName, value) {
 	if (srcList == null) {
 		return;
 	}
+	srcList.defaultValue = value;
 	var srcLen = srcList.length;
-
 	for ( var i = 0; i < srcLen; i++) {
 		srcList.options[i].selected = false;
 		if (srcList.options[i].value == value) {
 			srcList.options[i].selected = true;
-			srcList.options[i].defaultSelected = true;
 		}
 	}
 }
-
-
-
 
 Mosimage.initShowImageProps = function(base_path, messages) {
 	this.messages = messages;
 	var list = document.getElementById('jform_imageslist');
 	list.previousSelectedIndex = list.selectedIndex;
+	Mosimage.showImagePropsWithoutChecks(base_path);
 }
 
 
@@ -91,6 +88,9 @@ Mosimage.showImagePropsWithoutChecks  = function(base_path){
 	var form = document.adminForm;
 	form._width.value = parts[7] || '';
 
+	if ( 'undefined' === typeof base_path) {
+		return;
+	}
 	srcImage = document.getElementById('jform_view_imagelist');
 	if (parts[0]){
 		srcImage.src = base_path + parts[0];
@@ -110,9 +110,25 @@ Mosimage.isValueChanged = function(elementId){
 }
 
 
+Mosimage.isValueChangedInSelect = function(elementId){
+	var aa = document.getElementById(elementId).selectedOptions;
+	var defaultValue = document.getElementById(elementId).defaultValue;
+	var currentValue = document.getElementById(elementId).value;
+	if (defaultValue == currentValue ) {
+		return false;
+	} 
+	return true;
+}
+
+
 Mosimage.showImageProps = function(base_path) {
 	var list = document.getElementById('jform_imageslist');
-	if (Mosimage.isValueChanged('jform__caption') || Mosimage.isValueChanged('jform__alt') /*|| Mosimage.isValueChanged('jform__border')*/){  
+	if (Mosimage.isValueChangedInSelect('jform__align') ||
+			Mosimage.isValueChanged('jform__alt') ||
+			Mosimage.isValueChangedInSelect('jform__border') ||
+			Mosimage.isValueChanged('jform__caption') || 
+			Mosimage.isValueChangedInSelect('jform__caption_position') 
+			){  
 			if (confirm(this.messages[0])){
 				Mosimage.applyImageProps(true);
 			} else {
@@ -125,6 +141,22 @@ Mosimage.showImageProps = function(base_path) {
 	list.previousSelectedIndex = list.selectedIndex;
 }
 
+
+Mosimage.resetImageProps = function () {
+	document.getElementById('jform__align').value = document.getElementById('jform__align').defaultValue;
+	document.getElementById('jform__alt').value = document.getElementById('jform__alt').defaultValue;
+	document.getElementById('jform__caption').value = document.getElementById('jform__caption').defaultValue;
+	
+	document.getElementById('jform__border').value = document.getElementById('jform__border').defaultValue;
+	document.getElementById('jform__caption_position').value = document.getElementById('jform__caption_position').defaultValue;
+}
+
+/**
+ * 
+ * jform_imageslist: Liste mit den Image-Daten
+ * @param previous bei true werden die Image-Daten nicht aus dem selectedIndex, 
+ * 		sonder aus dem previousSelectedIndex geholt. Default ist false
+ */
 Mosimage.applyImageProps = function (previous) {
 	if ('undefined' === typeof previous) {
 		previous = false;
@@ -140,6 +172,7 @@ Mosimage.applyImageProps = function (previous) {
 			+ Mosimage.getSelectedValue2('jform__caption_align') + '|'
 			+ form._width.value;
 	Mosimage.chgSelectedValue('jform_imageslist', value, previous);
+	Mosimage.showImagePropsWithoutChecks();
 }
 
 Mosimage.chgSelectedValue = function (srcListName, value, previous) {

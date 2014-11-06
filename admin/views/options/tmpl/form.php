@@ -156,6 +156,7 @@ Joomla.submitbutton = function(task) {
 					<?php echo $this->form->getControlGroup('_caption')?>
 					<?php echo $this->form->getControlGroup('_caption_position')?>
 					<?php echo $this->form->getControlGroup('applay'); ?>
+					<?php echo $this->form->getControlGroup('reset'); ?>
 					<!-- hidden fields -->
 					<?php echo $this->form->getInput('content_id');?>
 					<?php echo $this->form->getInput('images');?>

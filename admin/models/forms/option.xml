@@ -20,7 +20,7 @@
 		<field id="_alt" name="_alt" type="text" class="inputbox" size="25" 
 			label="COM_MOSIMAGE_ALT_TEXT" description="COM_MOSIMAGE_ALT_TEXT_DESC"/>
 			
-		<field id="_border" name="_border" type="list" size="1" 
+		<field id="_border" name="_border" type="list" size="1" default="hidden"
 			label="COM_MOSIMAGE_BORDER" description="COM_MOSIMAGE_BORDER_DESC">
 			<option value="0">COM_MOSIMAGE_DEFAULT</option>
 			<option value="hidden">COM_MOSIMAGE_HIDDEN</option>
@@ -70,6 +70,7 @@
 		<field name="end"  type="button" label="COM_MOSIMAGE_END_LABEL"  description="COM_MOSIMAGE_END_LABEL_DESC"  onclick="Mosimage.moveInList('adminForm','jform_imageslist','end')"/>
 		
 		<field name="applay" type="button" class="btn btn-primary" label="COM_MOSIMAGE_APPLY" onclick="Mosimage.applyImageProps()" />
+		<field name="reset"  type="button" class="btn" label="COM_MOSIMAGE_RESET_BUTTON" onclick="Mosimage.resetImageProps()" />
 		<field id="content_id" name="content_id" type="hidden"/>
 		<field id="images" name="images" type="hidden"/>
 	</fieldset>
