@@ -2,6 +2,8 @@ mosimage.xml
 admin/controller.php
 admin/mosimage.php
 admin/index.html
+admin/access.xml
+admin/config.xml
 admin/controllers/index.html
 admin/controllers/options.php
 admin/models/fields/button.php
@@ -31,3 +33,5 @@ admin/tables/mosimage.php
 admin/js/mosimage.js
 admin/js/index.html
 admin/helpers/mosimage.php
+site/mosimage.php
+site/index.html

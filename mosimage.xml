@@ -19,10 +19,13 @@
     <uninstall>
     	<sql></sql>
     </uninstall>
-    <files/>
     <languages>
     </languages>
     <media/>
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>mosimage.php</filename>
+    </files>
     <administration>
        <menu view="info" task="info">COM_MOSIMAGE_INFO</menu>
        <files folder="admin">
@@ -37,6 +40,8 @@
             <filename>mosimage.php</filename>
             <filename>controller.php</filename>
             <filename>index.html</filename>
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
         </files>
         <languages folder="admin/language">
             <language tag="de-DE">de-DE/de-DE.com_mosimage.ini</language>
@@ -45,4 +50,5 @@
             <language tag="en-GB">en-GB/en-GB.com_mosimage.sys.ini</language>
         </languages>
     </administration>
+    
 </extension>
