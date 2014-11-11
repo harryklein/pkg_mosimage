@@ -21,20 +21,18 @@
  * along with EventList; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-/*
-require_once (JPATH_COMPONENT.'/controller.php');
 
-$controller = new MosimageController();
-$controller->execute( JRequest::getVar('task'));
-$controller->redirect();
-*/
-
-if (!JFactory::getUser()->authorise('core.manage', 'com_mosimage'))
-{
-	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+$app=JFactory::getApplication();
+if ($app->isAdmin()) {
+	if (!JFactory::getUser()->authorise('core.manage', 'com_mosimage')){		
+		return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+	}
+} else {
+	if (!JFactory::getUser()->authorise('core.edit', 'com_mosimage')){
+		return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+	}
 }
-
-$controller	= JControllerLegacy::getInstance('Mosimage');
+$controller	= JControllerLegacy::getInstance('Mosimage', array('base_path' => JPATH_COMPONENT_ADMINISTRATOR));
 $controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();
 
