@@ -24,72 +24,18 @@
 
 class MosimageController extends JControllerLegacy {
 	
+	protected $default_view = 'info';
+	
 	public function display($cachable = false, $urlparams = array()){
-		require_once JPATH_COMPONENT.'/helpers/mosimage.php';
-	    $view	= JRequest::getCmd('view', 'info');	    
+		require_once JPATH_COMPONENT_ADMINISTRATOR.'/helpers/mosimage.php';
+		$view   = $this->input->get('view', 'info');
+	    
 	    if ($view == 'info'){
-	        JRequest::setVar('view','info');
 	       	MosimageHelper::addSubmenu($view);
 	        parent::display();
 	        return $this;
 	    }	    
 		parent::display();	
 		return $this;
-	}
-
-	public function saveMosimageOption(){
-		$images = JRequest::getString('images');
-		$cid = JRequest::getVar( 'cid', array(0), '', 'array' );
-		JArrayHelper::toInteger($cid, array(0));
-		$id = JRequest::getVar( 'id', $cid[0], '', 'int' );
-		$db	= JFactory::getDBO();
-		if ($id == 0){
-			$result = false;
-		} else {
-			JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_mosimage/tables');
-			$row = JTable::getInstance('mosimage');
-			$row->load($id);
-			$row->images=$images;
-		    if ($row->content_id != 0) {
-			    $result = $db->updateObject('#__mosimage', $row, 'content_id');
-		    }
-		    else {
-		        $row->content_id = $id;
-			    $result = $db->insertObject('#__mosimage', $row, 'content_id');
-		    }
-		}
-		if ($result === true){
-		?>
-		<script type="text/javascript">
-		window.parent.SqueezeBox.close();
-		</script>
-		<?php } else {
-		    if ($error = $db->getErrorMsg()) {
-			    JError::raiseWarning(500, $error);
-		    } else { 
-			    echo JText::_('COM_MOSIMAGE_ERROR_OCCURRED');
-		    }
-			?><br />
-			<button type="button" onclick="window.parent.SqueezeBox.close();"><?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE');?></button>
-		<?php
-		} 
-	}
-	
-	public function clearcache(){
-		jimport('joomla.filesystem.folder');
-        $cacheDirectory = JPATH_SITE.'/cache/mosimage-cache';
-        $result= JFolder::delete($cacheDirectory);
-        
-        if (!JFolder::exists($cacheDirectory)){
-			$result = JFolder::create($cacheDirectory) && $result;
-		}
-  
-		if ($result){
-			$msg = JText::_('COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL');
-		} else {
-			$msg = JText::_('COM_MOSIMAGE_DELETE_CACHE_FAILED');			
-		}	
-	    $this->setRedirect(JRoute::_('index.php?option=com_mosimage&view=info'), $msg);
-	}
-	
+	}	
 }
