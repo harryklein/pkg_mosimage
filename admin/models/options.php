@@ -38,6 +38,11 @@ class MosimageModelOptions extends JModelAdmin {
 	
 	
 	public function getForm($data = array(), $loadData = true) {
+		JForm::addFormPath(JPATH_COMPONENT_ADMINISTRATOR . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT_ADMINISTRATOR . '/models/fields');
+		JForm::addFormPath(JPATH_COMPONENT_ADMINISTRATOR . '/model/form');
+		JForm::addFieldPath(JPATH_COMPONENT_ADMINISTRATOR . '/model/field');
+		
 		$form = $this->loadForm('com_mosimage.option', 'option', array('control' => 'jform', 'load_data' => $loadData));
 	
 		if (empty($form))
