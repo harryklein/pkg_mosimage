@@ -35,8 +35,14 @@
 	action="<?php echo JRoute::_('index.php?option=com_mosimage&view=info');?>"
 	method="post" name="adminForm" id="adminForm">
 
+	<?php if (!empty( $this->sidebar)) : ?>
+	<div id="j-sidebar-container" class="span2">
+		<?php echo $this->sidebar; ?>
+	</div>	
 	<div id="j-main-container" class="span10">
-	
+<?php else : ?>
+	<div id="j-main-container">
+<?php endif;?>
 		<fieldset>
             <label><?php echo JText::_('COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC') . ": " . $this->amountCacheFile;?>&nbsp;</label>
 			<input class="button" type="button"
@@ -61,7 +67,7 @@
 				?><li><a href="<?php echo JURI::root();?>/cache/mosimage-cache/<?php echo $i;?>"><?php echo $i;?></a></li><?php 
 			}?>
 		</ul>
-		<input type="hidden" name="task" value="clearcache" />
+		<input type="hidden" name="task" value="info.clearcache" />
 	</div>
 	<?php echo JHtml::_('form.token'); ?>	
 </form>

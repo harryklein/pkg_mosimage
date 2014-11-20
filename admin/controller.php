@@ -27,11 +27,8 @@ class MosimageController extends JControllerLegacy {
 	protected $default_view = 'info';
 	
 	public function display($cachable = false, $urlparams = array()){
-		require_once JPATH_COMPONENT_ADMINISTRATOR.'/helpers/mosimage.php';
 		$view   = $this->input->get('view', 'info');
-	    
 	    if ($view == 'info'){
-	       	MosimageHelper::addSubmenu($view);
 	        parent::display();
 	        return $this;
 	    }	    

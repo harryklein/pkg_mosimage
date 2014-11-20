@@ -23,12 +23,9 @@
 */
 
 class MosimageHelper extends JHelperContent {
-	public static function addSubmenu($vName) {
-		JSubMenuHelper::addEntry(
-			JText::_('COM_MOSIMAGE_CACHE_MANAGEMENT'),
-			'#',
-			$vName == 'cache'
-		);
+		
+	public static function addSubmenu($vName = 'cache') {
+		JHtmlSidebar::addEntry(JText::_('COM_MOSIMAGE_CACHE_MANAGEMENT'),'#',$vName == 'cache');
 	}
 }
 

@@ -1,0 +1,3031 @@
++ ROOT_DIR=/home/harald/project/joomla-3.1/com_mosimage
++ case "${1}" in
++ echo 'WORKSPACE: [/home/harald/project/joomla-3.1/com_mosimage]'
+WORKSPACE: [/home/harald/project/joomla-3.1/com_mosimage]
++ LANGUAGE_1=en-GB
++ LANGUAGE_2=de-DE
++ ERROR_COUNTER=0
++ loadConfiguration
++ local CONF_FILE=/home/harald/project/joomla-3.1/com_mosimage/build.properties
++ '[' -f /home/harald/project/joomla-3.1/com_mosimage/build.properties -a -r /home/harald/project/joomla-3.1/com_mosimage/build.properties ']'
++ echo 'INFO: Lade Konfiguration [/home/harald/project/joomla-3.1/com_mosimage/build.properties]'
+INFO: Lade Konfiguration [/home/harald/project/joomla-3.1/com_mosimage/build.properties]
++ . /home/harald/project/joomla-3.1/com_mosimage/build.properties
+++ ZIP_FILE_NAME=com_mosimage
+++ url=http://localhost/cms
+++ login=admin
+++ password=admin
+++ source=deploy/com_mosimage-.zip
+++ name=Mosimage
+++ LANG_FILE_DIRECTORY=admin
+++ echo com_mosimage
++ [[ com_mosimage == '' ]]
++ getVersionString
++ '[' '' == '' ']'
++ '[' '' == '' ']'
++ VERSION=HEAD
++ changeIntoWorkingDirectory
++ cd /home/harald/project/joomla-3.1/com_mosimage
++ check_exit_code 0 'ERROR: Kann nicht in das Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage] wechseln. Abbruch'
++ EXIT_CODE=0
++ shift 1
++ MSG='ERROR: Kann nicht in das Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage] wechseln. Abbruch'
++ '[' 0 -ne 0 ']'
++ checkFilelistFile
++ '[' '!' -f /home/harald/project/joomla-3.1/com_mosimage/bin/filelist.txt ']'
++ checkUnusedProperties de-DE
++ '[' '' == 1 ']'
++ '[' -z '' ']'
++ local FILE=com_mosimage
++ local LANGUAGE_1=de-DE
++ local EXTENTION=
++ '[' -n '' ']'
++ '[' -z admin ']'
++ echo 'LANG_FILE_DIRECTORY [admin]'
+LANG_FILE_DIRECTORY [admin]
++ for dir in '${LANG_FILE_DIRECTORY}'
++ FILE_1=admin/language/de-DE/de-DE.com_mosimage.ini
++ echo 'Prüfe Datei [admin/language/de-DE/de-DE.com_mosimage.ini]'
+Prüfe Datei [admin/language/de-DE/de-DE.com_mosimage.ini]
+++ find admin -name '*.php'
++ local 'SRC=admin/controller.php
+admin/controllers/options.php
+admin/models/fields/button.php
+admin/models/fields/folderlistextended.php
+admin/models/fields/positions.php
+admin/models/fields/image.php
+admin/models/fields/mosimagelist.php
+admin/models/options.php
+admin/mosimage.php
+admin/views/info/tmpl/default.php
+admin/views/info/view.html.php
+admin/views/options/tmpl/form.php
+admin/views/options/view.html.php
+admin/helpers/mosimage.php
+admin/tables/mosimage.php'
++ '[' admin '!=' site ']'
+++ ls build.xml mosimage.xml
++ SRC='admin/controller.php
+admin/controllers/options.php
+admin/models/fields/button.php
+admin/models/fields/folderlistextended.php
+admin/models/fields/positions.php
+admin/models/fields/image.php
+admin/models/fields/mosimagelist.php
+admin/models/options.php
+admin/mosimage.php
+admin/views/info/tmpl/default.php
+admin/views/info/view.html.php
+admin/views/options/tmpl/form.php
+admin/views/options/view.html.php
+admin/helpers/mosimage.php
+admin/tables/mosimage.php build.xml
+mosimage.xml'
++ '[' admin == admin ']'
+++ find site -name '*.xml'
+find: "site": Datei oder Verzeichnis nicht gefunden
++ SRC='admin/controller.php
+admin/controllers/options.php
+admin/models/fields/button.php
+admin/models/fields/folderlistextended.php
+admin/models/fields/positions.php
+admin/models/fields/image.php
+admin/models/fields/mosimagelist.php
+admin/models/options.php
+admin/mosimage.php
+admin/views/info/tmpl/default.php
+admin/views/info/view.html.php
+admin/views/options/tmpl/form.php
+admin/views/options/view.html.php
+admin/helpers/mosimage.php
+admin/tables/mosimage.php build.xml
+mosimage.xml  '
+++ grep -v ';'
+++ cut -d = -f 1
+++ grep =
+++ cat admin/language/de-DE/de-DE.com_mosimage.ini
++ local 'LABELS=COM_MOSIMAGE_SUBFOLDER
+COM_MOSIMAGE_PREVIEW
+COM_MOSIMAGE_ACTIVE_IMAGE
+COM_MOSIMAGE_SAMPLE_IMAGE
+COM_MOSIMAGE_CAPTION
+COM_MOSIMAGE_CAPTION_WIDTH
+COM_MOSIMAGE_CAPTION_ALIGN
+COM_MOSIMAGE_CAPTION_POSITION
+COM_MOSIMAGE_IMAGE_ALIGN
+COM_MOSIMAGE_CAPTION_PROPERTIES
+COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED
+COM_MOSIMAGE_MOSIMAGE_CONTROL
+COM_MOSIMAGE_ALT_TEXT
+COM_MOSIMAGE_BORDER
+COM_MOSIMAGE_SOURCE
+COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED
+COM_MOSIMAGE_ERROR_OCCURRED
+COM_MOSIMAGE_DESC
+COM_MOSIMAGE_CONTENT_IMAGES
+COM_MOSIMAGE_GALLERY_IMAGES
+COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL
+COM_MOSIMAGE_DELETE_CACHE_FAILED
+COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC
+COM_MOSIMAGE_CLEAR_IMAGE_CACHE
+COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC
+COM_MOSIMAGE_BOTTOM
+COM_MOSIMAGE_HIDDEN
+COM_MOSIMAGE_TOP
+COM_MOSIMAGE_DEFAULT
+COM_MOSIMAGE_APPLY
+COM_MOSIMAGE
+COM_MOSIMAGE_CACHE_MANAGEMENT
+COM_MOSIMAGE_CACHE_FILE_LIST
+COM_MOSIMAGE_FIRST_N_FILES
+COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC
+COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC
+COM_MOSIMAGE_POS1_LABEL_DESC
+COM_MOSIMAGE_UP_LABEL_DESC
+COM_MOSIMAGE_DOWN_LABEL_DESC
+COM_MOSIMAGE_END_LABEL_DESC'
++ local i
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_SUBFOLDER]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SUBFOLDER mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_SUBFOLDER]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_SUBFOLDER]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_PREVIEW]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_PREVIEW mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_PREVIEW]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_PREVIEW]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_ACTIVE_IMAGE]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ACTIVE_IMAGE mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_ACTIVE_IMAGE]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_ACTIVE_IMAGE]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_SAMPLE_IMAGE]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SAMPLE_IMAGE mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_SAMPLE_IMAGE]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_SAMPLE_IMAGE]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CAPTION]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CAPTION_WIDTH]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_WIDTH mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION_WIDTH]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION_WIDTH]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CAPTION_ALIGN]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_ALIGN mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION_ALIGN]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION_ALIGN]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CAPTION_POSITION]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_POSITION mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION_POSITION]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION_POSITION]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_IMAGE_ALIGN]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_IMAGE_ALIGN mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_IMAGE_ALIGN]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_IMAGE_ALIGN]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CAPTION_PROPERTIES]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CAPTION_PROPERTIES mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION_PROPERTIES]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CAPTION_PROPERTIES]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED admin/views/options/tmpl/form.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_MOSIMAGE_CONTROL]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_MOSIMAGE_CONTROL admin/views/options/tmpl/form.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_ALT_TEXT]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ALT_TEXT mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_ALT_TEXT]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_ALT_TEXT]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_BORDER]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BORDER mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_BORDER]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_BORDER]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_SOURCE]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_SOURCE mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_SOURCE]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_SOURCE]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_ERROR_OCCURRED]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ERROR_OCCURRED admin/controller.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_DESC]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DESC mosimage.xml
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CONTENT_IMAGES]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CONTENT_IMAGES mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CONTENT_IMAGES]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CONTENT_IMAGES]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_GALLERY_IMAGES]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_GALLERY_IMAGES mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_GALLERY_IMAGES]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_GALLERY_IMAGES]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL admin/controller.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_DELETE_CACHE_FAILED]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DELETE_CACHE_FAILED admin/controller.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CLEAR_IMAGE_CACHE]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CLEAR_IMAGE_CACHE admin/views/info/tmpl/default.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC admin/views/info/tmpl/default.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_BOTTOM]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_BOTTOM mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_BOTTOM]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_BOTTOM]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_HIDDEN]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_HIDDEN mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_HIDDEN]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_HIDDEN]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_TOP]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_TOP mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_TOP]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_TOP]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_DEFAULT]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DEFAULT mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_DEFAULT]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_DEFAULT]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_APPLY]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_APPLY mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_APPLY]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_APPLY]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE admin/controller.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CACHE_MANAGEMENT]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_MANAGEMENT admin/helpers/mosimage.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_CACHE_FILE_LIST]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_CACHE_FILE_LIST admin/views/info/tmpl/default.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_FIRST_N_FILES]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_FIRST_N_FILES admin/views/info/tmpl/default.php
++ '[' 0 -eq 0 ']'
++ FOUND=1
++ break
++ '[' 1 -eq 0 ']'
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_POS1_LABEL_DESC]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_POS1_LABEL_DESC mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_POS1_LABEL_DESC]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_POS1_LABEL_DESC]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_UP_LABEL_DESC]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_UP_LABEL_DESC mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_UP_LABEL_DESC]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_UP_LABEL_DESC]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_DOWN_LABEL_DESC]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_DOWN_LABEL_DESC mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_DOWN_LABEL_DESC]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_DOWN_LABEL_DESC]
++ for i in '$LABELS'
++ debug 'Label [COM_MOSIMAGE_END_LABEL_DESC]'
++ '[' '' == 1 ']'
++ local FOUND=0
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/controller.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/controllers/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/models/fields/button.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/models/fields/folderlistextended.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/models/fields/positions.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/models/fields/image.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/models/fields/mosimagelist.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/models/options.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/views/info/tmpl/default.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/views/info/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/views/options/tmpl/form.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/views/options/view.html.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/helpers/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC admin/tables/mosimage.php
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC build.xml
++ '[' 1 -eq 0 ']'
++ for f in '$SRC'
++ grep -q COM_MOSIMAGE_END_LABEL_DESC mosimage.xml
++ '[' 1 -eq 0 ']'
++ '[' 0 -eq 0 ']'
++ echo 'NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_END_LABEL_DESC]'
+NOT FOUND [admin/language/de-DE/de-DE.com_mosimage.ini] [COM_MOSIMAGE_END_LABEL_DESC]
++ createDepoloyDirectory
++ echo 'INFO: Lösche Deploy-Ordner [/home/harald/project/joomla-3.1/com_mosimage/deploy]'
+INFO: Lösche Deploy-Ordner [/home/harald/project/joomla-3.1/com_mosimage/deploy]
++ rm -rf /home/harald/project/joomla-3.1/com_mosimage/deploy
++ check_exit_code 0 'Kann Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/deploy] nicht löschen'
++ EXIT_CODE=0
++ shift 1
++ MSG='Kann Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/deploy] nicht löschen'
++ '[' 0 -ne 0 ']'
++ '[' '!' -d deploy ']'
++ mkdir deploy
++ check_exit_code 0 'Kann Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/deploy] nicht anlegen'
++ EXIT_CODE=0
++ shift 1
++ MSG='Kann Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/deploy] nicht anlegen'
++ '[' 0 -ne 0 ']'
++ createBuildDirectory
++ BUILD_DIR=/home/harald/project/joomla-3.1/com_mosimage/build
++ '[' -d /home/harald/project/joomla-3.1/com_mosimage/build -o -f /home/harald/project/joomla-3.1/com_mosimage/build ']'
++ echo 'INFO: Lösche Build-Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/build].'
+INFO: Lösche Build-Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/build].
++ rm -rf /home/harald/project/joomla-3.1/com_mosimage/build
++ echo 'INFO: Lege Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/build] an.'
+INFO: Lege Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/build] an.
++ mkdir -p /home/harald/project/joomla-3.1/com_mosimage/build
++ copyAllFileToBuildDirectory
++ echo 'INFO: kopiere Filelelist nach [/home/harald/project/joomla-3.1/com_mosimage/build]'
+INFO: kopiere Filelelist nach [/home/harald/project/joomla-3.1/com_mosimage/build]
++ cp /home/harald/project/joomla-3.1/com_mosimage/bin/filelist.txt /home/harald/project/joomla-3.1/com_mosimage/build
++ check_exit_code 0 'Kann [/home/harald/project/joomla-3.1/com_mosimage/bin/filelist.txt] nicht nach [/home/harald/project/joomla-3.1/com_mosimage/build] kopieren'
++ EXIT_CODE=0
++ shift 1
++ MSG='Kann [/home/harald/project/joomla-3.1/com_mosimage/bin/filelist.txt] nicht nach [/home/harald/project/joomla-3.1/com_mosimage/build] kopieren'
++ '[' 0 -ne 0 ']'
+++ cat /home/harald/project/joomla-3.1/com_mosimage/bin/filelist.txt
++ FILES='mosimage.xml
+admin/controller.php
+admin/mosimage.php
+admin/index.html
+admin/controllers/index.html
+admin/controllers/options.php
+admin/models/fields/button.php
+admin/models/fields/folderlistextended.php
+admin/models/fields/image.php
+admin/models/fields/mosimagelist.php
+admin/models/fields/index.html
+admin/models/index.html
+admin/models/forms/index.html
+admin/models/forms/option.xml
+admin/models/options.php
+admin/sql/install.mysql.utf8.sql
+admin/views/index.html
+admin/views/options/view.html.php
+admin/views/options/index.html
+admin/views/options/tmpl/form.php
+admin/views/options/tmpl/index.html
+admin/views/info/view.html.php
+admin/views/info/index.html
+admin/views/info/tmpl/index.html
+admin/views/info/tmpl/default.php
+admin/language/de-DE/de-DE.com_mosimage.ini
+admin/language/de-DE/de-DE.com_mosimage.sys.ini
+admin/language/en-GB/en-GB.com_mosimage.ini
+admin/language/en-GB/en-GB.com_mosimage.sys.ini
+admin/tables/mosimage.php
+admin/js/mosimage.js
+admin/js/index.html
+admin/helpers/mosimage.php'
++ cp --parent mosimage.xml admin/controller.php admin/mosimage.php admin/index.html admin/controllers/index.html admin/controllers/options.php admin/models/fields/button.php admin/models/fields/folderlistextended.php admin/models/fields/image.php admin/models/fields/mosimagelist.php admin/models/fields/index.html admin/models/index.html admin/models/forms/index.html admin/models/forms/option.xml admin/models/options.php admin/sql/install.mysql.utf8.sql admin/views/index.html admin/views/options/view.html.php admin/views/options/index.html admin/views/options/tmpl/form.php admin/views/options/tmpl/index.html admin/views/info/view.html.php admin/views/info/index.html admin/views/info/tmpl/index.html admin/views/info/tmpl/default.php admin/language/de-DE/de-DE.com_mosimage.ini admin/language/de-DE/de-DE.com_mosimage.sys.ini admin/language/en-GB/en-GB.com_mosimage.ini admin/language/en-GB/en-GB.com_mosimage.sys.ini admin/tables/mosimage.php admin/js/mosimage.js admin/js/index.html admin/helpers/mosimage.php /home/harald/project/joomla-3.1/com_mosimage/build
++ check_exit_code 0 'Kann Dateien aus [/home/harald/project/joomla-3.1/com_mosimage/bin/filelist.txt] nicht nach [/home/harald/project/joomla-3.1/com_mosimage/build] kopieren'
++ EXIT_CODE=0
++ shift 1
++ MSG='Kann Dateien aus [/home/harald/project/joomla-3.1/com_mosimage/bin/filelist.txt] nicht nach [/home/harald/project/joomla-3.1/com_mosimage/build] kopieren'
++ '[' 0 -ne 0 ']'
++ changeIntoBuildDirectory
++ cd /home/harald/project/joomla-3.1/com_mosimage/build
++ check_exit_code 0 'Kann nicht nach {/home/harald/project/joomla-3.1/com_mosimage/build] wechseln'
++ EXIT_CODE=0
++ shift 1
++ MSG='Kann nicht nach {/home/harald/project/joomla-3.1/com_mosimage/build] wechseln'
++ '[' 0 -ne 0 ']'
++ replaceParameterInConfigFile
+++ ls mosimage.xml
++ CONFIG_FILE=mosimage.xml
+++ echo mosimage.xml
+++ wc -w
++ '[' 1 -ne 1 ']'
++ sed -e 's#<version>.*</version>#<version>HEAD</version>#g' mosimage.xml
+++ date '+%d %b %Y'
++ sed -e 's#<creationDate>.*</creationDate>#<creationDate>01 Nov 2014</creationDate>#g'
++ mv mosimage.xml.tmp mosimage.xml
++ createReportDirectory
++ REPORT_DIR=/home/harald/project/joomla-3.1/com_mosimage/report
++ '[' -d /home/harald/project/joomla-3.1/com_mosimage/report -o -f /home/harald/project/joomla-3.1/com_mosimage/report ']'
++ echo 'INFO: Lösche Build-Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/report].'
+INFO: Lösche Build-Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/report].
++ rm -rf /home/harald/project/joomla-3.1/com_mosimage/report
++ echo 'INFO: Lege Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/report] an.'
+INFO: Lege Verzeichnis [/home/harald/project/joomla-3.1/com_mosimage/report] an.
++ mkdir -p /home/harald/project/joomla-3.1/com_mosimage/report
++ phpLint
++ '[' '' == 1 ']'
++ local FOUND_ERROR=0
+++ find . -name '*.php'
++ local 'PHP_FILES=./admin/controller.php
+./admin/controllers/options.php
+./admin/models/fields/button.php
+./admin/models/fields/folderlistextended.php
+./admin/models/fields/image.php
+./admin/models/fields/mosimagelist.php
+./admin/models/options.php
+./admin/mosimage.php
+./admin/views/info/tmpl/default.php
+./admin/views/info/view.html.php
+./admin/views/options/tmpl/form.php
+./admin/views/options/view.html.php
+./admin/helpers/mosimage.php
+./admin/tables/mosimage.php'
++ local i
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/controller.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/controller.php] auf syntaktische Fehler
++ php5 -l ./admin/controller.php
+No syntax errors detected in ./admin/controller.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/controllers/options.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/controllers/options.php] auf syntaktische Fehler
++ php5 -l ./admin/controllers/options.php
+No syntax errors detected in ./admin/controllers/options.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/models/fields/button.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/models/fields/button.php] auf syntaktische Fehler
++ php5 -l ./admin/models/fields/button.php
+No syntax errors detected in ./admin/models/fields/button.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/models/fields/folderlistextended.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/models/fields/folderlistextended.php] auf syntaktische Fehler
++ php5 -l ./admin/models/fields/folderlistextended.php
+No syntax errors detected in ./admin/models/fields/folderlistextended.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/models/fields/image.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/models/fields/image.php] auf syntaktische Fehler
++ php5 -l ./admin/models/fields/image.php
+No syntax errors detected in ./admin/models/fields/image.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/models/fields/mosimagelist.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/models/fields/mosimagelist.php] auf syntaktische Fehler
++ php5 -l ./admin/models/fields/mosimagelist.php
+No syntax errors detected in ./admin/models/fields/mosimagelist.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/models/options.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/models/options.php] auf syntaktische Fehler
++ php5 -l ./admin/models/options.php
+No syntax errors detected in ./admin/models/options.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/mosimage.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/mosimage.php] auf syntaktische Fehler
++ php5 -l ./admin/mosimage.php
+No syntax errors detected in ./admin/mosimage.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/views/info/tmpl/default.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/views/info/tmpl/default.php] auf syntaktische Fehler
++ php5 -l ./admin/views/info/tmpl/default.php
+No syntax errors detected in ./admin/views/info/tmpl/default.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/views/info/view.html.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/views/info/view.html.php] auf syntaktische Fehler
++ php5 -l ./admin/views/info/view.html.php
+No syntax errors detected in ./admin/views/info/view.html.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/views/options/tmpl/form.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/views/options/tmpl/form.php] auf syntaktische Fehler
++ php5 -l ./admin/views/options/tmpl/form.php
+No syntax errors detected in ./admin/views/options/tmpl/form.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/views/options/view.html.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/views/options/view.html.php] auf syntaktische Fehler
++ php5 -l ./admin/views/options/view.html.php
+No syntax errors detected in ./admin/views/options/view.html.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/helpers/mosimage.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/helpers/mosimage.php] auf syntaktische Fehler
++ php5 -l ./admin/helpers/mosimage.php
+No syntax errors detected in ./admin/helpers/mosimage.php
++ '[' 0 -ne 0 ']'
++ for i in '${PHP_FILES}'
++ echo 'INFO: Prüfe [./admin/tables/mosimage.php] auf syntaktische Fehler'
+INFO: Prüfe [./admin/tables/mosimage.php] auf syntaktische Fehler
++ php5 -l ./admin/tables/mosimage.php
+No syntax errors detected in ./admin/tables/mosimage.php
++ '[' 0 -ne 0 ']'
++ check_exit_code 0 'Syntaktischen Fehler gefunden. Details siehe [/home/harald/project/joomla-3.1/com_mosimage/report/php-lint.log]'
++ EXIT_CODE=0
++ shift 1
++ MSG='Syntaktischen Fehler gefunden. Details siehe [/home/harald/project/joomla-3.1/com_mosimage/report/php-lint.log]'
++ '[' 0 -ne 0 ']'
++ buildArtefakct
+++ pwd
++ echo 'INFO: Baue ZIP [com_mosimage-HEAD] in [/home/harald/project/joomla-3.1/com_mosimage/build]'
+INFO: Baue ZIP [com_mosimage-HEAD] in [/home/harald/project/joomla-3.1/com_mosimage/build]
++ cat filelist.txt
++ zip /home/harald/project/joomla-3.1/com_mosimage/deploy/com_mosimage-HEAD.zip -@
+  adding: mosimage.xml (deflated 64%)
+  adding: admin/controller.php (deflated 51%)
+  adding: admin/mosimage.php (deflated 43%)
+  adding: admin/index.html (deflated 18%)
+  adding: admin/controllers/index.html (deflated 10%)
+  adding: admin/controllers/options.php (deflated 50%)
+  adding: admin/models/fields/button.php (deflated 53%)
+  adding: admin/models/fields/folderlistextended.php (deflated 57%)
+  adding: admin/models/fields/image.php (deflated 53%)
+  adding: admin/models/fields/mosimagelist.php (deflated 50%)
+  adding: admin/models/fields/index.html (deflated 10%)
+  adding: admin/models/index.html (deflated 10%)
+  adding: admin/models/forms/index.html (deflated 10%)
+  adding: admin/models/forms/option.xml (deflated 73%)
+  adding: admin/models/options.php (deflated 52%)
+  adding: admin/sql/install.mysql.utf8.sql (deflated 31%)
+  adding: admin/views/index.html (deflated 18%)
+  adding: admin/views/options/view.html.php (deflated 54%)
+  adding: admin/views/options/index.html (deflated 18%)
+  adding: admin/views/options/tmpl/form.php (deflated 64%)
+  adding: admin/views/options/tmpl/index.html (deflated 18%)
+  adding: admin/views/info/view.html.php (deflated 56%)
+  adding: admin/views/info/index.html (deflated 18%)
+  adding: admin/views/info/tmpl/index.html (deflated 18%)
+  adding: admin/views/info/tmpl/default.php (deflated 46%)
+  adding: admin/language/de-DE/de-DE.com_mosimage.ini (deflated 58%)
+  adding: admin/language/de-DE/de-DE.com_mosimage.sys.ini (deflated 26%)
+  adding: admin/language/en-GB/en-GB.com_mosimage.ini (deflated 58%)
+  adding: admin/language/en-GB/en-GB.com_mosimage.sys.ini (deflated 27%)
+  adding: admin/tables/mosimage.php (deflated 44%)
+  adding: admin/js/mosimage.js (deflated 74%)
+  adding: admin/js/index.html (deflated 18%)
+  adding: admin/helpers/mosimage.php (deflated 39%)
++ check_exit_code 0 'Datei /home/harald/project/joomla-3.1/com_mosimage/deploy/com_mosimage-HEAD.zip konnte nicht erzeugt werden.'
++ EXIT_CODE=0
++ shift 1
++ MSG='Datei /home/harald/project/joomla-3.1/com_mosimage/deploy/com_mosimage-HEAD.zip konnte nicht erzeugt werden.'
++ '[' 0 -ne 0 ']'
++ echo ''
+
++ echo 'SUCCESS: Datei /home/harald/project/joomla-3.1/com_mosimage/deploy/com_mosimage-HEAD.zip wurde erzeugt.'
+SUCCESS: Datei /home/harald/project/joomla-3.1/com_mosimage/deploy/com_mosimage-HEAD.zip wurde erzeugt.
++ checkAllLanguageFiles
++ echo 'INFO: prüfe die Sprachfiles auf Konsistenz.'
+INFO: prüfe die Sprachfiles auf Konsistenz.
++ checkLanguageFile en-GB de-DE
++ '[' '' == 1 ']'
++ '[' -z '' ']'
++ local FILE=com_mosimage
++ local LANGUAGE_1=en-GB
++ local LANGUAGE_2=de-DE
++ local EXTENTION=
++ '[' -n '' ']'
++ '[' -z admin ']'
++ for dir in '${LANG_FILE_DIRECTORY}'
++ FILE_1=admin/language/en-GB/en-GB.com_mosimage.ini
++ FILE_2=admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' '!' -r admin/language/en-GB/en-GB.com_mosimage.ini -o '!' -r admin/language/de-DE/de-DE.com_mosimage.ini ']'
++ echo 'Prüfe Datei [admin/language/de-DE/de-DE.com_mosimage.ini] mit den Labels aus [admin/language/en-GB/en-GB.com_mosimage.ini]'
+Prüfe Datei [admin/language/de-DE/de-DE.com_mosimage.ini] mit den Labels aus [admin/language/en-GB/en-GB.com_mosimage.ini]
+++ grep -v ';'
+++ cut -d = -f 1
+++ grep =
++ local 'LABELS=COM_MOSIMAGE_ERROR_OCCURRED
+COM_MOSIMAGE_DESC
+COM_MOSIMAGE_MOSIMAGE_CONTROL
+COM_MOSIMAGE_GALLERY_IMAGES
+COM_MOSIMAGE_CONTENT_IMAGES
+COM_MOSIMAGE_SUBFOLDER
+COM_MOSIMAGE_SAMPLE_IMAGE
+COM_MOSIMAGE_ACTIVE_IMAGE
+COM_MOSIMAGE_SOURCE
+COM_MOSIMAGE_IMAGE_ALIGN
+COM_MOSIMAGE_CAPTION_PROPERTIES
+COM_MOSIMAGE_CAPTION_WIDTH
+COM_MOSIMAGE_ALT_TEXT
+COM_MOSIMAGE_BORDER
+COM_MOSIMAGE_CAPTION WIDTH
+COM_MOSIMAGE_CAPTION_ALIGN
+COM_MOSIMAGE_CAPTION_POSITION
+COM_MOSIMAGE_CAPTION
+COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED
+COM_MOSIMAGE_CAPTION PROPERTIES
+COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED
+COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL
+COM_MOSIMAGE_DELETE_CACHE_FAILED
+COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC
+COM_MOSIMAGE_CLEAR_IMAGE_CACHE
+COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC
+COM_MOSIMAGE_BOTTOM
+COM_MOSIMAGE_HIDDEN
+COM_MOSIMAGE_TOP
+COM_MOSIMAGE_DEFAULT
+COM_MOSIMAGE_APPLY
+COM_MOSIMAGE
+COM_MOSIMAGE_CACHE_MANAGEMENT
+COM_MOSIMAGE_CACHE_FILE_LIST
+COM_MOSIMAGE_FIRST_N_FILES
+COM_MOSIMAGE_ADD_BUTTON_LABEL
+COM_MOSIMAGE_REMOVE_BUTTON_LABEL
+COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC
+COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC'
++ local i
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_ERROR_OCCURRED=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_ERROR_OCCURRED=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_MOSIMAGE_CONTROL=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_MOSIMAGE_CONTROL=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_GALLERY_IMAGES=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_GALLERY_IMAGES=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CONTENT_IMAGES=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CONTENT_IMAGES=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_SUBFOLDER=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_SUBFOLDER=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_SAMPLE_IMAGE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_SAMPLE_IMAGE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_ACTIVE_IMAGE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_ACTIVE_IMAGE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_SOURCE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_SOURCE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_IMAGE_ALIGN=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_IMAGE_ALIGN=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION_PROPERTIES=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION_PROPERTIES=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION_WIDTH=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION_WIDTH=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_ALT_TEXT=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_ALT_TEXT=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_BORDER=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_BORDER=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^WIDTH=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 1 -ne 0 ']'
++ echo 'Not found label [WIDTH] in [admin/language/en-GB/en-GB.com_mosimage.ini]'
+Not found label [WIDTH] in [admin/language/en-GB/en-GB.com_mosimage.ini]
++ ERROR_COUNTER=1
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION_ALIGN=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION_ALIGN=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION_POSITION=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION_POSITION=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^PROPERTIES=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 1 -ne 0 ']'
++ echo 'Not found label [PROPERTIES] in [admin/language/en-GB/en-GB.com_mosimage.ini]'
+Not found label [PROPERTIES] in [admin/language/en-GB/en-GB.com_mosimage.ini]
++ ERROR_COUNTER=2
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DELETE_CACHE_FAILED=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DELETE_CACHE_FAILED=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CLEAR_IMAGE_CACHE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CLEAR_IMAGE_CACHE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_BOTTOM=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_BOTTOM=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_HIDDEN=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_HIDDEN=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_TOP=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_TOP=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DEFAULT=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DEFAULT=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_APPLY=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_APPLY=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CACHE_MANAGEMENT=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CACHE_MANAGEMENT=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CACHE_FILE_LIST=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CACHE_FILE_LIST=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_FIRST_N_FILES=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_FIRST_N_FILES=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_ADD_BUTTON_LABEL=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_ADD_BUTTON_LABEL=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_REMOVE_BUTTON_LABEL=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_REMOVE_BUTTON_LABEL=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ checkLanguageFile de-DE en-GB
++ '[' '' == 1 ']'
++ '[' -z '' ']'
++ local FILE=com_mosimage
++ local LANGUAGE_1=de-DE
++ local LANGUAGE_2=en-GB
++ local EXTENTION=
++ '[' -n '' ']'
++ '[' -z admin ']'
++ for dir in '${LANG_FILE_DIRECTORY}'
++ FILE_1=admin/language/de-DE/de-DE.com_mosimage.ini
++ FILE_2=admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' '!' -r admin/language/de-DE/de-DE.com_mosimage.ini -o '!' -r admin/language/en-GB/en-GB.com_mosimage.ini ']'
++ echo 'Prüfe Datei [admin/language/en-GB/en-GB.com_mosimage.ini] mit den Labels aus [admin/language/de-DE/de-DE.com_mosimage.ini]'
+Prüfe Datei [admin/language/en-GB/en-GB.com_mosimage.ini] mit den Labels aus [admin/language/de-DE/de-DE.com_mosimage.ini]
+++ grep -v ';'
+++ cut -d = -f 1
+++ grep =
++ local 'LABELS=COM_MOSIMAGE_SUBFOLDER
+COM_MOSIMAGE_PREVIEW
+COM_MOSIMAGE_ACTIVE_IMAGE
+COM_MOSIMAGE_SAMPLE_IMAGE
+COM_MOSIMAGE_CAPTION
+COM_MOSIMAGE_CAPTION_WIDTH
+COM_MOSIMAGE_CAPTION_ALIGN
+COM_MOSIMAGE_CAPTION_POSITION
+COM_MOSIMAGE_IMAGE_ALIGN
+COM_MOSIMAGE_CAPTION_PROPERTIES
+COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED
+COM_MOSIMAGE_MOSIMAGE_CONTROL
+COM_MOSIMAGE_ALT_TEXT
+COM_MOSIMAGE_BORDER
+COM_MOSIMAGE_SOURCE
+COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED
+COM_MOSIMAGE_ERROR_OCCURRED
+COM_MOSIMAGE_DESC
+COM_MOSIMAGE_CONTENT_IMAGES
+COM_MOSIMAGE_GALLERY_IMAGES
+COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL
+COM_MOSIMAGE_DELETE_CACHE_FAILED
+COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC
+COM_MOSIMAGE_CLEAR_IMAGE_CACHE
+COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC
+COM_MOSIMAGE_BOTTOM
+COM_MOSIMAGE_HIDDEN
+COM_MOSIMAGE_TOP
+COM_MOSIMAGE_DEFAULT
+COM_MOSIMAGE_APPLY
+COM_MOSIMAGE
+COM_MOSIMAGE_CACHE_MANAGEMENT
+COM_MOSIMAGE_CACHE_FILE_LIST
+COM_MOSIMAGE_FIRST_N_FILES
+COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC
+COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC
+COM_MOSIMAGE_POS1_LABEL_DESC
+COM_MOSIMAGE_UP_LABEL_DESC
+COM_MOSIMAGE_DOWN_LABEL_DESC
+COM_MOSIMAGE_END_LABEL_DESC'
++ local i
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_SUBFOLDER=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_SUBFOLDER=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_PREVIEW=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_PREVIEW=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 1 -ne 0 ']'
++ printf 'Not found label %-40s in %s \n' '[COM_MOSIMAGE_PREVIEW]' '[admin/language/en-GB/en-GB.com_mosimage.ini]'
+Not found label [COM_MOSIMAGE_PREVIEW]                   in [admin/language/en-GB/en-GB.com_mosimage.ini] 
++ ERROR_COUNTER=3
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_ACTIVE_IMAGE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_ACTIVE_IMAGE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_SAMPLE_IMAGE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_SAMPLE_IMAGE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION_WIDTH=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION_WIDTH=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION_ALIGN=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION_ALIGN=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION_POSITION=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION_POSITION=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_IMAGE_ALIGN=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_IMAGE_ALIGN=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CAPTION_PROPERTIES=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CAPTION_PROPERTIES=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_MOSIMAGE_CONTROL=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_MOSIMAGE_CONTROL=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_ALT_TEXT=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_ALT_TEXT=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_BORDER=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_BORDER=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_SOURCE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_SOURCE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CONTENT_WAS_NOT_SAVED=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_ERROR_OCCURRED=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_ERROR_OCCURRED=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CONTENT_IMAGES=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CONTENT_IMAGES=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_GALLERY_IMAGES=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_GALLERY_IMAGES=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DELETE_CACHE_WAS_SUCCESSFULL=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DELETE_CACHE_FAILED=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DELETE_CACHE_FAILED=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CLEAR_IMAGE_CACHE_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CLEAR_IMAGE_CACHE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CLEAR_IMAGE_CACHE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_AMOUNT_IMAGE_CACHE_FILE_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_BOTTOM=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_BOTTOM=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_HIDDEN=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_HIDDEN=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_TOP=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_TOP=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DEFAULT=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DEFAULT=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_APPLY=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_APPLY=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CACHE_MANAGEMENT=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CACHE_MANAGEMENT=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_CACHE_FILE_LIST=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_CACHE_FILE_LIST=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_FIRST_N_FILES=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_FIRST_N_FILES=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_ADD_BUTTON_LABEL_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_POS1_LABEL_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_POS1_LABEL_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 1 -ne 0 ']'
++ printf 'Not found label %-40s in %s \n' '[COM_MOSIMAGE_POS1_LABEL_DESC]' '[admin/language/en-GB/en-GB.com_mosimage.ini]'
+Not found label [COM_MOSIMAGE_POS1_LABEL_DESC]           in [admin/language/en-GB/en-GB.com_mosimage.ini] 
++ ERROR_COUNTER=4
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_UP_LABEL_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_UP_LABEL_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 1 -ne 0 ']'
++ printf 'Not found label %-40s in %s \n' '[COM_MOSIMAGE_UP_LABEL_DESC]' '[admin/language/en-GB/en-GB.com_mosimage.ini]'
+Not found label [COM_MOSIMAGE_UP_LABEL_DESC]             in [admin/language/en-GB/en-GB.com_mosimage.ini] 
++ ERROR_COUNTER=5
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DOWN_LABEL_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DOWN_LABEL_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 1 -ne 0 ']'
++ printf 'Not found label %-40s in %s \n' '[COM_MOSIMAGE_DOWN_LABEL_DESC]' '[admin/language/en-GB/en-GB.com_mosimage.ini]'
+Not found label [COM_MOSIMAGE_DOWN_LABEL_DESC]           in [admin/language/en-GB/en-GB.com_mosimage.ini] 
++ ERROR_COUNTER=6
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_END_LABEL_DESC=' admin/language/de-DE/de-DE.com_mosimage.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_END_LABEL_DESC=' admin/language/en-GB/en-GB.com_mosimage.ini
++ '[' 1 -ne 0 ']'
++ printf 'Not found label %-40s in %s \n' '[COM_MOSIMAGE_END_LABEL_DESC]' '[admin/language/en-GB/en-GB.com_mosimage.ini]'
+Not found label [COM_MOSIMAGE_END_LABEL_DESC]            in [admin/language/en-GB/en-GB.com_mosimage.ini] 
++ ERROR_COUNTER=7
++ checkLanguageFile en-GB de-DE sys
++ '[' '' == 1 ']'
++ '[' -z '' ']'
++ local FILE=com_mosimage
++ local LANGUAGE_1=en-GB
++ local LANGUAGE_2=de-DE
++ local EXTENTION=sys
++ '[' -n sys ']'
++ EXTENTION=.sys
++ '[' -z admin ']'
++ for dir in '${LANG_FILE_DIRECTORY}'
++ FILE_1=admin/language/en-GB/en-GB.com_mosimage.sys.ini
++ FILE_2=admin/language/de-DE/de-DE.com_mosimage.sys.ini
++ '[' '!' -r admin/language/en-GB/en-GB.com_mosimage.sys.ini -o '!' -r admin/language/de-DE/de-DE.com_mosimage.sys.ini ']'
++ echo 'Prüfe Datei [admin/language/de-DE/de-DE.com_mosimage.sys.ini] mit den Labels aus [admin/language/en-GB/en-GB.com_mosimage.sys.ini]'
+Prüfe Datei [admin/language/de-DE/de-DE.com_mosimage.sys.ini] mit den Labels aus [admin/language/en-GB/en-GB.com_mosimage.sys.ini]
+++ cat admin/language/en-GB/en-GB.com_mosimage.sys.ini
+++ cut -d = -f 1
+++ grep -v ';'
+++ grep =
++ local 'LABELS=COM_MOSIMAGE_DESC
+COM_MOSIMAGE_INFO'
++ local i
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DESC=' admin/language/en-GB/en-GB.com_mosimage.sys.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DESC=' admin/language/de-DE/de-DE.com_mosimage.sys.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_INFO=' admin/language/en-GB/en-GB.com_mosimage.sys.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_INFO=' admin/language/de-DE/de-DE.com_mosimage.sys.ini
++ '[' 0 -ne 0 ']'
++ checkLanguageFile de-DE en-GB sys
++ '[' '' == 1 ']'
++ '[' -z '' ']'
++ local FILE=com_mosimage
++ local LANGUAGE_1=de-DE
++ local LANGUAGE_2=en-GB
++ local EXTENTION=sys
++ '[' -n sys ']'
++ EXTENTION=.sys
++ '[' -z admin ']'
++ for dir in '${LANG_FILE_DIRECTORY}'
++ FILE_1=admin/language/de-DE/de-DE.com_mosimage.sys.ini
++ FILE_2=admin/language/en-GB/en-GB.com_mosimage.sys.ini
++ '[' '!' -r admin/language/de-DE/de-DE.com_mosimage.sys.ini -o '!' -r admin/language/en-GB/en-GB.com_mosimage.sys.ini ']'
++ echo 'Prüfe Datei [admin/language/en-GB/en-GB.com_mosimage.sys.ini] mit den Labels aus [admin/language/de-DE/de-DE.com_mosimage.sys.ini]'
+Prüfe Datei [admin/language/en-GB/en-GB.com_mosimage.sys.ini] mit den Labels aus [admin/language/de-DE/de-DE.com_mosimage.sys.ini]
+++ grep -v ';'
+++ cut -d = -f 1
+++ cat admin/language/de-DE/de-DE.com_mosimage.sys.ini
+++ grep =
++ local 'LABELS=COM_MOSIMAGE_DESC
+COM_MOSIMAGE_INFO'
++ local i
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_DESC=' admin/language/de-DE/de-DE.com_mosimage.sys.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_DESC=' admin/language/en-GB/en-GB.com_mosimage.sys.ini
++ '[' 0 -ne 0 ']'
++ for i in '$LABELS'
++ grep -q '^COM_MOSIMAGE_INFO=' admin/language/de-DE/de-DE.com_mosimage.sys.ini
++ '[' 0 -ne 0 ']'
++ grep -q '^COM_MOSIMAGE_INFO=' admin/language/en-GB/en-GB.com_mosimage.sys.ini
++ '[' 0 -ne 0 ']'
++ '[' '' '!=' 1 ']'
++ check_exit_code 7 'Sparchfiles sind nicht konsitent. Es wurden [7] Fehler gefunden.'
++ EXIT_CODE=7
++ shift 1
++ MSG='Sparchfiles sind nicht konsitent. Es wurden [7] Fehler gefunden.'
++ '[' 7 -ne 0 ']'
++ echo 'ERROR: Sparchfiles sind nicht konsitent. Es wurden [7] Fehler gefunden..'
+ERROR: Sparchfiles sind nicht konsitent. Es wurden [7] Fehler gefunden..
++ echo ''
+
++ echo 'BUILD FAILED'
+BUILD FAILED
++ echo ''
+
++ exit 1

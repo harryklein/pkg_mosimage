@@ -26,67 +26,21 @@ defined('_JEXEC') or die('Restricted access');
 
 class MosimageViewInfo extends JViewLegacy {
 	
-	const MAX_FILES = 500;
-
     public function display($tpl = null) {
         JToolBarHelper::title(JText::_('COM_MOSIMAGE'));
-        $this->assign('amountCacheFile',$this->amountCacheFiles());
-        $fileList = &$this->getFileList();
-        $this->assignRef('cacheFileList',$fileList);
-    	if (count($fileList) == self::MAX_FILES){
-    		$this->assign('moreAsMaxFilesExist', self::MAX_FILES);
-    	} else {
-    		$this->assign('moreAsMaxFilesExist', 0);
-    	}
+        $this->amountCacheFile = $this->get('AmountCacheFiles');        
+        $this->cacheFileList = $this->get('FileList');
+        $this->moreAsMaxFilesExist = $this->get('MoreAsMaxFilesExist');
+        
+        require_once JPATH_COMPONENT_ADMINISTRATOR.'/helpers/mosimage.php';
+        MosimageHelper::addSubmenu('cache');
+        $this->sidebar = JHtmlSidebar::render();
+      
         parent::display($tpl);
     }
 
     
     
-    private function amountCacheFiles(){
-        $cacheDirectory = JPATH_SITE.'/cache/mosimage-cache';
-        if (!is_dir($cacheDirectory)){
-            return 0;
-        }
-        $d = opendir($cacheDirectory);
-        $amountDir = 0;
-        $amountFile = 0;
-        while(false !== ($file = readdir($d))) {
-            if(is_dir($cacheDirectory.'/'.$file)){
-                $amountDir++;
-            }
-
-            if(is_file($cacheDirectory.'/'.$file)) {
-                $amountFile++;
-            }
-        }
-        closedir($d);       
-        return $amountFile;
-    }
-    
-    /**
-     * Liefert eine Liste mit allen Files aus dem Cache-Ordner
-     * 
-     * @return number|Ambigous <multitype:, boolean>
-     */
-    private function &getFileList() {
-    	$cacheDirectory = JPATH_SITE.'/cache/mosimage-cache';
-    	if (!is_dir($cacheDirectory)){
-    		return 0;
-    	}
-    	
-    	$files = array();
-    	$fileCounter = 0;
-    	$d = opendir($cacheDirectory);
-    	while( (false !== ($file = readdir($d))) && ($fileCounter < self::MAX_FILES)){     	
-    		if(is_file($cacheDirectory.'/'.$file)) {
-    			$fileCounter++;
-    			$files[] = $file;
-    		}
-    	}
-    	closedir($d);
-    	return $files;
-    }
-    
+        
 
 }
