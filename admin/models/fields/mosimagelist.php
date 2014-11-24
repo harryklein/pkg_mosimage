@@ -38,8 +38,7 @@ class JFormFieldMosimageList extends JFormFieldList {
 		$a1 = ' onkeyup="' . "Mosimage.showImageProps( '". $baseURL ."' );";
 		$a2 = ' onclick="' . "Mosimage.showImageProps( '". $baseURL ."' );";
 		 
-		// wir misbrauchen iher onchange, da Fieldlist kein onclick und 
-		// onkeyup unterstützt
+		// wir misbrauchen hier onchange, da Fieldlist kein onclick und onkeyup unterstützt
 		$this->onchange = '" ' . $a1 . '"' . $a2;
 		return parent::getInput();
 	}
@@ -49,18 +48,24 @@ class JFormFieldMosimageList extends JFormFieldList {
 		$value = $this->value;
 		$options= array();
 		$i = 0;
-		foreach( $value as $file ) {
-			$temp = explode( '|', $file );
-			if( strrchr($temp[0], '/') ) {
-				$filename = substr( strrchr($temp[0], '/' ), 1 );
+		
+		// wir machen aus dem Json wieder ein Objekt
+		$jsonObjects = json_decode($value,false);
+		
+		
+		foreach ($jsonObjects as $obj){
+			$data = json_encode($obj);
+			$source = $obj->source;
+			if( strrchr($source, '/') ) {
+				$filename = substr( strrchr($source, '/' ), 1 );
 			} else {
-				$filename = $temp[0];
+				$filename = $source;
 			}
-			$tmp = JHTML::_('select.option', $file, $filename );
+			$tmp = JHTML::_('select.option', $data, $filename );
 			$options[] = $tmp;
 			// 1. Zeile selektrieren
 			if  ($i == 0){
-				$this->value = $file;
+				$this->value = $data;
 			}
 			$i++;
 		}
