@@ -49,7 +49,8 @@ $document->addStyleDeclaration($css);
 
 Joomla.submitbutton = function(task) {
 	if (task == 'options.cancel') {
-		window.parent.SqueezeBox.close();
+
+		Mosimage.revertChanges();
 		return;
 	}
 	// assemble the images back into one field
@@ -58,19 +59,37 @@ Joomla.submitbutton = function(task) {
 	for (var i=0, n=srcList.options.length; i < n; i++) {
 		temp[i] = srcList.options[i].value;
 	}
-	document.getElementById('jform_images').value = temp.join( '\n' );
+
+	json = '[' + temp.join( ',' ) + ']';
+	
+	document.getElementById('jform_images').value = json;
 	Joomla.submitform(task);
 }
 
 </script>
 <div class="modal-header">
 <div class="row-fluid">
-	<div class="span8">
+	
 <?php 
 	JHtml::_('bootstrap.tooltip');
-	echo JToolbar::getInstance('toolbar')->render();
+	
+	$app = JFactory::getApplication();
+	if ($app->isAdmin()) {
+	?><div class="span8"><?php echo JToolbar::getInstance('toolbar')->render();?></div><?php 
+	} else { 
 ?>	
-	</div>
+
+
+<div class="pull-right">
+	<button class="btn" type="button" onclick="Joomla.submitbutton('options.apply');"><?php echo JText::_('JTOOLBAR_APPLY') ?></button>
+	<button class="btn btn-primary" type="button" onclick="Joomla.submitbutton('options.save');"><?php echo JText::_('JTOOLBAR_SAVE') ?></button>
+	<button class="btn" type="button" onclick="Joomla.submitbutton('options.cancel');"><?php echo JText::_('JCANCEL') ?></button>
+</div>
+
+<div class="clearfix"> </div>
+
+<?php } ?>
+
 	</div>
 	</div>
 	<div class="modal-form">
@@ -155,8 +174,11 @@ Joomla.submitbutton = function(task) {
 					<?php echo $this->form->getControlGroup('_border')?>
 					<?php echo $this->form->getControlGroup('_caption')?>
 					<?php echo $this->form->getControlGroup('_caption_position')?>
-					<?php echo $this->form->getControlGroup('applay'); ?>
-					<?php echo $this->form->getControlGroup('reset'); ?>
+					<?php echo $this->form->getLabel('buttonspacer');?>
+					<div class="pull-left">
+						<?php echo $this->form->getInput('applay'); ?>	
+						<?php echo $this->form->getInput('reset'); ?>
+					</div>
 					<!-- hidden fields -->
 					<?php echo $this->form->getInput('content_id');?>
 					<?php echo $this->form->getInput('images');?>

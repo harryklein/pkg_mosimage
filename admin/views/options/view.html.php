@@ -22,6 +22,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+
+
 class MosimageViewOptions extends JViewLegacy {
 
 	public function display($tpl = null) {
@@ -33,19 +35,28 @@ class MosimageViewOptions extends JViewLegacy {
 		$this->setLayout('form');
 
 		$this->state = $this->get('State'); 
-		$this->item = $this->get('Item');
+		$this->item = $this->get('Item');	
 		$this->form = $this->get('Form');
+		
+		if ($this->form === false){
+			throw new Exception('Can\'t load Form',500);
+		}
 				
 		$this->allAvailableImages = $this->get('AllAvailableImages');
-		
-		$this->addToolbar();
+		if(	JFactory::getApplication()->isAdmin()){
+			$this->addToolbar();
+		}
 		parent::display($tpl);
 	}
 	
 	protected function addToolbar(){
+		$user = JFactory::getUser();
+		
 		JToolbarHelper::title(JText::_('COM_MOSIMAGE_MOSIMAGE_CONTROL'));
-		JToolbarHelper::apply('options.apply');
-		JToolbarHelper::save('options.save');
+		if ($user->authorise('core.edit', 'com_mosimage')){
+			JToolbarHelper::apply('options.apply');
+			JToolbarHelper::save('options.save');
+		}
 		JToolbarHelper::cancel('options.cancel', 'JTOOLBAR_CLOSE');
 	} 
 }
