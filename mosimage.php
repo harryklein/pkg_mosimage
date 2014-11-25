@@ -30,7 +30,8 @@ require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/ThumbnailCrea
 require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/MosimageConfiguration.php';
 require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/ImageDisplayProperties.php';
 require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/CacheFile.php';
-require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/MosimageFromFolder.php';
+require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/MosimageDirProperties.php';
+require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/HtmlHelper.php';
 
 class plgContentMosimage extends JPlugin {
 
@@ -188,82 +189,40 @@ class plgContentMosimage extends JPlugin {
 		}
 		return false;
 	}
-	
-	private function createImageAndBuildHtmlFromArrayObject($imgagePropertiesAsArrayObject, $config, $screenres, $addHtml = '' ) {
-		$html = '<p>';
-		if (!is_array($imgagePropertiesAsArrayObject)){
-			$value = array();
-			$value[] = $imgagePropertiesAsArrayObject;
-		} else {
-			$value = $imgagePropertiesAsArrayObject;
-		}
-		foreach ($value as $v){
-			$html .= $this->createImageAndBuildHtml($v, $config, $screenres);
-		}
-		$html .= '</p>';
-		return $html;	
-	}
-	
-	private function createImageAndBuildHtml($imgageProperties, $config, $screenres, $addHtml = '' ) {
-		if ( $imgageProperties ) {
-			$imgProperties = new ImageProperties($imgageProperties,$config);
 
-			$thumb_width = $config->getThumbnailMaxWidth();
-			$thumb_heigth = $config->getThumbnailMaxHeight();
-			$full_width = $config->getFullsizeMaxWidth();
-			$full_height = $config->getFullsizeMaxHeight();
-
-			$thumbSizeProperties = new ImageDisplayProperties($thumb_width,$thumb_heigth, $imgProperties->getAbsoluteFileName());
-			$imageSizeProperties = new ImageDisplayProperties($full_width,$full_height, $imgProperties->getAbsoluteFileName(), $screenres);
-			$thumbnailCreator = new ThumbnailCreator($config);
-			$mosthumbProperties = $thumbnailCreator->createThumbnailImage($thumbSizeProperties);
-			$mosimageProperties = $thumbnailCreator->createResizedImage  ($imageSizeProperties);
-
-			if (!$mosthumbProperties || !$mosimageProperties){
-				return '';
-			}
-			$lightboxHelper = new LightboxHelper($config->getLightboxType());
-			$images = $this->buildHtmlForImage($lightboxHelper, $mosthumbProperties, $mosimageProperties, $imgProperties, $config, $addHtml);
-			return $images;
-		} else {
-			return '';
-		}
-	}
-
-	private function getMosimageParameter($mosimage){
+	public function getMosimageParameter($mosimage){
 		$param = preg_replace('/{mosimage\s*(.*)\s*}/','$1',$mosimage);
-		switch($param){
-			case 'clear':
-			case 'clear=all':
-				return '<br clear="all">';
-				//return '<div style="clear:both;"/>';
-			case 'clear=left':
-				return '<br clear="left">';
-			case 'clear=right':
-				return '<br clear="right">';
-			default:
-				return '';
-		}
+		return $param;
 	}
 
 	private function processImagesDir( &$row, MosimageConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres ){
 		$images = array();
 		$introImages = array();
-		$addHtml = '';
+
 		for ($i = 0; $i < count($matchesInIntro); $i++){
-			$imgagePropertiesAsArrayObject  = (new MosimageFromFolder($matchesInIntro[$i]))->getImgagePropertiesAsArrayObject();
-			if ($imgagePropertiesAsArrayObject){
-				$introImages[] = $this->createImageAndBuildHtmlFromArrayObject($imgagePropertiesAsArrayObject, $config, $screenres, $addHtml);
-			} else {
-				$intoImages[] = '<span style="display:none;">'.JTEXT::_("PICTURE_INTRO").'['.$i.']</span>';
+			try {
+				$properies = MosimageDirProperties::parse($matchesInIntro[$i]);
+				$imgagePropertiesAsArrayObject  = $properies->getImgagePropertiesAsArrayObject();
+				if ($imgagePropertiesAsArrayObject){
+					$introImages[] = HtmlHelper::createImageAndBuildHtmlFromArrayObject($imgagePropertiesAsArrayObject, $config, $screenres);
+				} else {
+					$intoImages[] = HtmlHelper::createHtmlForNoneIntroImage($i);
+				}
+			} catch (Exception $e){
+				$introImages[] = '<p>' . $e->getMessage() . '</p>';
 			}
 		}
 		for ($i = 0; $i < count($matchesInText); $i++){
-			$imgagePropertiesAsArrayObject  = (new MosimageFromFolder($matchesInText[$i]))->getImgagePropertiesAsArrayObject();
-			if ($imgagePropertiesAsArrayObject){
-				$images[] = $this->createImageAndBuildHtmlFromArrayObject($imgagePropertiesAsArrayObject, $config, $screenres, $addHtml);
-			} else {
-				$images[] = '<span style="display:none;">'.JTEXT::_("PICTURE_INTRO").'['.$i.']</span>';
+			try {
+				$properies = MosimageDirProperties::parse($matchesInText[$i]);
+				$imgagePropertiesAsArrayObject  = $properies->getImgagePropertiesAsArrayObject();
+				if ($imgagePropertiesAsArrayObject){
+					$images[] = HtmlHelper::createImageAndBuildHtmlFromArrayObject($imgagePropertiesAsArrayObject, $config, $screenres);
+				} else {
+					$images[] = HtmlHelper::createHtmlForNoneImage($i);
+				}
+			} catch (Exception $e){
+				$images[] = '<p>' . $e->getMessage() . '</p>';
 			}
 		}
 		 
@@ -303,48 +262,14 @@ class plgContentMosimage extends JPlugin {
 		return $json;
 	}
 	
-	/**
-	 * Konveriert das Json-Format bzw. das alte '|'-Format in ein Array mit PHP-Objekten, die die 
-	 * jeweiligen Properties der Bilder enthält.
-<pre>
-		(
-		    [0] => stdClass Object
-		        (
-		            [source] => stories/fruit/cherry.jpg
-		            [align] => left
-		            [alt] => 
-		            [border] => 0
-		            [caption] => 
-		            [caption_position] => 
-		            [caption_align] => 
-		            [width] => 
-		        )
-		
-		    [1] => stdClass Object
-		        (
-		            [source] => stories/fruit/pears.jpg
-		            [align] => left
-		            [alt] => 
-		            [border] => 0
-		            [caption] => 
-		            [caption_position] => 
-		            [caption_align] => 
-		            [width] => 
-		        )
-		
-		)
-</pre> 
-	 * @param $images Properies im Json bzw. '|'-Format
-	 * @return array mit PHP-Objekten, die die jeweiligen Properties der Bilder enthält. 
-	 */
-	private function convertImagePropertiesToObjectArray($images){
-		if (is_null(json_decode($images))){
-			$json = $this->convertOldImagelistFormatToJson($images);
-		} else {
-			$json = $images;
+	public function convertJsonToObjectArray($json){
+		$jsonObjects = json_decode($json, false);
+		 
+		if (is_null($jsonObjects )) {
+			$emptyArray = array();
+			return $emptyArray;
 		}
-		$jsonObjects = json_decode($json,false);
-
+		
 		if (is_object($jsonObjects)){
 			$jsonItemArray = array();
 			foreach ($jsonObjects as $jsonItem){
@@ -354,25 +279,29 @@ class plgContentMosimage extends JPlugin {
 		}
 		return $jsonObjects;
 	}
+	
 
 	private function processImages ( &$row, MosimageConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres, $showIntro ) {
 		$introCount=count($matchesInIntro);
 		$count = count($matchesInText);
 
+		
+		jimport('joomla.application.component.model');
+		JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_mosimage/models');
 		JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_mosimage/tables');
-		$rowImage = JTable::getInstance('mosimage');
-		$rowImage->load($row->id);
+		$model = JModelLegacy::getInstance('Options', 'MosimageModel');
 
-		$jsonObjectsList = $this->convertImagePropertiesToObjectArray($rowImage->images);	
+		$rowImage = $model->getItem($row->id);
+		$jsonObjectsList = $this->convertJsonToObjectArray($rowImage->imageslist);	
 		
 		$rowImageCount = count($jsonObjectsList);
 		$introImages = array();
 		for ( $i = 0, $m = 0; $i < $introCount; $i++, $m++ ) {
-			$addHtml = $this->getMosimageParameter($matchesInIntro[$m]);
+			$param = $this->getMosimageParameter($matchesInIntro[$m]);
 			if ($i < $rowImageCount){
-				$introImages[] = $this->createImageAndBuildHtml($jsonObjectsList[$i], $config, $screenres, $addHtml);
+				$introImages[] = HtmlHelper::createImageAndBuildHtml($jsonObjectsList[$i], $config, $screenres, $param);
 			} else {
-				$intoImages[] = '<span style="display:none;">'.JTEXT::_("PICTURE_INTRO").'['.$i.']</span>';
+				$intoImages[] = HtmlHelper::createHtmlForNoneIntroImage($i);
 			}
 		}
 
@@ -388,11 +317,11 @@ class plgContentMosimage extends JPlugin {
 
 		$images = array();
 		for ( $i = $start, $m=0 ; $m < $count; $i++, $m++ ) {
-			$addHtml = $this->getMosimageParameter($matchesInText[$m]);
+			$param = $this->getMosimageParameter($matchesInText[$m]);
 			if ($i < $rowImageCount && ($rowImageCount > 0)){
-				$images[] = $this->createImageAndBuildHtml($jsonObjectsList[$i], $config, $screenres, $addHtml);
+				$images[] = HtmlHelper::createImageAndBuildHtml($jsonObjectsList[$i], $config, $screenres, $param);
 			} else {
-				$images[] = '<span style="display:none;">'.JTEXT::_("PICTURE").'['.$i.']</span>';
+				$images[] = HtmlHelper::createHtmlForNoneImage($i);
 			}
 
 		}
@@ -400,65 +329,6 @@ class plgContentMosimage extends JPlugin {
 		$result->introImages = $introImages;
 		$result->images = $images;
 		return $result;
-	}
-
-
-	private function buildHtmlForImage(&$lightboxHelper, CacheFile &$mosthumbProperties, CacheFile &$mosimageProperties, &$imgProperties, &$config, $addHtml){
-		$lightboxRel   = $lightboxHelper->getRel();
-		$thumbSize = ' width="'. $mosthumbProperties->displayWidth() .'" height="'. $mosthumbProperties->displayHeight() .'"';
-
-		$image = '<a href="'. $mosimageProperties->getCacheFileUrl() .'"';
-		$image.= ' rel="'.$lightboxRel.'"';
-		$image.= ' class="'. $lightboxHelper->getCssClassForImageLink() .'"';
-		$image.= ' title="' . ($config->isViewCaptionTextForFullsize() ? $imgProperties->getCaptionText():'') .'"';
-		$image.= '>';
-		$image.= '<img class="mosimgage-inner" src="'. $mosthumbProperties->getCacheFileUrl()  .'"';
-		$image.= $thumbSize;
-		$image.= $imgProperties->getImageAlignAsHtml();
-		$image.=' alt="'. $imgProperties->getAltText() .'"';
-		$image.=' title="'. $imgProperties->getCaptionText() .'"';
-		$image.=' border="'. $imgProperties->getBorderWidth() .'"';
-		$image.=' /></a>';
-
-		$caption = '';
-
-		$widthInner = $mosthumbProperties->displayWidth();
-		$widthOuter = $mosthumbProperties->displayWidth() ;//+ 26 - 12; // -12 img.mosimgage-inner margin- = 0px
-		if ($imgProperties->isCaptionTextEmpty()){
-			$cssDisplay =" visibility: hidden;";
-		} else {
-			$cssDisplay = '';
-		}
-		$cssWidh='width: '. $widthInner . 'px;';
-
-		$caption_valign = $imgProperties->getCaptionPosition();
-		
-		if ($imgProperties->getImageAlgin() == ""){
-			$cssClassOuter 		= 'mosimgage-outer-none';
-		} else {
-			$cssClassOuter 		= 'mosimgage-outer-'. $imgProperties->getImageAlgin();
-		}
-		$img = '<span class="' . $cssClassOuter . '" style="width: '. $widthOuter . 'px;border-width:'.$imgProperties->getBorderWidth().'px;">';
-
-		if ( $imgProperties->isViewCaptionTextForThumbnail()) {
-			$caption = '<span class="mosimgage-inner-'.$caption_valign.'" style="'.$cssWidh . $cssDisplay.'" ';
-			$caption .= '>';
-			$caption .= $imgProperties->getCaptionText();
-			$caption .= '</span>';
-
-			if ($caption_valign == 'top' && $caption){
-				$img .= $caption;
-			}
-			$img .= $image;
-			if ($caption_valign == 'bottom' && $caption){
-				$img .= $caption;
-			}
-		} else {
-			$img .= $image;
-		}
-		$img .='</span>';
-		 
-		return $addHtml . $img;
 	}
 }
 
