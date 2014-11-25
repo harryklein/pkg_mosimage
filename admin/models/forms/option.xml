@@ -69,6 +69,7 @@
 		<field name="down" type="button" label="COM_MOSIMAGE_DOWN_LABEL" description="COM_MOSIMAGE_DOWN_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_imageslist',+1)"/>
 		<field name="end"  type="button" label="COM_MOSIMAGE_END_LABEL"  description="COM_MOSIMAGE_END_LABEL_DESC"  onclick="Mosimage.moveInList('adminForm','jform_imageslist','end')"/>
 		
+		<field name="buttonspacer" label="" hr="true" description="" type="spacer" />
 		<field name="applay" type="button" class="btn btn-primary" label="COM_MOSIMAGE_APPLY" onclick="Mosimage.applyImageProps()" />
 		<field name="reset"  type="button" class="btn" label="COM_MOSIMAGE_RESET_BUTTON" onclick="Mosimage.resetImageProps()" />
 		<field id="content_id" name="content_id" type="hidden"/>
