@@ -6,6 +6,7 @@ admin/access.xml
 admin/config.xml
 admin/controllers/index.html
 admin/controllers/options.php
+admin/controllers/info.php
 admin/models/fields/button.php
 admin/models/fields/folderlistextended.php
 admin/models/fields/image.php
@@ -15,6 +16,7 @@ admin/models/index.html
 admin/models/forms/index.html
 admin/models/forms/option.xml
 admin/models/options.php
+admin/models/info.php
 admin/sql/install.mysql.utf8.sql
 admin/views/index.html
 admin/views/options/view.html.php
