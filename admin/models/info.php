@@ -100,6 +100,25 @@ class MosimageModelInfo extends JModelLegacy {
 		} 
 		return 0;
 	}	
+	
+	
+	public function getPluginId ()
+	{
+	    $db = $this->getDBO();
+	    JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_mosimage/tables');
+	    $row = JTable::getInstance('Extension');
+	
+	    $keys = array();
+	    $keys['folder'] = 'content';
+	    $keys['element'] = 'mosimage';
+	    $result = $row->load($keys);
+	    if ($result === false) {
+	        return 0;
+	    }
+	    $id = $row->extension_id;
+	    return $id;
+	}
+	
 }
 
 

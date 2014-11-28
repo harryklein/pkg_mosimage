@@ -50,4 +50,23 @@ class MosimageControllerInfo extends JControllerForm
         $user = JFactory::getUser();
         return $user->authorise('core.manage', 'com_mosimage');
     }
+    
+    public function plugin ()
+    {
+        $id = $this->getModel()->getPluginId();
+        if ($id == 0) {
+            $this->setRedirect(JRoute::_('index.php?option=com_config&view=component&component=com_mosimage', false));
+            $this->setMessage(JText::_('COM_MOSIMGAE_MOSIMAGE_PLUGIN_NOT_FOUND_PLEASE_INSTALL_PLUGIN'));
+            return true;
+        }
+    
+        $this->setRedirect(JRoute::_('index.php?option=com_plugins&view=plugin&layout=edit&extension_id=' . $id, false));
+        $app = JFactory::getApplication();
+        $context = 'com_plugins.edit.plugin';
+        $value = array();
+        $value[0] = $id;
+        $app->setUserState($context . '.id', $value);
+    
+        return true;
+    }    
 }
