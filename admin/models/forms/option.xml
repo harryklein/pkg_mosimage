@@ -51,7 +51,7 @@
 			label="COM_MOSIMAGE_GALLERY_IMAGES" description="COM_MOSIMAGE_GALLERY_IMAGES_DESC" multiple="true" hide_none="true" hide_default="true"></field>
 		
 		<!-- Liste aller Ordner unter /images -->
-		<field id="folder" name="folder" type="folderlistextended" default="" directory="images" size="1" 
+		<field id="folder" name="folder" type="folderlistrecursive" default="" directory="images" size="1"
 			label="COM_MOSIMAGE_SUBFOLDER" description="COM_MOSIMAGE_SUBFOLDER" 
 			onchange="Mosimage.changeDynaList2( 'jform_imagefiles', folderimages, 'jform_folder', 0, 0);"/>
 			
