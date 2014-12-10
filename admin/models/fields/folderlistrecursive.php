@@ -1,7 +1,5 @@
 <?php
-
 /**
- *
  * @version 2.0 $Id: folderlistextended.php,v 1.3 2014-10-30 21:51:38 harry Exp $
  * @package Joomla
  * @subpackage H2N Mosimage Component

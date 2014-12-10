@@ -1,7 +1,5 @@
 <?php
-
-/**
- *
+/** 
  * @version 2.0 $Id: button.php,v 1.3 2014-10-30 21:50:08 harry Exp $
  * @package Joomla
  * @subpackage H2N Mosimage Component
