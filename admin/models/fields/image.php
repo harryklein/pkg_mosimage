@@ -8,7 +8,6 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-
 /**
  * Erlaubt es, eine Bild via xml-Beschreibung in ein Form einzubinden. Folgende Attribute werden dabei unterstützt:
  * <ul>
@@ -24,17 +23,17 @@ defined('_JEXEC') or die('Restricted access');
  * Beispiel XML
  * <pre>
  <field id="view_imagefiles" name="view_imagefiles" type="image" class="preview" 
-     default="../media/system/images/blank.png" alt="COM_MOSIMAGE_PREVIEW" label="COM_MOSIMAGE_PREVIEW" />
+ default="../media/system/images/blank.png" alt="COM_MOSIMAGE_PREVIEW" label="COM_MOSIMAGE_PREVIEW" />
  </pre>
  * Als HTML wird ausgegebn:
  <pre>
  <img id="jform_view_imagefiles" class="preview" name="jform[view_imagefiles]" 
-     onclick="" src="http://localhost/cms/images/apply_f2.png" style="visibility: hidden;"/>
+ onclick="" src="http://localhost/cms/images/apply_f2.png" style="visibility: hidden;"/>
  </pre>
  */
-
 class JFormFieldImage extends JFormField
 {
+
     protected $type = 'Image';
 
     public function __construct ($form = null)
@@ -72,10 +71,10 @@ class JFormFieldImage extends JFormField
             $attribute['title'] = $this->prepareAttribute('title', $this->translateDescription ? JText::_($this->description) : $this->description);
         }
         
-        if (empty ($this->value)){
-            $attribute['src'] = $this->prepareAttribute('src','../media/system/images/blank.png');
+        if (empty($this->value)) {
+            $attribute['src'] = $this->prepareAttribute('src', '../media/system/images/blank.png');
         } else {
-            $attribute['src'] = $this->prepareAttribute('src',$this->value);
+            $attribute['src'] = $this->prepareAttribute('src', $this->value);
         }
         
         if ($this->disabled) {
@@ -87,7 +86,7 @@ class JFormFieldImage extends JFormField
         }
         
         if (! empty($this->onclick)) {
-	        $attribute['onclick'] = $this->prepareAttribute('onclick', $this->onclick);
+            $attribute['onclick'] = $this->prepareAttribute('onclick', $this->onclick);
         }
         $attribute['id'] = $this->prepareAttribute('id', $this->id);
         $attribute['name'] = $this->prepareAttribute('name', $this->name);

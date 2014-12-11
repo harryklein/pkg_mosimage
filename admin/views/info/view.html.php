@@ -1,15 +1,13 @@
 <?php
 /**
- *
  * @version 2.0 $Id: view.html.php,v 1.2 2014-02-19 22:35:03 harry Exp $
  * @package Joomla
  * @subpackage H2N Mosimage Component
- * @copyright (C) 2010-2012 Harry Klein - www.joomla-hklein.de
+ * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
  * @copyright Copyright (C) 2005 Open Source Matters. All rights reserved.
- * @license GNU/GPL, see LICENSE.php
+ * @license GNU/GPL, see LICENSE.txt
  *         
  */
-
 defined('_JEXEC') or die('Restricted access');
 
 class MosimageViewInfo extends JViewLegacy

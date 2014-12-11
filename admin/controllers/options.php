@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * @version 2.0 $Id: options.php,v 1.2 2014-10-28 23:08:46 harry Exp $
  * @package Joomla
  * @subpackage H2N Mosimage Component
@@ -27,9 +26,7 @@ class MosimageControllerOptions extends JControllerForm
         switch ($task) {
             case 'save':
                 $document = JFactory::getDocument();
-                $document->addScript(
-                        JURI::root() .
-                                 '/administrator/components/com_mosimage/js/mosimage.js');
+                $document->addScript(JURI::root() . '/administrator/components/com_mosimage/js/mosimage.js');
                 ?>
 <script type="text/javascript">
 					window.parent.SqueezeBox.close();	

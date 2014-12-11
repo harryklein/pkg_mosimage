@@ -25,7 +25,7 @@ class JFormFieldMosimageList extends JFormFieldList
 {
 
     protected $type = 'MosmageList';
-    
+
     public function __construct ($form = null)
     {
         parent::__construct($form);
@@ -63,9 +63,9 @@ class JFormFieldMosimageList extends JFormFieldList
         }
         return $options;
     }
-    
-    
-    private function stripTrailingSlashFromFilename($source){
+
+    private function stripTrailingSlashFromFilename ($source)
+    {
         if (strrchr($source, '/')) {
             $filename = substr(strrchr($source, '/'), 1);
         } else {
@@ -73,6 +73,5 @@ class JFormFieldMosimageList extends JFormFieldList
         }
         return $filename;
     }
-    
 }
 ?>

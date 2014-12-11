@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * @version 2.0 $Id: options.php,v 1.2 2014-10-28 23:10:01 harry Exp $
  * @package Joomla
  * @subpackage H2N Mosimage Component
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
  * @copyright Copyright (C) 2005 Open Source Matters. All rights reserved.
- * @license GNU General Public License version 2 or later; see LICENSE.txt
- *         
+ * @license GNU General Public License version 2 or later; see LICENSE.txt       
  */
 defined('_JEXEC') or die('Restricted access');
 
@@ -18,9 +16,9 @@ class MosimageModelInfo extends JModelLegacy
 
     protected $text_prefix = 'COM_MOSIMAGE';
 
-    const MAX_FILES = 500;
-
     private $filelist;
+
+    const MAX_FILES = 500;
 
     /**
      * Liefert die Gesamtanzahl der verfügbaren Dateien.
