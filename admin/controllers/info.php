@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * @version 2.0 $Id: options.php,v 1.2 2014-10-28 23:08:46 harry Exp $
  * @package Joomla
  * @subpackage H2N Mosimage Component
@@ -20,8 +19,7 @@ class MosimageControllerInfo extends JControllerForm
     public function clearcache ()
     {
         if (! $this->allowClearCache()) {
-            $this->setError(
-                    JText::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
+            $this->setError(JText::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
             $this->setMessage($this->getError(), 'error');
             
             $this->setRedirect(JRoute::_('index.php', false));
@@ -41,8 +39,7 @@ class MosimageControllerInfo extends JControllerForm
         } else {
             $msg = JText::_('COM_MOSIMAGE_DELETE_CACHE_FAILED');
         }
-        $this->setRedirect(JRoute::_('index.php?option=com_mosimage&view=info'), 
-                $msg);
+        $this->setRedirect(JRoute::_('index.php?option=com_mosimage&view=info'), $msg);
     }
 
     public function allowClearCache ()
@@ -50,7 +47,7 @@ class MosimageControllerInfo extends JControllerForm
         $user = JFactory::getUser();
         return $user->authorise('core.manage', 'com_mosimage');
     }
-    
+
     public function plugin ()
     {
         $id = $this->getModel()->getPluginId();
@@ -59,14 +56,14 @@ class MosimageControllerInfo extends JControllerForm
             $this->setMessage(JText::_('COM_MOSIMGAE_MOSIMAGE_PLUGIN_NOT_FOUND_PLEASE_INSTALL_PLUGIN'));
             return true;
         }
-    
+        
         $this->setRedirect(JRoute::_('index.php?option=com_plugins&view=plugin&layout=edit&extension_id=' . $id, false));
         $app = JFactory::getApplication();
         $context = 'com_plugins.edit.plugin';
         $value = array();
         $value[0] = $id;
         $app->setUserState($context . '.id', $value);
-    
+        
         return true;
-    }    
+    }
 }
