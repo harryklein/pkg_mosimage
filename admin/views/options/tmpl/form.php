@@ -106,7 +106,7 @@ Joomla.submitbutton = function(task) {
 			
 			<div class="span3 control-group">
 				<fieldset>
-					<legend><?php echo JText::_('COM_MOSIMAGE_EDIT_THE_IMAGE_SELECTED'); ?></legend>
+					<legend><?php echo JText::_('COM_MOSIMAGE_OPTION_LABEL'); ?></legend>
 				</fieldset>
 			</div>
 		</div>
