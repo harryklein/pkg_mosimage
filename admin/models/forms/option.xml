@@ -32,8 +32,8 @@
 		<field id="_caption" name="_caption" type="text" class="inputbox" size="25" 
 			label="COM_MOSIMAGE_CAPTION" description="COM_MOSIMAGE_CAPTION_DESC"/>
 			
-		<field id="view_imagefiles" name="view_imagefiles" type="image" class="preview" default="../media/system/images/blank.png" alt="COM_MOSIMAGE_PREVIEW" label="COM_MOSIMAGE_PREVIEW" />
-		<field id="view_imagelist"  name="view_imagelist"  type="image" class="preview" default="../media/system/images/blank.png" alt="COM_MOSIMAGE_ACTIVE_IMAGE" label="COM_MOSIMAGE_ACTIVE_IMAGE" />
+		<field id="view_imagefiles" name="view_imagefiles" type="image" class="preview" alt="COM_MOSIMAGE_PREVIEW"      label="COM_MOSIMAGE_PREVIEW_LABEL" description="COM_MOSIMAGE_PREVIEW_DESC" />
+		<field id="view_imagelist"  name="view_imagelist"  type="image" class="preview" alt="COM_MOSIMAGE_ACTIVE_IMAGE" label="COM_MOSIMAGE_ACTIVE_IMAGE_LABEL" description="COM_MOSIMAGE_ACTIVE_IMAGE_DESC" />
 			
 		<field id="_caption_position" name="_caption_position" type="list" default=""
 			size="1" label="COM_MOSIMAGE_CAPTION_POSITION"
