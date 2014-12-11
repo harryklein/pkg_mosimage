@@ -8,7 +8,7 @@ admin/controllers/index.html
 admin/controllers/options.php
 admin/controllers/info.php
 admin/models/fields/button.php
-admin/models/fields/folderlistextended.php
+admin/models/fields/folderlistrecursive.php
 admin/models/fields/image.php
 admin/models/fields/mosimagelist.php
 admin/models/fields/index.html
