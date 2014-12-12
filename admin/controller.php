@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * @version 2.0 $Id: controller.php,v 1.3 2014-10-19 19:26:35 harry Exp $
  * @package Joomla
  * @subpackage H2N Mosimage Component
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
  * @copyright Copyright (C) 2005 Open Source Matters. All rights reserved.
- * @license GNU/GPL, see LICENSE.txt
- *         
+ * @license GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die('Restricted access');
 

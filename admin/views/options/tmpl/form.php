@@ -4,7 +4,7 @@
  * @package Joomla
  * @subpackage H2N Mosimage Component
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
- * @license GNU/GPL, see LICENSE.txt
+ * @license GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die('Restricted access');
 
