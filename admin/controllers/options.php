@@ -1,8 +1,8 @@
 <?php
 /**
  * @version 2.0 $Id: options.php,v 1.2 2014-10-28 23:08:46 harry Exp $
- * @package Joomla
- * @subpackage H2N Mosimage Component
+ * @package Joomla.Administrator
+ * @subpackage com_mosimage
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
  * @copyright Copyright (C) 2005 Open Source Matters. All rights reserved.
  * @license GNU General Public License version 2 or later; see LICENSE.txt

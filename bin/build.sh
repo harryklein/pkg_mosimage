@@ -140,7 +140,7 @@ function replaceParameterInConfigFile(){
 
 function buildArtefakct(){
 
-  echo "INFO: Baue ZIP [${ZIP_FILE_NAME}-${VERSION}] in [$(pwd)]"
+  echo "* Baue ZIP [${ZIP_FILE_NAME}-${VERSION}] in [$(pwd)]"
   cat filelist.txt | zip "${ROOT_DIR}/deploy/${ZIP_FILE_NAME}-${VERSION}.zip" '-@'
   check_exit_code $? "Datei $ROOT_DIR/deploy/${ZIP_FILE_NAME}-${VERSION}.zip konnte nicht erzeugt werden."
 
@@ -181,9 +181,10 @@ function changeIntoBuildDirectory(){
 }
 
 function phpLint(){
+  echo "* Prüfen der PHP-Dateien auf Syntaktische Fehler"
   if [ "${FAST}" == "1" ]
   then
-  	echo "Ignore php lint checks"
+  	echo "  - Prüfung übersprungen, da Programmschalter --fast|-f angegeben worden ist."
   	return
   fi
   local FOUND_ERROR=0
@@ -191,11 +192,14 @@ function phpLint(){
   local i
   for i in ${PHP_FILES}
   do
-    echo "INFO: Prüfe [${i}] auf syntaktische Fehler"
-    php5 -l $i 2>> "${REPORT_DIR}/php-lint.log"
+    printf "  - %-60s " ${i}
+    php5 -l $i 2>> "${REPORT_DIR}/php-lint.log" >/dev/null
     if [ $? -ne 0 ]
     then
+      echo "error"
       FOUND_ERROR=1
+    else
+      echo "ok"
     fi
   done 
   check_exit_code ${FOUND_ERROR} "Syntaktischen Fehler gefunden. Details siehe [${REPORT_DIR}/php-lint.log]"
@@ -321,7 +325,7 @@ function checkLanguageFile(){
   then
     check_exit_code 1 "Datei [${FILE_1}] oder [${FILE_2}] wurde nicht gefunden"
   fi
-  echo "Prüfe Datei [${FILE_2}] mit den Labels aus [${FILE_1}]"
+  echo "  - [${FILE_2}] mit den Labels aus [${FILE_1}] prüfen"
   local LABELS=$(cat ${FILE_1} | grep '=' | grep -v ';' |  cut -d '=' -f 1)
   local i
   for i in $LABELS
@@ -344,7 +348,7 @@ done
 }
 
 function checkAllLanguageFiles(){
-  echo "INFO: prüfe die Sprachfiles auf Konsistenz."
+  echo "* Prüfe die Sprachfiles auf Konsistenz."
   checkLanguageFile ${LANGUAGE_1} ${LANGUAGE_2}
   checkLanguageFile ${LANGUAGE_2} ${LANGUAGE_1}
   checkLanguageFile ${LANGUAGE_1} ${LANGUAGE_2} "sys"
