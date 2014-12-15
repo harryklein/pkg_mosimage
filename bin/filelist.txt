@@ -16,7 +16,8 @@ mosimage/helper/MosimageConfiguration.php
 mosimage/helper/CacheFile.php
 mosimage/helper/WatermarkCreator.php
 mosimage/helper/ThumbnailCreator.php
-mosimage/helper/MosimageFromFolder.php
+mosimage/helper/MosimageDirProperties.php
+mosimage/helper/HtmlHelper.php
 mosimage/index.html
 mosimage/lightbox/index.html
 mosimage/lightbox/img/index.html
