@@ -81,6 +81,82 @@ function compareLanguageFilesAndAdaptThisFiles(){
   fi
 }
 
+#
+# Temporärer Dateien löschen.
+#
+function trapDeleteFiles(){
+  echo "* Löschen der temporären Datein [${ORIG_FILE} ${OTHER_FILE}]"
+  if [ "${ORIG_FILE}" != "" ]
+  then
+    echo "  - ${ORIG_FILE}"
+    rm -f "${ORIG_FILE}"
+  fi
+
+  if [ "${OTHER_FILE}" != "" ]
+  then
+    echo "  - ${OTHER_FILE}"
+    rm -f "${OTHER_FILE}"
+  fi
+  exit 0
+}
+
+#
+# Überprüft die Header der einzelnen Dateien. Bei Fehlern erfolgt
+# # # ein Abbruch. Aus Vorlage werden die ersten 10 Zeilen der ersten Datei verwendet.
+#
+function checkPhpHeader(){
+  echo "* Prüfe Header in den PHP-Files auf Konstenz .. "
+  cd ..
+  local f_admin=$(find admin -name "*.php")
+  local f_site=$(find admin -name "*.php")  
+
+  trap 'trapDeleteFiles' EXIT  
+  trap 'trapDeleteFiles' 1 2 3 15  
+  ORIG_FILE=$(mktemp)
+  OTHER_FILE=$(mktemp)
+  
+  local ERROR=0
+  local FIRST=1
+
+  for i in $f_admin $f_site
+  do
+    if [ $FIRST -eq 1 ]
+    then
+      cat $i | sed -e s/'\$Id: .*\$'/'\$Id: \$'/g |\
+        grep -v 'www.sonerekici.com' |\
+        grep -v 'Open Source Matters. All rights reserved.' |\
+        sed -e s/' 20[0-9][0-9]-'/' 20xx-'/g |\
+        head -10 > ${ORIG_FILE}
+      FIRST=0
+      echo "  - Vorlage für Header-Konsistenzprügung ist [${i}]"
+      echo "    ==== Inhalt - Beginn ===="
+      pr -T --indent=6 --page-width=160 ${ORIG_FILE}
+      echo "    ==== Inhalt - Ende ======"
+      continue
+    fi
+    printf "  - %-60s " $i
+    cat $i | sed -e s/'\$Id: .*\$'/'\$Id: \$'/g |\
+        grep -v 'www.sonerekici.com' |\
+        grep -v 'Open Source Matters. All rights reserved.' |\
+        sed -e s/' 20[0-9][0-9]-'/' 20xx-'/g |\
+        head -10 > ${OTHER_FILE}
+    diff ${ORIG_FILE} ${OTHER_FILE}
+    if [ $? -ne 0 ] 
+    then
+      echo "error"
+      ERROR=$((ERROR+1))
+    else
+      echo "ok"
+    fi
+  done
+  if [ $ERROR -ne 0 ]
+  then
+    echo "Die Header in PHP-Dateien weicht in $ERROR Fällen vom erwarteten Inhalt ab."
+  fi
+
+}
+
+
 getComamdLineParameterExt "$@"
 
 if [ "$FIX_LANG_FILE" == "1" ]
@@ -88,3 +164,6 @@ then
   compareLanguageFilesAndAdaptThisFiles
 fi
 
+checkPhpHeader
+
+exit 0
