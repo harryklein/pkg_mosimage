@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: options.php,v 1.2 2014-10-28 23:08:46 harry Exp $
+ * @version 2.0 $Id: options.php,v 1.3 2014/12/16 23:34:34 harry Exp $
  * @package Joomla.Administrator
  * @subpackage com_mosimage
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
