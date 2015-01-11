@@ -3,3 +3,9 @@
 .settings
 *~
 CVS/
+/deploy/
+/deploy-dist/
+/doc/
+/tmp/
+/report/
+/build/
