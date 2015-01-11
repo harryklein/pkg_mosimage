@@ -106,10 +106,44 @@ function trapDeleteFiles(){
 #
 function checkPhpHeader(){
   echo "* Prüfe Header in den PHP-Files auf Konstenz .. "
+  
+  
+  echo "HEADER_CHECK_FILES [$HEADER_CHECK_FILES]"
+  
+  local FILES_FOR_CHECKING
+  
+  HEADER_CHECK_FILES=$(echo ${HEADER_CHECK_FILES})
+  echo "HEADER_CHECK_FILES [$HEADER_CHECK_FILES]"
+  if [ "${HEADER_CHECK_FILES}" == "" ]
+  then
+  	echo " - keine Dateien zum Prüfen vorhanden"
+  	return	
+  fi
+  
   cd ..
-  local f_admin=$(find admin -name "*.php")
-  local f_site=$(find admin -name "*.php")  
-
+  
+  for i in ${HEADER_CHECK_FILES}
+  do
+  	if [ -d ${i} ]
+  	then
+  		FILES_FOR_CHECKING="${FILES_FOR_CHECKING} "$(find ${i} -name "*.php")
+  	else
+	  	if  [ -f ${i} ]
+	  	then
+	  		FILES_FOR_CHECKING="${FILES_FOR_CHECKING} ${i}"
+	  	else 
+	  		eche "  - [${i}] ist keine Verzeichnis oder Datei"
+	  	fi
+	fi		
+  done
+  
+  FILES_FOR_CHECKING=$(echo ${FILES_FOR_CHECKING})
+  if [ -z "${FILES_FOR_CHECKING}" ]
+  then
+  	echo "ERROR: Keine Dateien zum Prüfen der Konsitent gefunden. Abbruch"
+  	exit 1
+  fi
+  
   trap 'trapDeleteFiles' EXIT  
   trap 'trapDeleteFiles' 1 2 3 15  
   ORIG_FILE=$(mktemp)
@@ -118,7 +152,7 @@ function checkPhpHeader(){
   local ERROR=0
   local FIRST=1
 
-  for i in $f_admin $f_site
+  for i in ${FILES_FOR_CHECKING}
   do
     if [ $FIRST -eq 1 ]
     then
@@ -153,7 +187,6 @@ function checkPhpHeader(){
   then
     echo "Die Header in PHP-Dateien weicht in $ERROR Fällen vom erwarteten Inhalt ab."
   fi
-
 }
 
 
