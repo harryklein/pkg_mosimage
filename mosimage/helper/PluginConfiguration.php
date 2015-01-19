@@ -9,7 +9,7 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-class MosimageConfiguration
+class PluginConfiguration
 {
 
     const DEFAULT_THUUMNAIL_WIDTH = 150;

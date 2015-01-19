@@ -27,7 +27,7 @@ defined('_JEXEC') or die('Restricted access');
 require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/LightboxHelper.php';
 require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/ImageProperties.php';
 require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/ThumbnailCreator.php';
-require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/MosimageConfiguration.php';
+require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/PluginConfiguration.php';
 require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/ImageDisplayProperties.php';
 require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/CacheFile.php';
 require_once JPATH_ROOT.'/plugins/content/mosimage/mosimage/helper/MosimageDirProperties.php';
@@ -79,7 +79,7 @@ class plgContentMosimage extends JPlugin {
 				$count = count( $matchesInText[0] );
 				if ($count || $introCount) {
 					$replaceMosimagePlaceholder = true;
-					$config = new MosimageConfiguration($this->params);
+					$config = new PluginConfiguration($this->params);
 					$this->addMosimageStyleSheet();
 					$this->addLightBoxStyleSheetAndScript($config);
 					$screenres = $this->getScreenSizeFromCookie();
@@ -107,7 +107,7 @@ class plgContentMosimage extends JPlugin {
 
 				if ($count || $introCount) {
 					$replaceMosimagePlaceholder = true;
-					$config = new MosimageConfiguration($this->params);
+					$config = new PluginConfiguration($this->params);
 					$this->addMosimageStyleSheet();
 					$this->addLightBoxStyleSheetAndScript($config);
 					$screenres = $this->getScreenSizeFromCookie();
@@ -195,7 +195,7 @@ class plgContentMosimage extends JPlugin {
 		return $param;
 	}
 
-	private function processImagesDir( &$row, MosimageConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres ){
+	private function processImagesDir( &$row, PluginConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres ){
 		$images = array();
 		$introImages = array();
 
@@ -281,7 +281,7 @@ class plgContentMosimage extends JPlugin {
 	}
 	
 
-	private function processImages ( &$row, MosimageConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres, $showIntro ) {
+	private function processImages ( &$row, PluginConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres, $showIntro ) {
 		$introCount=count($matchesInIntro);
 		$count = count($matchesInText);
 

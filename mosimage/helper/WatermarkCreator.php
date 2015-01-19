@@ -14,7 +14,7 @@ class WatermarkCreator
 
     private $config;
 
-    public function __construct (MosimageConfiguration $config)
+    public function __construct (PluginConfiguration $config)
     {
         $this->config = $config;
     }

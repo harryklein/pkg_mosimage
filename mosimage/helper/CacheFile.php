@@ -37,14 +37,14 @@ class CacheFile
 
     /**
      * @param ImageDisplayProperties $imageProperties Pfad und Name des Original-Bildes inkl. der Größe, wie es angezeigt werden soll
-     * @param MosimageConfiguration $config Plugin-Konfiguration
+     * @param PluginConfiguration $config Plugin-Konfiguration
      * @param $proportion
      * @param $bgcolor
      * @param $origWidth Breite des Original-Bildes, Wird, wenn nicht angegeben (bzw. wenn $origHeight nicht angegeben), zur Laufzeit ermittelt
      * @param $origHeight Höhe des Original-Bides. Wird, wenn nicht angegeben (bzw. wenn $origWidth nicht angegeben), zur Laufzeit ermiitelt.
      *
      */
-    public function __construct (ImageDisplayProperties $imageProperties, MosimageConfiguration $config, $proportion, $bgcolor, $origWidth = null, 
+    public function __construct (ImageDisplayProperties $imageProperties, PluginConfiguration $config, $proportion, $bgcolor, $origWidth = null, 
             $origHeight = null)
     {
         $this->absoluteFile = $imageProperties->file();

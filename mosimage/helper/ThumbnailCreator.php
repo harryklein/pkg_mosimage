@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 require_once JPATH_ROOT . '/plugins/content/mosimage/mosimage/helper/CacheFile.php';
-require_once JPATH_ROOT . '/plugins/content/mosimage/mosimage/helper/MosimageConfiguration.php';
+require_once JPATH_ROOT . '/plugins/content/mosimage/mosimage/helper/PluginConfiguration.php';
 require_once JPATH_ROOT . '/plugins/content/mosimage/mosimage/helper/WatermarkCreator.php';
 
 class ThumbnailCreator
@@ -20,7 +20,7 @@ class ThumbnailCreator
 
     private $watermarkCreator;
 
-    public function __construct (MosimageConfiguration $config)
+    public function __construct (PluginConfiguration $config)
     {
         $this->config = $config;
         $this->watermarkCreator = new WatermarkCreator($config);

@@ -11,43 +11,20 @@ defined('_JEXEC') or die('Restricted access');
 
 class ImageProperties
 {
-
-    const IMAGE_FILENAME = 0;
-
-    const IMAGE_ALIGN = 1;
-
-    const ALT_TEXT = 2;
-
-    const BORDER_WIDTH = 3;
-
-    const CAPTION = 4;
-
-    const CAPTION_POSITION = 5;
-
-    const CAPTION_ALIGN = 6;
-    // Nicht mehr benutzt, Relikt aus J1.0.x
-    const CAPTION_WIDTH = 7;
-    // Nicht mehr benutzt, Relikt aus J1.0.x
     const DEFAULT_IMGAGE_ALGIN = 'left';
 
     private $attrib;
+    private $config;
 
-    private $displayThumbCaption;
-
-    private $captionValignFromConfig;
-
-    private $defaultThumbnailBorderWidth;
 
     /**
-     * @param String $imagePropertiesAsLine
+     * @param stdClass $imagePropertiesAsStdClass
      * @param $config
      */
-    public function __construct (&$imageProperties, &$config)
+    public function __construct (&$imagePropertiesAsStdClass, PluginConfiguration &$config)
     {
-        $this->attrib = $imageProperties;
-        $this->displayThumbCaption = $config->isViewCaptionTextForThumbnail();
-        $this->captionValignFromConfig = $config->getThumbnailCaptionAlign();
-        $this->defaultThumbnailBorderWidth = $config->getThumbnailBorderWidth();
+        $this->attrib = $imagePropertiesAsStdClass;
+        $this->config = $config;
     }
 
     public function getRelativeFileName ()
@@ -65,7 +42,7 @@ class ImageProperties
 
     public function getImageAlignAsHtml ()
     {
-        if ($this->displayThumbCaption) {
+        if ($this->config->isViewCaptionTextForThumbnail()) {
             return '';
         }
         $imageAlign = $this->getImageAlgin();
@@ -100,7 +77,7 @@ class ImageProperties
         if (isset($this->attrib->border)) {
             switch ($this->attrib->border) {
                 case '0':
-                    return $this->defaultThumbnailBorderWidth;
+                    return $this->config->getThumbnailBorderWidth();
                 case '1':
                 case '2':
                 case '3':
@@ -109,7 +86,7 @@ class ImageProperties
                     return 0;
             }
         }
-        return $this->defaultThumbnailBorderWidth;
+        return $this->config->getThumbnailBorderWidth();
     }
 
     public function getCaptionText ()
@@ -131,7 +108,7 @@ class ImageProperties
     public function getCaptionPosition ()
     {
         if (! isset($this->attrib->caption_position) || ! $this->attrib->caption_position) {
-            return $this->captionValignFromConfig;
+            return $this->config->getThumbnailCaptionAlign();
         }
         switch ($this->attrib->caption_position) {
             case 'bottom':
@@ -139,9 +116,22 @@ class ImageProperties
             case 'hide':
                 return $this->attrib->caption_position;
         }
-        return $this->captionValignFromConfig;
+        return $this->config->getThumbnailCaptionAlign();
     }
-
+    
+    public function getAccessLevel(){
+    	if (isset($this->attrib->accesslevel)) {
+    		switch ($this->attrib->accesslevel){
+    			case 1:
+    			case 2:
+    			case 3:
+    				return $this->attrib->accesslevel;
+    				break;
+    		}
+    	}
+    	return 1;
+    }
+    
     public function getAbsoluteFileName ()
     {
         return JPATH_SITE . '/images/' . $this->getRelativeFileName();

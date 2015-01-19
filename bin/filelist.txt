@@ -12,7 +12,7 @@ mosimage/helper/ImageProperties.php
 mosimage/helper/ImageDisplayProperties.php
 mosimage/helper/index.html
 mosimage/helper/LightboxHelper.php
-mosimage/helper/MosimageConfiguration.php
+mosimage/helper/PluginConfiguration.php
 mosimage/helper/CacheFile.php
 mosimage/helper/WatermarkCreator.php
 mosimage/helper/ThumbnailCreator.php
