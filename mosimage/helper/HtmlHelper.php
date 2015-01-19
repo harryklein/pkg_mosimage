@@ -66,62 +66,69 @@ class HtmlHelper
         }
     }
 
-    public static function buildHtmlForImage (&$lightboxHelper, CacheFile &$mosthumbProperties, CacheFile &$mosimageProperties, &$imgProperties, &$config, 
+    public static function buildHtmlForImage (&$lightboxHelper, CacheFile &$mosthumbProperties, CacheFile &$mosimageProperties, ImageProperties &$imgProperties, &$config, 
             $param)
     {
-        $lightboxRel = $lightboxHelper->getRel();
-        $thumbSize = ' width="' . $mosthumbProperties->displayWidth() . '" height="' . $mosthumbProperties->displayHeight() . '"';
-        
-        $image = '<a href="' . $mosimageProperties->getCacheFileUrl() . '"';
-        $image .= ' rel="' . $lightboxRel . '"';
-        $image .= ' class="' . $lightboxHelper->getCssClassForImageLink() . '"';
-        $image .= ' title="' . ($config->isViewCaptionTextForFullsize() ? $imgProperties->getCaptionText() : '') . '"';
-        $image .= '>';
-        $image .= '<img class="mosimgage-inner" src="' . $mosthumbProperties->getCacheFileUrl() . '"';
-        $image .= $thumbSize;
-        $image .= $imgProperties->getImageAlignAsHtml();
-        $image .= ' alt="' . $imgProperties->getAltText() . '"';
-        $image .= ' title="' . $imgProperties->getCaptionText() . '"';
-        $image .= ' border="' . $imgProperties->getBorderWidth() . '"';
-        $image .= ' /></a>';
-        
-        $caption = '';
-        
-        $widthInner = $mosthumbProperties->displayWidth();
-        $widthOuter = $mosthumbProperties->displayWidth(); // + 26 - 12; // -12 img.mosimgage-inner margin- = 0px
-        if ($imgProperties->isCaptionTextEmpty()) {
-            $cssDisplay = " visibility: hidden;";
-        } else {
-            $cssDisplay = '';
-        }
-        $cssWidh = 'width: ' . $widthInner . 'px;';
-        
-        $caption_valign = $imgProperties->getCaptionPosition();
-        
-        if ($imgProperties->getImageAlgin() == "") {
-            $cssClassOuter = 'mosimgage-outer-none';
-        } else {
-            $cssClassOuter = 'mosimgage-outer-' . $imgProperties->getImageAlgin();
-        }
-        $img = '<span class="' . $cssClassOuter . '" style="width: ' . $widthOuter . 'px;border-width:' . $imgProperties->getBorderWidth() . 'px;">';
-        
-        if ($imgProperties->isViewCaptionTextForThumbnail()) {
-            $caption = '<span class="mosimgage-inner-' . $caption_valign . '" style="' . $cssWidh . $cssDisplay . '" ';
-            $caption .= '>';
-            $caption .= $imgProperties->getCaptionText();
-            $caption .= '</span>';
-            
-            if ($caption_valign == 'top' && $caption) {
-                $img .= $caption;
-            }
-            $img .= $image;
-            if ($caption_valign == 'bottom' && $caption) {
-                $img .= $caption;
-            }
-        } else {
-            $img .= $image;
-        }
-        $img .= '</span>';
+    	$accessLevel = $imgProperties->getAccessLevel();
+    	
+    	$user = JFactory::getUser();
+    	if (($user->guest) && ($accessLevel > 1) ){
+    		$img = '';
+    	} else {
+	        $lightboxRel = $lightboxHelper->getRel();
+	        $thumbSize = ' width="' . $mosthumbProperties->displayWidth() . '" height="' . $mosthumbProperties->displayHeight() . '"';
+	        
+	        $image = '<a href="' . $mosimageProperties->getCacheFileUrl() . '"';
+	        $image .= ' rel="' . $lightboxRel . '"';
+	        $image .= ' class="' . $lightboxHelper->getCssClassForImageLink() . '"';
+	        $image .= ' title="' . ($config->isViewCaptionTextForFullsize() ? $imgProperties->getCaptionText() : '') . '"';
+	        $image .= '>';
+	        $image .= '<img class="mosimgage-inner" src="' . $mosthumbProperties->getCacheFileUrl() . '"';
+	        $image .= $thumbSize;
+	        $image .= $imgProperties->getImageAlignAsHtml();
+	        $image .= ' alt="' . $imgProperties->getAltText() . '"';
+	        $image .= ' title="' . $imgProperties->getCaptionText() . '"';
+	        $image .= ' border="' . $imgProperties->getBorderWidth() . '"';
+	        $image .= ' /></a>';
+	        
+	        $caption = '';
+	        
+	        $widthInner = $mosthumbProperties->displayWidth();
+	        $widthOuter = $mosthumbProperties->displayWidth(); // + 26 - 12; // -12 img.mosimgage-inner margin- = 0px
+	        if ($imgProperties->isCaptionTextEmpty()) {
+	            $cssDisplay = " visibility: hidden;";
+	        } else {
+	            $cssDisplay = '';
+	        }
+	        $cssWidh = 'width: ' . $widthInner . 'px;';
+	        
+	        $caption_valign = $imgProperties->getCaptionPosition();
+	        
+	        if ($imgProperties->getImageAlgin() == "") {
+	            $cssClassOuter = 'mosimgage-outer-none';
+	        } else {
+	            $cssClassOuter = 'mosimgage-outer-' . $imgProperties->getImageAlgin();
+	        }
+	        $img = '<span class="' . $cssClassOuter . '" style="width: ' . $widthOuter . 'px;border-width:' . $imgProperties->getBorderWidth() . 'px;">';
+	        
+	        if ($imgProperties->isViewCaptionTextForThumbnail()) {
+	            $caption = '<span class="mosimgage-inner-' . $caption_valign . '" style="' . $cssWidh . $cssDisplay . '" ';
+	            $caption .= '>';
+	            $caption .= $imgProperties->getCaptionText();
+	            $caption .= '</span>';
+	            
+	            if ($caption_valign == 'top' && $caption) {
+	                $img .= $caption;
+	            }
+	            $img .= $image;
+	            if ($caption_valign == 'bottom' && $caption) {
+	                $img .= $caption;
+	            }
+	        } else {
+	            $img .= $image;
+	        }
+	        $img .= '</span>';
+    	}
         $addHtml = self::getHtmlForFloat($param);
         return $addHtml . $img;
     }
