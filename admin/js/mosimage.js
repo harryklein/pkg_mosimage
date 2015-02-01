@@ -80,6 +80,10 @@ Mosimage.showImagePropsWithoutChecks  = function(base_path){
 	document.getElementById('jform__border').value = props.border || '0';
 	document.getElementById('jform__border').defaultValue = props.border || '0';
 	
+	document.getElementById('jform_accesslevel').value = props.accesslevel || '1';
+	document.getElementById('jform_accesslevel').defaultValue = props.accesslevel || '1';
+	
+	
 	document.getElementById('jform__caption').value = props.caption || '';
 	document.getElementById('jform__caption').defaultValue = props.caption || '';
 	
@@ -126,8 +130,10 @@ Mosimage.isValueChangedInSelect = function(elementId){
 Mosimage.showImageProps = function(base_path) {
 	var list = document.getElementById('jform_imageslist');
 	if (Mosimage.isValueChangedInSelect('jform__align') ||
+			Mosimage.isValueChangedInSelect('jform_accesslevel') ||
 			Mosimage.isValueChanged('jform__alt') ||
 			Mosimage.isValueChangedInSelect('jform__border') ||
+			Mosimage.isValueChangedInSelect('jform_accesslevel') ||
 			Mosimage.isValueChanged('jform__caption') || 
 			Mosimage.isValueChangedInSelect('jform__caption_position') 
 			){  
@@ -150,6 +156,7 @@ Mosimage.resetImageProps = function () {
 	document.getElementById('jform__caption').value = document.getElementById('jform__caption').defaultValue;
 	
 	document.getElementById('jform__border').value = document.getElementById('jform__border').defaultValue;
+	document.getElementById('jform_accesslevel').value = document.getElementById('jform_accesslevel').defaultValue;
 	document.getElementById('jform__caption_position').value = document.getElementById('jform__caption_position').defaultValue;
 }
 
@@ -170,6 +177,7 @@ Mosimage.applyImageProps = function (previous) {
 		    align            : Mosimage.getSelectedValue2('jform__align'),
 		    alt              : document.getElementById('jform__alt').value,
 		    border           : Mosimage.getSelectedValue2('jform__border'),
+		    accesslevel      : Mosimage.getSelectedValue2('jform_accesslevel'),
 		    caption          : document.getElementById('jform__caption').value,
 		    caption_position : Mosimage.getSelectedValue2('jform__caption_position'),
 		    caption_align    : Mosimage.getSelectedValue2('jform__caption_align'),

@@ -157,6 +157,7 @@ if ($app->isAdmin()) {
 			<div class="span3">
 				<fieldset>
 					<?php echo $this->form->getControlGroup('_source')?>
+					<?php echo $this->form->getControlGroup('accesslevel')?>
 					<?php echo $this->form->getControlGroup('_align')?>
 					<?php echo $this->form->getControlGroup('_alt')?>
 					<?php echo $this->form->getControlGroup('_border')?>

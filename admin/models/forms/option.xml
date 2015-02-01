@@ -8,6 +8,9 @@
 		<field id="_source" name="_source" type="text" class="inputbox" size="25" readonly="true" 
 			label="COM_MOSIMAGE_SOURCE" description="COM_MOSIMAGE_SOURCE_DESC"/>
 		
+		<field id="accesslevel" name="accesslevel" type="accesslevel" size="1" 
+			label="JFIELD_ACCESS_LABEL" description="JFIELD_ACCESS_DESC" />
+		
 		<field name="_align" type="list" default="left" size="1" 
 			label="COM_MOSIMAGE_IMAGE_ALIGN" description="COM_MOSIMAGE_IMAGE_ALIGN_DESC">
 			<option value="">JNONE</option>
