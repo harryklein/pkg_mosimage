@@ -4,14 +4,14 @@ ROOT_DIR=${WORKSPACE:=$PWD}
 
 function usage(){
 	echo ""
-	echo "Aufruf: $(basename $0) [--help] [--build-version|-b] [--ignore-lang-error|-l]"
+	echo "Aufruf: $(basename $0) [--help] [--build-version|--build|-b] [--ignore-lang-error|-l] [--fast|-f]"
 	echo "Baut das Modul/Komponente in [${ROOT_DIR}]"
-	echo "   --build-version|-b    : Liefert die VERSIONS-Nummer des Builds"
-	echo "   --ignore-lang-error|-l: Fehler in den Sprachfiles führen nicht zu einem"	
-	echo "                           Abbruch."   
-	echo "   --fast|-f             : Keine Sprachfike-und Lint-Checks"                     
-	echo "   --help|-h             : Diese Hilfe"
-}	
+	echo "   --build-version|--build|-b : Liefert die VERSIONS-Nummer des Builds"
+	echo "   --ignore-lang-error|-l     : Fehler in den Sprachfiles führen nicht zu einem"	
+	echo "                                Abbruch."   
+	echo "   --fast|-f                  : Keine Sprachfike-und Lint-Checks"                     
+	echo "   --help|-h                  : Diese Hilfe"
+}
 
 function debug(){
   if [ "$DEBUG" == "1" ]
@@ -30,7 +30,7 @@ function getVersionString(){
 	    VERSION="build-${BUILD_NUMBER}"
 	fi
   else
-  		VERSION=$(echo "${VERSION}" | sed -e s/'-'/'\.'/g)
+  	VERSION=$(echo "${VERSION}" | sed -e s/'-'/'\.'/g)
   fi
 }
 
@@ -205,9 +205,6 @@ function phpLint(){
   check_exit_code ${FOUND_ERROR} "Syntaktischen Fehler gefunden. Details siehe [${REPORT_DIR}/php-lint.log]"
 }
 
-LANGUAGE_1="en-GB"
-LANGUAGE_2="de-DE"
-
 ERROR_COUNTER=0;
 
 function checkUnusedProperties(){
@@ -239,7 +236,7 @@ function checkUnusedProperties(){
   for dir in ${LANG_FILE_DIRECTORY}
   do
     FILE_1=${dir}/language/${LANGUAGE_1}/${LANGUAGE_1}.${FILE}${EXTENTION}.ini
-    echo "Prüfe Datei [${FILE_1}]"
+    echo "Prüfe, ob alle Labels der Datei [${FILE_1}] im Code (php, xml) benutzt werden"
     local SRC="$(find ${dir} -name "*.php" -or -name "*.xml")"
     
     if [ "${dir}" == "admin" ]
@@ -247,8 +244,7 @@ function checkUnusedProperties(){
       SRC="${SRC}  $(find . -maxdepth 1 -name "*.xml")";
     fi
 
- 
-    local LABELS=$(cat ${FILE_1} | grep '=' | grep -v ';' |  cut -d '=' -f 1)
+    local LABELS=$(cat ${FILE_1} | grep v '^#'| grep '=' | grep -v ';' |  cut -d '=' -f 1)
     local i
     for i in $LABELS
     do
@@ -271,7 +267,6 @@ function checkUnusedProperties(){
   done
 
 }
-
 
 # ############################################################################
 #                                                                            #
@@ -316,39 +311,40 @@ function checkLanguageFile(){
 	LANG_FILE_DIRECTORY="."
   fi 
   for dir in ${LANG_FILE_DIRECTORY}
-  do
+  do 
+    FILE_1=${dir}/language/${LANGUAGE_1}/${LANGUAGE_1}.${FILE}${EXTENTION}.ini
+    FILE_2=${dir}/language/${LANGUAGE_2}/${LANGUAGE_2}.${FILE}${EXTENTION}.ini
   
-  FILE_1=${dir}/language/${LANGUAGE_1}/${LANGUAGE_1}.${FILE}${EXTENTION}.ini
-  FILE_2=${dir}/language/${LANGUAGE_2}/${LANGUAGE_2}.${FILE}${EXTENTION}.ini
-  
-  if [ ! -r ${FILE_1} -o ! -r ${FILE_2} ]
-  then
-    check_exit_code 1 "Datei [${FILE_1}] oder [${FILE_2}] wurde nicht gefunden"
-  fi
-  echo "  - [${FILE_2}] mit den Labels aus [${FILE_1}] prüfen"
-  local LABELS=$(cat ${FILE_1} | grep '=' | grep -v ';' |  cut -d '=' -f 1)
-  local i
-  for i in $LABELS
-  do
-    grep -q "^${i}=" ${FILE_1}
-    if [ $? -ne 0 ]
+    if [ ! -r ${FILE_1} -o ! -r ${FILE_2} ]
     then
-      echo "Not found label [${i}] in [${FILE_1}]" 
-      ERROR_COUNTER=$((ERROR_COUNTER+1))
-    else
+      check_exit_code 1 "Datei [${FILE_1}] oder [${FILE_2}] wurde nicht gefunden"
+    fi
+    echo "  - [${FILE_2}] mit den Labels aus [${FILE_1}] prüfen"
+    local LABELS=$(cat ${FILE_1} | grep -v '^#' | grep '=' | grep -v ';' | grep '^[A-Z_][A-Z_][A-Z_]' | cut -d '=' -f 1)
+    local i
+    for i in $LABELS
+    do
+      grep -q "^${i}=" ${FILE_1}
+      if [ $? -ne 0 ]
+      then
+        echo "Not found label [${i}] in [${FILE_1}]" 
+        ERROR_COUNTER=$((ERROR_COUNTER+1))
+      else
         grep -q "^${i}=" ${FILE_2}
         if [ $? -ne 0 ]
         then
           printf "Not found label %-40s in %s \n" "[${i}]" "[${FILE_2}]"
           ERROR_COUNTER=$((ERROR_COUNTER+1))
         fi
-    fi
+      fi
+    done
   done
-done
 }
 
 function checkAllLanguageFiles(){
   echo "* Prüfe die Sprachfiles auf Konsistenz."
+  local LANGUAGE_1="en-GB"
+  local LANGUAGE_2="de-DE"
   checkLanguageFile ${LANGUAGE_1} ${LANGUAGE_2}
   checkLanguageFile ${LANGUAGE_2} ${LANGUAGE_1}
   checkLanguageFile ${LANGUAGE_1} ${LANGUAGE_2} "sys"
@@ -359,9 +355,7 @@ function checkAllLanguageFiles(){
   fi
 }
 
-
 getComamdLineParameter "$@"
-
 
 loadConfiguration
 getVersionString
