@@ -1,0 +1,6 @@
+language/de-DE/de-DE.pkg_mosimage.sys.ini
+language/en-GB/en-GB.pkg_mosimage.sys.ini
+pkg_mosimage.xml
+com_mosimage.zip
+plg_mosimage-admin.zip
+plg_mosimage.zip

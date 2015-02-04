@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="3.0" method="upgrade">
+	<name>PKG_MOSIMAGE</name>
+	<packagename>mosimage</packagename>
+	<creationDate>DATE</creationDate>
+	<packager>Joomla! Project</packager>
+	<copyright>(C) 2005 - 2014 Open Source Matters. All rights reserved.</copyright>
+	<packageremail>admin@joomla.org</packageremail>
+	<packagerurl>www.joomla.org</packagerurl>
+	<author>Joomla! Project</author>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>HEAD</version>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<description>PKG_MOSIMAGE_XML_DESCRIPTION</description>
+	<files>
+		<file type="component" id="com_mosimage">com_weblinks.zip</file>
+		<file type="plugin" id="weblinks" group="content">plg_mosimage.zip</file>
+		<file type="plugin" id="weblinks" group="editors-xtd">plg_mosimage-admin.zip</file>
+	</files>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.pkg_mosimage.sys.ini</language>
+		<language tag="de-DE">de-DE/de-DE.pkg_mosimage.sys.ini</language>
+	</languages>
+	<updateservers>
+		<!-- Note: No spaces or linebreaks allowed between the server tags -->
+		<server type="extension" name="Weblinks Update Site">https://raw.githubusercontent.com/joomla-extensions/weblinks/master/manifest.xml</server>
+	</updateservers>
+</extension>
