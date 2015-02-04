@@ -97,7 +97,6 @@ function trapDeleteFiles(){
     echo "  - ${OTHER_FILE}"
     rm -f "${OTHER_FILE}"
   fi
-  exit 0
 }
 
 #
@@ -121,7 +120,8 @@ function checkPhpHeader(){
   fi
   
   cd ..
-  
+
+  # Liste alle zu prüfenden Files ermitteln
   for i in ${HEADER_CHECK_FILES}
   do
   	if [ -d ${i} ]
@@ -183,10 +183,8 @@ function checkPhpHeader(){
       echo "ok"
     fi
   done
-  if [ $ERROR -ne 0 ]
-  then
-    echo "Die Header in PHP-Dateien weicht in $ERROR Fällen vom erwarteten Inhalt ab."
-  fi
+  
+  check_exit_code $ERROR "Die Header in PHP-Dateien weicht in $ERROR Fällen vom erwarteten Inhalt ab." 
 }
 
 
