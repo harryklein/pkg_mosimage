@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: recursiveimagelist.php,v 1.2 2013-12-19 22:58:49 harry Exp $
+ * @version 2.0 $Id: recursiveimagelist.php,v 1.3 2015/02/05 23:57:53 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de

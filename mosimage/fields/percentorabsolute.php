@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: percentorabsolute.php,v 1.2 2014-01-18 22:31:38 harry Exp $
+ * @version 2.0 $Id: percentorabsolute.php,v 1.3 2015/02/05 23:57:54 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: CacheFile.php,v 1.5 2014-03-04 22:53:56 harry Exp $
+ * @version 2.0 $Id: CacheFile.php,v 1.6 2015/02/06 00:06:48 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de
@@ -36,16 +36,25 @@ class CacheFile
     private $proportion;
 
     /**
-     * @param ImageDisplayProperties $imageProperties Pfad und Name des Original-Bildes inkl. der Größe, wie es angezeigt werden soll
-     * @param PluginConfiguration $config Plugin-Konfiguration
-     * @param $proportion
-     * @param $bgcolor
-     * @param $origWidth Breite des Original-Bildes, Wird, wenn nicht angegeben (bzw. wenn $origHeight nicht angegeben), zur Laufzeit ermittelt
-     * @param $origHeight Höhe des Original-Bides. Wird, wenn nicht angegeben (bzw. wenn $origWidth nicht angegeben), zur Laufzeit ermiitelt.
      *
+     * @param ImageDisplayProperties $imageProperties
+     *            Pfad und Name des Original-Bildes inkl. der Größe, wie es
+     *            angezeigt werden soll
+     * @param PluginConfiguration $config
+     *            Plugin-Konfiguration
+     * @param
+     *            $proportion
+     * @param
+     *            $bgcolor
+     * @param $origWidth Breite
+     *            des Original-Bildes, Wird, wenn nicht angegeben (bzw. wenn
+     *            $origHeight nicht angegeben), zur Laufzeit ermittelt
+     * @param $origHeight Höhe
+     *            des Original-Bides. Wird, wenn nicht angegeben (bzw. wenn
+     *            $origWidth nicht angegeben), zur Laufzeit ermiitelt.
+     *            
      */
-    public function __construct (ImageDisplayProperties $imageProperties, PluginConfiguration $config, $proportion, $bgcolor, $origWidth = null, 
-            $origHeight = null)
+    public function __construct (ImageDisplayProperties $imageProperties, PluginConfiguration $config, $proportion, $bgcolor, $origWidth = null, $origHeight = null)
     {
         $this->absoluteFile = $imageProperties->file();
         $this->config = $config;
@@ -77,7 +86,9 @@ class CacheFile
     }
 
     /**
-     * @param $language Sprache für den Place-Holder-Text
+     *
+     * @param $language Sprache
+     *            für den Place-Holder-Text
      * @return CacheFile
      */
     public function newCacheFileForPlaceholder ($language)
@@ -86,20 +97,20 @@ class CacheFile
         $cachefile = new CacheFile($this->imageProperties(), $this->config, $this->proportion, $this->bgcolor, $this->origWidth(), $this->origHeight());
         $cachefile->setDisplaySize($this->displayWidth, $this->displayHeight);
         $cachefile->cacheFilename = $this->scrambleFilename($otherCacheFilename, $this->config->getScrambleFilename());
-        ;
         return $cachefile;
     }
 
     /**
+     *
      * @return Name des Cache-Files ohne Pfadangabe
      */
     public function getCacheFilename ()
     {
         return $this->cacheFilename;
-        ;
     }
 
     /**
+     *
      * @return Name des Cache-Files mit absoluter Pfadangabe
      */
     public function getAbsoluteFile ()
@@ -108,6 +119,7 @@ class CacheFile
     }
 
     /**
+     *
      * @return string Name des Pfades des Caches
      */
     public function getAbsoluteCachePath ()
@@ -172,8 +184,11 @@ class CacheFile
 
     /**
      * Offset des "Inhaltes"
-     * @param $x
-     * @param $y
+     *
+     * @param
+     *            $x
+     * @param
+     *            $y
      */
     public function setImageOffset ($x, $y)
     {
@@ -193,8 +208,11 @@ class CacheFile
 
     /**
      * Größe für die Anzeiges des Bildes
-     * @param $x
-     * @param $y
+     *
+     * @param
+     *            $x
+     * @param
+     *            $y
      */
     public function setDisplaySize ($x, $y)
     {
@@ -257,10 +275,15 @@ class CacheFileNameBuilder
     }
 
     /**
-     * Damit beim späteren Zusammenbau des Names des CacheFile AddBlock das Image nicht unterdückt,
-     * wird vom Waterfilename der sha1 gebildet. Nach Versichen blockiert AddBlock das Bild nicht mehr.
-     * @param $watermarkFilename
-     * @param $isUsedWatermark
+     * Damit beim späteren Zusammenbau des Names des CacheFile AddBlock das
+     * Image nicht unterdückt,
+     * wird vom Waterfilename der sha1 gebildet.
+     * Nach Versichen blockiert AddBlock das Bild nicht mehr.
+     *
+     * @param
+     *            $watermarkFilename
+     * @param
+     *            $isUsedWatermark
      * @return $this
      */
     public function addWatermarkInfo ($watermarkFilename, $isUsedWatermark)

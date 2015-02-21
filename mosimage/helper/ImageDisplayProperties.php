@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: CacheFile.php,v 1.5 2014-03-04 22:53:56 harry Exp $
+ * @version 2.0 $Id: ImageDisplayProperties.php,v 1.3 2015/02/06 00:06:49 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de
