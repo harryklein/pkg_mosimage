@@ -33,7 +33,6 @@ class LyteboxLightbox implements LightBox
         $baseUrl = JURI::base() . 'plugins/content/mosimage/mosimage/lytebox';
         $document->addScript($baseUrl . '/js/lytebox.js');
         $document->addStyleSheet($baseUrl . '/css/lytebox.css');
-        break;
     }
 }
 
