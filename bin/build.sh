@@ -154,7 +154,8 @@ function replaceParameterInConfigFile(){
 }
 
 function buildArtefakct(){
-
+  changeIntoBuildDirectory
+  
   echo "* Baue ZIP [${ZIP_FILE_NAME}-${VERSION}] in [$(pwd)]"
   cat filelist.txt | zip "${ROOT_DIR}/deploy/${ZIP_FILE_NAME}-${VERSION}.zip" '-@'
   check_exit_code $? "Datei $ROOT_DIR/deploy/${ZIP_FILE_NAME}-${VERSION}.zip konnte nicht erzeugt werden."
