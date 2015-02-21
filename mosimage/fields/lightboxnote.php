@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: lightboxnote.php,v 1.2 2014-01-18 22:30:39 harry Exp $
+ * @version 2.0 $Id: lightboxnote.php,v 1.3 2015/02/05 23:57:53 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de
@@ -42,6 +42,12 @@ class JFormFieldLightboxNote extends JFormFieldNote
                 'Christophe Beyls', array(
                         'MIT License' => 'http://www.opensource.org/licenses/mit-license.php'
                 ));
+        
+        $list[] = new LightboxInfo(JFormFieldLightboxList::PRIOBOX, 'PiroBox Extended', '1.0', 'jQuery >=1.8', 'http://www.pirolab.it/pirobox/',
+                'Diego Valobra', array(
+                        'CC-BY-SA' => 'http://creativecommons.org/licenses/by-sa/3/'
+                ));
+        
         $licenseInfo = '<table width="100%" border="1">';
         $licenseInfo = $licenseInfo . LightboxInfo::writeTableHeader();
         foreach ($list as $l) {
