@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: thumbnailsize.php,v 1.2 2014-01-18 22:38:44 harry Exp $
+ * @version 2.0 $Id: thumbnailsize.php,v 1.3 2015/02/06 00:07:31 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de
