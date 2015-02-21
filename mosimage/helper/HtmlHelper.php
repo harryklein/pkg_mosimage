@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: CacheFile.php,v 1.5 2014-03-04 22:53:56 harry Exp $
+ * @version 2.0 $Id: HtmlHelper.php,v 1.1 2015/02/06 00:06:49 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de
@@ -58,15 +58,15 @@ class HtmlHelper
             if (! $mosthumbProperties || ! $mosimageProperties) {
                 return '';
             }
-            $lightboxHelper = new LightboxHelper($config->getLightboxType());
-            $images = self::buildHtmlForImage($lightboxHelper, $mosthumbProperties, $mosimageProperties, $imgProperties, $config, $param);
+            $lightbox = LightboxHelper::getInstance($config->getLightboxType());
+            $images = self::buildHtmlForImage($lightbox, $mosthumbProperties, $mosimageProperties, $imgProperties, $config, $param);
             return $images;
         } else {
             return '';
         }
     }
 
-    public static function buildHtmlForImage (&$lightboxHelper, CacheFile &$mosthumbProperties, CacheFile &$mosimageProperties, ImageProperties &$imgProperties, &$config, 
+    public static function buildHtmlForImage (&$lightbox, CacheFile &$mosthumbProperties, CacheFile &$mosimageProperties, ImageProperties &$imgProperties, &$config, 
             $param)
     {
     	$accessLevel = $imgProperties->getAccessLevel();
@@ -75,12 +75,12 @@ class HtmlHelper
     	if (($user->guest) && ($accessLevel > 1) ){
     		$img = '';
     	} else {
-	        $lightboxRel = $lightboxHelper->getRel();
+	        $lightboxRel = $lightbox->getRel();
 	        $thumbSize = ' width="' . $mosthumbProperties->displayWidth() . '" height="' . $mosthumbProperties->displayHeight() . '"';
 	        
 	        $image = '<a href="' . $mosimageProperties->getCacheFileUrl() . '"';
 	        $image .= ' rel="' . $lightboxRel . '"';
-	        $image .= ' class="' . $lightboxHelper->getCssClassForImageLink() . '"';
+	        $image .= ' class="' . $lightbox->getCssClassForImageLink() . '"';
 	        $image .= ' title="' . ($config->isViewCaptionTextForFullsize() ? $imgProperties->getCaptionText() : '') . '"';
 	        $image .= '>';
 	        $image .= '<img class="mosimgage-inner" src="' . $mosthumbProperties->getCacheFileUrl() . '"';
