@@ -3,7 +3,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * @version 2.0 $Id: mosimage.php,v 1.9 2014-03-11 23:38:31 harry Exp $
+ * @version 2.0 $Id: mosimage.php,v 1.10 2015/02/05 23:55:02 harry Exp $
  * @package Joomla
  * @subpackage H2N Mosimage Plugin
  * @copyright (C) 2010 Harry Klein - www.joomla-hklein.de
@@ -152,8 +152,8 @@ class plgContentMosimage extends JPlugin {
 	}
 
 	private function addLightBoxStyleSheetAndScript($config){
-		$lightboxHelper = new LightboxHelper($config->getLightboxType());
-		$lightboxHelper->addScriptAndCssToDocument();
+		$lightbox = LightboxHelper::getInstance($config->getLightboxType());
+		$lightbox->addScriptAndCssToDocument();
 	}
 
 	private function getScreenSizeFromCookie(){
