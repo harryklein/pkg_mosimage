@@ -92,11 +92,11 @@
 	resize = $('.resize'),
 	btn_info = $('.btn_info');
 	var rz_img =0.95; /*::::: ADAPT IMAGE TO BROWSER WINDOW SIZE :::::*/
-	if ( $.browser.msie ) {
+	/*if ( $.browser.msie ) {
 		wrapper.draggable({ handle:'.h_t_c,.h_b_c,.div_reg img'});
 	}else{
 		wrapper.draggable({ handle:'.h_t_c,.h_b_c,.div_reg img',opacity: 0.80});
-	}	
+	}*/	
 	var y = $(window).height();
 	var x = $(window).width();
 	$('.nav_container').hide();
@@ -353,7 +353,7 @@
 			} 	
 		}
 	});
-		$('.immagine').live('click',function(){
+		$(document).on('click','.immagine', function(){
 		piro_capt.slideToggle(200);
 	});
 	
