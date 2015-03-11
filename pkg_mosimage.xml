@@ -3,18 +3,19 @@
 	<name>PKG_MOSIMAGE</name>
 	<packagename>mosimage</packagename>
 	<creationDate>DATE</creationDate>
+	<author>Harry Klein</author>
+    <authorEmail>harry.klein@joomla-hklein.de</authorEmail>
+    <authorUrl>http://www.joomla-hklein.de</authorUrl>
+    <copyright>(C) 2009-2015 Harry Klein. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<packager>Joomla! Project</packager>
 	<copyright>(C) 2005 - 2014 Open Source Matters. All rights reserved.</copyright>
-	<packageremail>admin@joomla.org</packageremail>
-	<packagerurl>www.joomla.org</packagerurl>
-	<author>Joomla! Project</author>
-	<authorEmail>admin@joomla.org</authorEmail>
-	<authorUrl>www.joomla.org</authorUrl>
+	<packageremail>harry.klein@joomla-hklein.de</packageremail>
+	<packagerurl>www.joomla-hklein.de</packagerurl>
 	<version>HEAD</version>
-	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
 	<description>PKG_MOSIMAGE_XML_DESCRIPTION</description>
 	<files>
-		<file type="component" id="com_mosimage">com_weblinks.zip</file>
+		<file type="component" id="com_mosimage">com_mosimage.zip</file>
 		<file type="plugin" id="weblinks" group="content">plg_mosimage.zip</file>
 		<file type="plugin" id="weblinks" group="editors-xtd">plg_mosimage-admin.zip</file>
 	</files>
@@ -22,8 +23,9 @@
 		<language tag="en-GB">en-GB/en-GB.pkg_mosimage.sys.ini</language>
 		<language tag="de-DE">de-DE/de-DE.pkg_mosimage.sys.ini</language>
 	</languages>
+	<!-- 
 	<updateservers>
-		<!-- Note: No spaces or linebreaks allowed between the server tags -->
 		<server type="extension" name="Weblinks Update Site">https://raw.githubusercontent.com/joomla-extensions/weblinks/master/manifest.xml</server>
 	</updateservers>
+	 -->
 </extension>
