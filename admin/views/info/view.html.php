@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: view.html.php,v 1.2 2014-02-19 22:35:03 harry Exp $
+ * @version 2.0 $Id: view.html.php,v 1.3 2015/02/05 22:11:31 harry Exp $
  * @package Joomla.Administrator
  * @subpackage com_mosimage
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
