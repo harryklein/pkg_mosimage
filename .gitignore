@@ -10,3 +10,4 @@ CVS/
 /report/
 /build/
 /.buildpath
+/.cvsignore
