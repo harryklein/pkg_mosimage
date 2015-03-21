@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: options.php,v 1.2 2014-10-28 23:10:01 harry Exp $
+ * @version 2.0 $Id: options.php,v 1.3 2015/02/05 22:05:48 harry Exp $
  * @package Joomla.Administrator
  * @subpackage com_mosimage
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
@@ -85,7 +85,21 @@ class MosimageModelOptions extends JModelAdmin
     {
         $item = parent::getItem($pk);
         
+        
+        if (empty($item->content_id ))
+        {
+            $newValue = new stdClass();
+            $newValue->content_id = $this->getState('options.id');
+            $newValue->images = json_encode(array());
+            
+            
+            $table = $this->getTable();
+            $table->bind($newValue);
+            $result = $table->store();
+            $item = parent::getItem($pk);
+        } 
         $item->imageslist = $this->prepareJson(trim($item->images));
+        
         return $item;
     }
 

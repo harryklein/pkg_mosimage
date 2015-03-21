@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: form.php,v 1.4 2014-10-30 21:55:27 harry Exp $
+ * @version 2.0 $Id: form.php,v 1.5 2015/02/05 22:11:06 harry Exp $
  * @package Joomla.Administrator
  * @subpackage com_mosimage
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
@@ -44,8 +44,9 @@ Joomla.submitbutton = function(task) {
 	}
 
 	json = '[' + temp.join( ',' ) + ']';
+	element = document.getElementById('jform_images');
+	element.value = json;
 	
-	document.getElementById('jform_images').value = json;
 	Joomla.submitform(task);
 }
 

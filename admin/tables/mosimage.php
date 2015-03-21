@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: mosimage.php,v 1.1 2013-09-22 19:10:59 harry Exp $
+ * @version 2.0 $Id: mosimage.php,v 1.2 2015/02/05 22:12:01 harry Exp $
  * @package Joomla.Administrator
  * @subpackage com_mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de
@@ -19,6 +19,7 @@ class JTableMosimage extends JTable
     public function __construct (&$db)
     {
         parent::__construct('#__mosimage', 'content_id', $db);
+        $this->_autoincrement = false;
     }
 
     public function bind ($array, $ignore = '')
