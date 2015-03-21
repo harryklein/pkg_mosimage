@@ -249,7 +249,8 @@ Mosimage.addSelectedToList2 = function (frmName, srcListName, tgtListName) {
 										 * srcList.options[i].value + "," ) ==
 										 * -1
 										 */) {
-			opt = new Option(srcList.options[i].text, srcList.options[i].value);
+			value = '{"source":"' + srcList.options[i].value + '"}';
+			opt = new Option(srcList.options[i].text, value);
 			tgtList.options[tgtList.length] = opt;
 		}
 	}
