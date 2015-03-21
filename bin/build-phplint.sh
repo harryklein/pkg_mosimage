@@ -1,5 +1,5 @@
 #
-# $Id: build-phplint.sh,v 1.1 2015/02/05 20:20:18 harry Exp $
+# $Id: build-phplint.sh,v 1.1 2015/02/05 22:25:28 harry Exp $
 #
 
 function phpLint(){

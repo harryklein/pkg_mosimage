@@ -6,9 +6,9 @@ ROOT_DIR=${WORKSPACE:=$ROOT_DIR_1}
 REPORT_DIR=${ROOT_DIR}/report
 BUILD_DIR=${ROOT_DIR}/build
 
-echo "ROOT_DIR ....: [${ROOT_DIR}]"
-echo "REPORT_DIR ..: [${REPORT_DIR}]"
-echo "BUILD_DIR  ..: [${BUILD_DIR}]"
+>&2 echo "ROOT_DIR ....: [${ROOT_DIR}]"
+>&2 echo "REPORT_DIR ..: [${REPORT_DIR}]"
+>&2 echo "BUILD_DIR  ..: [${BUILD_DIR}]"
 
 ERROR_COUNTER=0;
 
@@ -160,7 +160,8 @@ function replaceParameterInConfigFile(){
 }
 
 function buildArtefakct(){
-
+  changeIntoBuildDirectory
+  
   echo "* Baue ZIP [${ZIP_FILE_NAME}-${VERSION}] in [$(pwd)]"
   cat filelist.txt | zip "${ROOT_DIR}/deploy/${ZIP_FILE_NAME}-${VERSION}.zip" '-@'
   check_exit_code $? "Datei $ROOT_DIR/deploy/${ZIP_FILE_NAME}-${VERSION}.zip konnte nicht erzeugt werden."

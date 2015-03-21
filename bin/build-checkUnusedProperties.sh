@@ -1,5 +1,5 @@
 #
-# $Id: build-checkUnusedProperties.sh,v 1.1 2015/02/05 20:20:17 harry Exp $
+# $Id: build-checkUnusedProperties.sh,v 1.1 2015/02/05 22:25:26 harry Exp $
 #
 
 function checkUnusedProperties(){
