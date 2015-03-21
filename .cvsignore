@@ -7,3 +7,5 @@ release
 deploy-dist
 build
 report
+.gitignore
+.git
