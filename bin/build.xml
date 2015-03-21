@@ -1,0 +1,84 @@
+<!DOCTYPE project>
+<project>
+	<property name="cvs.base" value=".." />
+	<property name="dir.base" location=".." />
+
+	<property name="build.properties" value="build.properties" />
+	<property file="${dir.base}/${build.properties}" />
+
+	<property name="url" value="http://localhost/joomla-1.7.3-inst" />
+	<property name="login" value="admin" />
+	<property name="password" value="sonne80" />
+	<property name="ftplogin" value="" />
+	<property name="ftppassword" value="" />
+	<property name="debug" value="false" />
+	<property name="source" value="deploy/h2n_linkdirectory2-u-HEAD.zip" />
+	<property name="name" value="Link Directotry 2.0" />
+	<property name="type" value="" />
+
+	<taskdef name="joomla-install-extension" classname="com.joomboss.InstallExtensionTask" />
+	<taskdef name="joomla-remove-extension" classname="com.joomboss.RemoveExtensionTask" />
+
+	<echo message="Nutze Konfiguration [${dir.base}/${build.properties}]" />
+
+	<!-- ================================= -->
+	<!-- = deploy                        = -->
+	<!-- ================================= -->
+	<target name="deploy">
+		<echo>Login auf [${url}] mit Login [${login}]</echo>
+		<joomla-install-extension source="${dir.base}/${source}" url="${url}" adminlogin="${login}" adminpassword="${password}" ftplogin="${ftplogin}" ftppassword="${ftppassword}" debug="${debug}" />
+	</target>
+
+	<!-- ================================= -->
+	<!-- = undeploy                      = -->
+	<!-- ================================= -->
+	<target name="undeploy">
+		<joomla-remove-extension name="${name}" type="${type}" url="${url}" adminLogin="${login}" adminPassword="${password}" ftpLogin="${ftplogin}" ftpPassword="${ftppassword}" debug="${debug}" />
+	</target>
+
+	<!-- ================================= -->
+	<!-- = copy2outgoing                 = -->
+	<!-- ================================= -->
+	<target name="copy2outgoing" description="Kopiert alle Artefakt nach outgoing">
+		<mkdir dir="${user.home}/outgoing" />
+		<copy todir="${user.home}/outgoing" overwrite="true" verbose="true">
+			<fileset dir="${dir.base}/deploy">
+				<include name="*.zip" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- ================================= -->
+	<!-- = copy2demohost                 = -->
+	<!-- ================================= -->
+	<target name="copy2demohost" description="Kopiert alle artefakts auf den Demo-Host">
+		<scp verbose="true" todir="www.neschke.de@ssh.strato.de:joomla-demo/joomla3/upload" keyfile="${user.home}/.ssh/id_rsa.deploy">
+			<fileset dir="${dir.base}/deploy">
+				<include name="*.zip" />
+			</fileset>
+		</scp>
+	</target>
+
+	<!-- ================================= -->
+	<!-- = tag                           = -->
+	<!-- ================================= -->
+	<target name="tag" description="Tagt die Source-Dateinen">
+
+		<property name="before" value="This is a value"/>
+		<script language="javascript">
+		    var before = project.getProperty("VERSION");
+		    project.setProperty("CVS_TAG", before.replaceAll("\\.", "-"));
+		</script>
+
+		<echo message="CVS Tag: [${CVS_TAG}]"/>
+		<cvs>
+			<commandline>
+				<argument value="tag" />
+				<argument value="-F" />
+				<argument value="v${CVS_TAG}" />
+				<argument value="${cvs.base}" />
+			</commandline>
+		</cvs>
+	</target>
+
+</project>
