@@ -88,6 +88,10 @@ class MosimageModelOptions extends JModelAdmin
         
         if (empty($item->content_id ))
         {
+            
+            $item->content_id = $this->getState('options.id');
+            $iten->images = json_encode(array());
+            /* // Wir legen den Mosimage-Eintrag schon mal an
             $newValue = new stdClass();
             $newValue->content_id = $this->getState('options.id');
             $newValue->images = json_encode(array());
@@ -97,6 +101,7 @@ class MosimageModelOptions extends JModelAdmin
             $table->bind($newValue);
             $result = $table->store();
             $item = parent::getItem($pk);
+            */
         } 
         $item->imageslist = $this->prepareJson(trim($item->images));
         
