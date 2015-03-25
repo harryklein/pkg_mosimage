@@ -23,9 +23,8 @@
 		<language tag="en-GB">en-GB/en-GB.pkg_mosimage.sys.ini</language>
 		<language tag="de-DE">de-DE/de-DE.pkg_mosimage.sys.ini</language>
 	</languages>
-	<!-- 
+	
 	<updateservers>
-		<server type="extension" name="Weblinks Update Site">https://raw.githubusercontent.com/joomla-extensions/weblinks/master/manifest.xml</server>
+		<server type="extension" priority="1" name="Mosimage Update Site">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update.xml</server>
 	</updateservers>
-	 -->
 </extension>
