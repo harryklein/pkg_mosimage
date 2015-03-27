@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
-   <update>
-      <name>PKG_MOSIMAGE</name>
-      <description>Package Mosimage</description>
-      <element>pkg_mosimage</element>
-      <type>package</type>
-      <version>3.4.0b2</version>
-      <infourl title="Modulsteckbrief URL">http://mosimage3-demo.joomla-hklein.de</infourl>
-      <downloads>
-         <downloadurl type="full" format="zip">http://mosimage3-demo.joomla-hklein.de/upload/pkg_mosimage-3.4.0b2.zip</downloadurl>
-      </downloads>
-      <tags>
-	<tag>beta</tag>
-         <!--tag>Stable</tag-->
-      </tags>
-      <maintainer>Harry Klein</maintainer>
-      <maintainerurl>http://www.joomla-hklein.de</maintainerurl>
-      <client_id>0</client_id>
-      <client>0</client>
-      <targetplatform name="joomla" version="3.4" />
-   </update>
+	<update>
+		<name>Package Mosimage</name>
+		<description></description>
+		<element>pkg_mosimage</element>
+		<type>package</type>
+		<version>HEAD</version>
+		<infourl title="Mosimage URL">http://mosimage3-demo.joomla-hklein.de
+		</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://mosimage3-demo.joomla-hklein.de/upload/pkg_mosimage-HEAD.zip
+			</downloadurl>
+		</downloads>
+		<tags>
+			<tag>TAG</tag>
+		</tags>
+		<maintainer>Harry Klein</maintainer>
+		<maintainerurl>http://www.joomla-hklein.de</maintainerurl>
+		<client_id>0</client_id>
+		<client>0</client>
+		<targetplatform name="joomla" version="3.[234]" />
+	</update>
 </updates>
 

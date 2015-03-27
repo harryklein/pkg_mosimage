@@ -16,8 +16,8 @@
 	<description>PKG_MOSIMAGE_XML_DESCRIPTION</description>
 	<files>
 		<file type="component" id="com_mosimage">com_mosimage.zip</file>
-		<file type="plugin" id="weblinks" group="content">plg_mosimage.zip</file>
-		<file type="plugin" id="weblinks" group="editors-xtd">plg_mosimage-admin.zip</file>
+		<file type="plugin" id="mosimage" group="content">plg_mosimage.zip</file>
+		<file type="plugin" id="mosimageadmin" group="editors-xtd">plg_mosimage-admin.zip</file>
 	</files>
 	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.pkg_mosimage.sys.ini</language>
@@ -25,6 +25,8 @@
 	</languages>
 	
 	<updateservers>
-		<server type="extension" priority="1" name="Mosimage Update Site">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update.xml</server>
+		<server type="extension" priority="3" name="Mosimage Update Site">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update.xml</server>
+		<server type="extension" priority="2" name="Mosimage Update Site Beta">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update-beta.xml</server>
+		<server type="extension" priority="1" name="Mosimage Update Site Release Candidate">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update-rc.xml</server>
 	</updateservers>
 </extension>
