@@ -79,14 +79,9 @@
 		</replaceregexp>
 
 		<concat destfile="${build}/filename.tmp">update_filename_tag=mosimage-update-TAG-${VERSION}</concat>
-		<!--
-		<replaceregexp match="[0-9\.]" flags="g" replace="">
-			<fileset dir="${build}">
-				<include name="filename.tmp" />
-			</fileset>
-		</replaceregexp>
--->
 
+		<!-- * Name des Updatefile-Namen ermitteln (mit -rc, -beta oder ohne, Teil 1 -->
+		<!-- * TAG im ...-update.xml ersetzen                                        -->
 		<replaceregexp match="TAG-[0-9\.]*rc[0-9]" replace="rc">
 			<fileset dir="${build}">
 				<include name="${update-filename}.xml" />
@@ -106,18 +101,11 @@
 			</fileset>
 		</replaceregexp>
 
-		<!--
-		<replaceregexp match="-$" flags="g" replace="">
-			<fileset dir="${build}">
-				<include name="filename.tmp" />
-			</fileset>
-		</replaceregexp>
--->
+		<!-- name des Updatefile-Namen ermitteln (mit -rc, -beta oder ohne, Teil 2 -->
 		<property file="${build}/filename.tmp" />
-		<echo message="${update_filename_tag}" />
 
+		<!-- Updatefile auf Server kopieren -->
 		<move file="${build}/${update-filename}.xml" tofile="${dir.base}/deploy/${update_filename_tag}.xml" overwrite="true" verbose="true" />
-
 		<scp verbose="true" todir="www.neschke.de@ssh.strato.de:joomla-demo/joomla3/upload" keyfile="${user.home}/.ssh/id_rsa.deploy">
 			<fileset dir="${dir.base}/deploy">
 				<include name="${update_filename_tag}.xml" />
