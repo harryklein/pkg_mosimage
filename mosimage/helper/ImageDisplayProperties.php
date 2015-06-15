@@ -1,6 +1,5 @@
 <?php
 /**
- * @version 2.0 $Id: ImageDisplayProperties.php,v 1.3 2015/02/06 00:06:49 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de

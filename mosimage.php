@@ -3,9 +3,8 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * @version 2.0 $Id: mosimage.php,v 1.10 2015/02/05 23:55:02 harry Exp $
- * @package Joomla
- * @subpackage H2N Mosimage Plugin
+ * @package Joomla.Plugin
+ * @subpackage Content.Mosimage
  * @copyright (C) 2010 Harry Klein - www.joomla-hklein.de
  * @copyright Copyright (C) 2005 Open Source Matters. All rights reserved.
  * @license GNU/GPL, see LICENSE.php

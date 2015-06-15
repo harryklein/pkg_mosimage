@@ -1,7 +1,6 @@
 /**
- * @version 2.0 $Id: mosimage.js,v 1.2 2014-01-18 22:37:04 harry Exp $
- * @package Joomla
- * @subpackage H2N Mosimage Plugin
+ * @package Joomla.Plugin
+ * @subpackage Content.Mosimage
  * @copyright (C) 2010 Harry Klein - www.joomla-hklein.de
  * @copyright Copyright (C) 2005 Open Source Matters. All rights reserved.
  * @license GNU/GPL, see LICENSE.php

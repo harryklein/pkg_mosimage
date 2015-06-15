@@ -1,6 +1,5 @@
 <?php
 /**
- * @version 2.0 $Id: LightboxHelper.php,v 1.5 2015/02/06 00:06:49 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de
@@ -41,7 +40,6 @@ class Lightbox2Lightbox implements LightBox
         $document->addScript($baseUrl . '/js/jquery-1.10.2.min.js');
         $document->addScript($baseUrl . '/js/lightbox-2.6.min.js');
         $document->addStyleSheet($baseUrl . '/css/lightbox.css');
-        break;
     }
 }
 

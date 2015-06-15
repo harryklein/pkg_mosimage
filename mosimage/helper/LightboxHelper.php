@@ -1,6 +1,5 @@
 <?php
 /**
- * @version 2.0 $Id: LightboxHelper.php,v 1.5 2015/02/06 00:06:49 harry Exp $
  * @package Joomla.Plugin
  * @subpackage Content.Mosimage
  * @copyright (C) 2008-2014 Harry Klein - www.joomla-hklein.de
@@ -31,10 +30,11 @@ class LightboxHelper
                 require_once JPATH_ROOT . self::LIGHTBOX_ROOT . 'Lightbox2Lightbox.php';
                 return new Lightbox2Lightbox();
             case JFormFieldLightboxList::FANCYBOX:
-                require_once JPATH_ROOT . self::LIGHTBOX_ROOT . 'FancyboxLightbox.php';
+                require_once JPATH_ROOT . self::LIGHTBOX_ROOT . 'FancyLightbox.php';
                 return new FancyLightbox();
             case JFormFieldLightboxList::SLIMBOX_20:
-                require_once JPATH_ROOT . self::LIGHTBOX_ROOT . 'Lightbox20Lightbox.php';
+            default:
+                require_once JPATH_ROOT . self::LIGHTBOX_ROOT . 'Slimbox20Lightbox.php';
                 return new Slimbox20Lightbox();
         }
     }
