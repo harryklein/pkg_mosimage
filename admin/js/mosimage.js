@@ -129,21 +129,24 @@ Mosimage.isValueChangedInSelect = function(elementId){
 
 Mosimage.showImageProps = function(base_path) {
 	var list = document.getElementById('jform_imageslist');
-	if (Mosimage.isValueChangedInSelect('jform__align') ||
-			Mosimage.isValueChangedInSelect('jform_accesslevel') ||
-			Mosimage.isValueChanged('jform__alt') ||
-			Mosimage.isValueChangedInSelect('jform__border') ||
-			Mosimage.isValueChangedInSelect('jform_accesslevel') ||
-			Mosimage.isValueChanged('jform__caption') || 
-			Mosimage.isValueChangedInSelect('jform__caption_position') 
-			){  
-			if (confirm(this.messages[0])){
-				Mosimage.applyImageProps(true);
-			} else {
-				// nun doch zu den alten Daten zurück, die noch in den Feldern zu sehen ist
-				list.selectedIndex = list.previousSelectedIndex;
-				return;
-			}
+	
+	if (document.getElementById('jform__source').value.length != 0) {
+		if (Mosimage.isValueChangedInSelect('jform__align') ||
+				Mosimage.isValueChangedInSelect('jform_accesslevel') ||
+				Mosimage.isValueChanged('jform__alt') ||
+				Mosimage.isValueChangedInSelect('jform__border') ||
+				Mosimage.isValueChangedInSelect('jform_accesslevel') ||
+				Mosimage.isValueChanged('jform__caption') || 
+				Mosimage.isValueChangedInSelect('jform__caption_position') 
+				){  
+				if (confirm(this.messages[0])){
+					Mosimage.applyImageProps(true);
+				} else {
+					// nun doch zu den alten Daten zurück, die noch in den Feldern zu sehen ist
+					list.selectedIndex = list.previousSelectedIndex;
+					return;
+				}
+		}
 	}
 	Mosimage.showImagePropsWithoutChecks(base_path);
 	list.previousSelectedIndex = list.selectedIndex;
@@ -228,31 +231,23 @@ Mosimage.delSelectedFromList2 = function (frmName, srcListName) {
 }
 
 Mosimage.addSelectedToList2 = function (frmName, srcListName, tgtListName) {
-	var form = eval('document.' + frmName);
-	var srcList = eval('form.' + srcListName);
+	var form = document.getElementById(frmName);
+	var srcList = document.getElementById(srcListName);
 	var tgtList = document.getElementById(tgtListName);
 
 	var srcLen = srcList.length;
 	var tgtLen = tgtList.length;
-	var tgt = "x";
-
-	// build array of target items
-	for ( var i = tgtLen - 1; i > -1; i--) {
-		tgt += "," + tgtList.options[i].value + ","
-	}
-
-	// Pull selected resources and add them to list
-	// for (var i=srcLen-1; i > -1; i--) {
+	
 	for ( var i = 0; i < srcLen; i++) {
-		if (srcList.options[i].selected /*
-										 * && tgt.indexOf( "," +
-										 * srcList.options[i].value + "," ) ==
-										 * -1
-										 */) {
+		if (srcList.options[i].selected) {
 			value = '{"source":"' + srcList.options[i].value + '"}';
 			opt = new Option(srcList.options[i].text, value);
 			tgtList.options[tgtList.length] = opt;
 		}
+	}
+	if ( tgtList.length > 0){
+		tgtList.selectedIndex = tgtList.length-1;
+		Mosimage.showImageProps(JOOMLA_ROOT + 'images/');
 	}
 	tgtList.wasChanged = true;
 }
@@ -369,7 +364,7 @@ Mosimage.convertToJson = function (temp){
 Mosimage.revertChanges = function(){
 	var list = document.getElementById('jform_imageslist');
 	if (list.wasChanged === true){
-		if (confirm('Änderungen verwerfen?')){
+		if (confirm(this.messages[1])){
 			Mosimage.closeWindows();
 			return true;
 		} else {
