@@ -1,8 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR_1=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]})))
-
-ROOT_DIR=${WORKSPACE:=$ROOT_DIR_1}
+ROOT_DIR=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]})))
 REPORT_DIR=${ROOT_DIR}/report
 BUILD_DIR=${ROOT_DIR}/build
 
@@ -280,7 +278,7 @@ function checkAllBinFiles(){
 			if [ ${RESULT} -ne 0 ]
 			then
 				ERROR_COUNTER=$((ERROR_COUNTER+1))
-				diff $i ${BUILD_FILE_MASTER}/$i
+				diff -u $i ${BUILD_FILE_MASTER}/$i
 			else
 				echo "ok"
 			fi
