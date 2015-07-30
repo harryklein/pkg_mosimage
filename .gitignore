@@ -6,3 +6,8 @@
 /plg_mosimage.zip
 /deploy.sh
 /.cvsignore
+CVS/
+bin/CVS/
+language/CVS/
+language/de-DE/CVS/
+language/en-GB/CVS/
