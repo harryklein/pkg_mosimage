@@ -160,7 +160,7 @@ function checkPhpHeader(){
         grep -v 'www.sonerekici.com' |\
         grep -v 'Open Source Matters. All rights reserved.' |\
         sed -e s/' 20[0-9][0-9]-'/' 20xx-'/g |\
-        head -10 > ${ORIG_FILE}
+        head -9 > ${ORIG_FILE}
       FIRST=0
       echo "  - Vorlage für Header-Konsistenzprügung ist [${i}]"
       echo "    ==== Inhalt - Beginn ===="
@@ -173,7 +173,7 @@ function checkPhpHeader(){
         grep -v 'www.sonerekici.com' |\
         grep -v 'Open Source Matters. All rights reserved.' |\
         sed -e s/' 20[0-9][0-9]-'/' 20xx-'/g |\
-        head -10 > ${OTHER_FILE}
+        head -9 > ${OTHER_FILE}
     diff ${ORIG_FILE} ${OTHER_FILE}
     if [ $? -ne 0 ] 
     then

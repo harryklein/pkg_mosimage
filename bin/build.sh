@@ -1,8 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR_1=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]})))
-
-ROOT_DIR=${WORKSPACE:=$ROOT_DIR_1}
+ROOT_DIR=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]})))
 REPORT_DIR=${ROOT_DIR}/report
 BUILD_DIR=${ROOT_DIR}/build
 
@@ -19,7 +17,8 @@ function usage(){
 	echo "   --build-version|--build|-b : Liefert die VERSIONS-Nummer des Builds"
 	echo "   --ignore-lang-error|-l     : Fehler in den Sprachfiles führen nicht zu einem"	
 	echo "                                Abbruch."   
-	echo "   --fast|-f                  : Keine Sprachfike-und Lint-Checks"                     
+	echo "   --fast|-f                  : Keine Sprachfike-und Lint-Checks"   
+	echo "   --check|-c                 : Überprüft die Files in bin/ auf Veränderungen"                  
 	echo "   --help|-h                  : Diese Hilfe"
 	
 	echo ""
@@ -41,6 +40,36 @@ function debug(){
   then
     echo "DEBUG: $@"
   fi
+}
+
+#
+# Ausgabe von Meldungen. Je nach Level wirde unterschiedliche Zeichen und Einrückungen ausgegeben
+# $1 : Level 1-3
+# $2 : printf-Format
+# $3-n : Parameter für das printf-Format
+#
+function trace(){
+  local FORMAT=""
+  local VALUE=""
+  case "${1}" in
+    1)
+	FORMAT='%1s '
+	VALUE='*'
+	;;
+    2)
+	FORMAT='%3s '
+	VALUE='-'
+	;;
+	
+    3) 
+	FORMAT='%5s '
+	VALUE='>'
+	;;
+	
+  esac
+  printf "${FORMAT}" "${VALUE}"
+  shift 1
+  printf "$@" 
 }
 
 function getVersionString(){
@@ -76,6 +105,9 @@ function getComamdLineParameter(){
             --fast|-f)
                     FAST=1
                     ;;
+            --check|-c)
+            		CHECK_BIN_FILES=1
+            		;;
             '')
                   break
                   ;;
@@ -112,6 +144,11 @@ function loadConfiguration(){
     fi
   else
     check_exit_code 1 "Kann Konfiguration [${CONF_FILE}] nicht laden"
+  fi
+  
+  if [ -z "${BUILD_FILE_MASTER}" ]
+  then
+  	BUILD_FILE_MASTER=../joomla-build
   fi
 
 }
@@ -212,10 +249,45 @@ function loadAndExecuteOtherScript(){
   local FILE_NAME="${ROOT_DIR}/bin/${1}"
   if [ -f "${FILE_NAME}" -a -r "${FILE_NAME}" ]
   then
-    echo "* Laden Datei [${FILE_NAME}] und führe sie aus."
+    trace 1 "Laden Datei [${FILE_NAME}] und führe sie aus.\n"
     shift 1
     . "${FILE_NAME}"	
   fi
+}
+
+function checkAllBinFiles(){
+	if [ "${CHECK_BIN_FILES}" != "1" ]
+	then
+		return
+	fi
+	trace 1 "Prüfe alle Build-Files auf Veränderung. Der Master liegt in [${BUILD_FILE_MASTER}]\n"
+	
+	[ -d ${BUILD_FILE_MASTER} ]
+	check_exit_code $? "[${BUILD_FILE_MASTER}] ist kein Verzeichnis. Abbruch"
+	
+	local FILES=$(find bin -maxdepth 1 -type f | grep -v filelist.txt | grep -v '^bin/\.')
+	local RESULT
+	local i
+	for i in $FILES
+	do
+		if [ -f ${BUILD_FILE_MASTER}/$i ]
+		then
+			trace 2 "%-60s" "$i"
+			diff -q $i ${BUILD_FILE_MASTER}/$i
+			RESULT=$?
+			if [ ${RESULT} -ne 0 ]
+			then
+				ERROR_COUNTER=$((ERROR_COUNTER+1))
+				diff -u $i ${BUILD_FILE_MASTER}/$i
+			else
+				echo "ok"
+			fi
+		fi
+	done
+	
+	check_exit_code ${ERROR_COUNTER} "Nicht alle Buildfiles sind gleich. Abbruch."
+
+
 }
 
 getComamdLineParameter "$@"
@@ -223,6 +295,8 @@ getComamdLineParameter "$@"
 loadConfiguration
 getVersionString
 changeIntoWorkingDirectory
+
+checkAllBinFiles
 
 checkFilelistFile
 
@@ -239,7 +313,9 @@ copyAllFileToBuildDirectory
 changeIntoBuildDirectory
 replaceParameterInConfigFile
 
-loadAndExecuteOtherScript build-phplint.sh  "$@"
+loadAndExecuteOtherScript replaceCopyrightInfo "$@"
+
+loadAndExecuteOtherScript checkPhpLint  "$@"
 
 changeIntoBuildDirectory
 buildArtefakct

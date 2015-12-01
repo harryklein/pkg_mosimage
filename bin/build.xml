@@ -6,6 +6,8 @@
 	<property name="build.properties" value="build.properties" />
 	<property file="${dir.base}/${build.properties}" />
 
+	<property file="${dir.base}/demo.properties"/>
+
 	<property name="url" value="http://localhost/joomla-1.7.3-inst" />
 	<property name="login" value="admin" />
 	<property name="password" value="sonne80" />
@@ -14,19 +16,38 @@
 	<property name="debug" value="false" />
 	<property name="source" value="deploy/h2n_linkdirectory2-u-HEAD.zip" />
 	<property name="name" value="Link Directotry 2.0" />
+	<property name="update-filename" value="mosimage-update" />
 	<property name="type" value="" />
+	<property name="build" value="${dir.base}/build" />
+	<property name="joomla.ant.jar" value="${user.home}/ant-joomla/lib/ant-joomla-HEAD.jar"/>
 
-	<taskdef name="joomla-install-extension" classname="com.joomboss.InstallExtensionTask" />
-	<taskdef name="joomla-remove-extension" classname="com.joomboss.RemoveExtensionTask" />
+	<path id="ant-joomla.lib.path">
+		<fileset dir="${user.home}/ant-joomla/lib" includes="*.jar"/>
+	</path>
+
+	<taskdef name="joomla-install-extension" classname="com.joomboss.InstallExtensionTask" classpathref="ant-joomla.lib.path"/>
+	<taskdef name="joomla-remove-extension"  classname="com.joomboss.RemoveExtensionTask"  classpathref="ant-joomla.lib.path"/>
 
 	<echo message="Nutze Konfiguration [${dir.base}/${build.properties}]" />
-
+	
 	<!-- ================================= -->
 	<!-- = deploy                        = -->
 	<!-- ================================= -->
-	<target name="deploy">
-		<echo>Login auf [${url}] mit Login [${login}]</echo>
-		<joomla-install-extension source="${dir.base}/${source}" url="${url}" adminlogin="${login}" adminpassword="${password}" ftplogin="${ftplogin}" ftppassword="${ftppassword}" debug="${debug}" />
+	<target name="deploy" depends="version" description="Deployt lokal die Erweiterung">
+		<echo>* Deploy von [${install.file}</echo>
+		<echo>  - URL  : [${url}]</echo> 
+		<echo>  - Login: [${login}]</echo>
+		<joomla-install-extension source="${install.file}" url="${url}" adminlogin="${login}" adminpassword="${password}" ftplogin="${ftplogin}" ftppassword="${ftppassword}" debug="${debug}" />
+	</target>
+	
+	<!-- ================================= -->
+	<!-- = deploy-demo                   = -->
+	<!-- ================================= -->
+	<target name="deploy-demo" depends="version" description="Deployt die Erweiterung auf dem demo-Server">
+		<echo>* Deploy von [${install.file}]</echo>
+		<echo>  - URL  : [${url.demo}]</echo> 
+		<echo>  - Login: [${login.demo}]</echo>
+		<joomla-install-extension source="${install.file}" url="${url.demo}" adminlogin="${login.demo}" adminpassword="${password.demo}" ftplogin="${ftplogin}" ftppassword="${ftppassword}" debug="${debug}" />
 	</target>
 
 	<!-- ================================= -->
@@ -39,39 +60,123 @@
 	<!-- ================================= -->
 	<!-- = copy2outgoing                 = -->
 	<!-- ================================= -->
-	<target name="copy2outgoing" description="Kopiert alle Artefakt nach outgoing">
+	<target name="copy2outgoing" depends="version" description="Kopiert alle Artefakt nach $HOME/outgoing">
 		<mkdir dir="${user.home}/outgoing" />
-		<copy todir="${user.home}/outgoing" overwrite="true" verbose="true">
-			<fileset dir="${dir.base}/deploy">
-				<include name="*.zip" />
+		<copy todir="${user.home}/outgoing" overwrite="true" verbose="true" file="${install.file}" />
+	</target>
+
+	<!-- ==================================== -->
+	<!-- = createUpdateXmlAndCopyToDemohost = -->
+	<!-- ==================================== -->
+	<target name="createUpdateXmlAndCopyToDemohost" depends="version" description="Erzeugt das File für die Update-Configuration und kopiert das File auf dem Demohost">
+
+		<mkdir dir="${build}" />
+		<copy todir="${build}" overwrite="true">
+			<fileset dir="${dir.base}">
+				<include name="${update-filename}.xml" />
 			</fileset>
 		</copy>
+
+		<echo message="Version: ${MY_VERSION}" />
+
+		<!-- Version entsprechend der Version setzen -->
+		<replaceregexp match="HEAD" replace="${MY_VERSION}" flags="g">
+			<fileset dir="${build}">
+				<include name="${update-filename}.xml" />
+			</fileset>
+		</replaceregexp>
+
+		<!-- ersetzen von tag in Abhänigkeit der Version -->
+		<replaceregexp match="TAG" replace="TAG-${MY_VERSION}">
+			<fileset dir="${build}">
+				<include name="${update-filename}.xml" />
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp match="ZIP_FILE_NAME" replace="${ZIP_FILE_NAME}" flags="g">
+			<fileset dir="${build}">
+				<include name="${update-filename}.xml" />
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp match="TITLE" replace="${title}" flags="g">
+			<fileset dir="${build}">
+				<include name="${update-filename}.xml" />
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp match="DEMO_URL" replace="${demourl}" flags="g">
+			<fileset dir="${build}">
+				<include name="${update-filename}.xml" />
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp match="NAME" replace="${NAME}" flags="g">
+			<fileset dir="${build}">
+				<include name="${update-filename}.xml" />
+			</fileset>
+		</replaceregexp>
+
+
+
+		<concat destfile="${build}/filename.tmp">update_filename_tag=${update-filename}-TAG-${MY_VERSION}</concat>
+
+		<!-- * Name des Updatefile-Namen ermitteln (mit -rc, -beta oder ohne, Teil 1 -->
+		<!-- * TAG im ...-update.xml ersetzen                                        -->
+		<replaceregexp match="TAG-[0-9\.]*rc[0-9]" replace="rc">
+			<fileset dir="${build}">
+				<include name="${update-filename}.xml" />
+				<include name="filename.tmp" />
+			</fileset>
+		</replaceregexp>
+		<replaceregexp match="TAG-[0-9\.]*b[0-9]" replace="beta">
+			<fileset dir="${build}">
+				<include name="${update-filename}.xml" />
+				<include name="filename.tmp" />
+			</fileset>
+		</replaceregexp>
+		<replaceregexp match="TAG-[0-9\.HEAD]*" replace="stable">
+			<fileset dir="${build}">
+				<include name="${update-filename}.xml" />
+				<include name="filename.tmp" />
+			</fileset>
+		</replaceregexp>
+
+		<!-- name des Updatefile-Namen ermitteln (mit -rc, -beta oder ohne, Teil 2 -->
+		<property file="${build}/filename.tmp" />
+
+		<!-- Updatefile auf Server kopieren -->
+		<move file="${build}/${update-filename}.xml" tofile="${dir.base}/deploy/${update_filename_tag}.xml" overwrite="true" verbose="true" />
+		<scp verbose="true" todir="www.neschke.de@ssh.strato.de:joomla-demo/joomla3/upload" keyfile="${user.home}/.ssh/id_rsa.deploy">
+			<fileset dir="${dir.base}/deploy">
+				<include name="${update_filename_tag}.xml" />
+			</fileset>
+		</scp>
+
 	</target>
 
 	<!-- ================================= -->
 	<!-- = copy2demohost                 = -->
 	<!-- ================================= -->
-	<target name="copy2demohost" description="Kopiert alle artefakts auf den Demo-Host">
-		<scp verbose="true" todir="www.neschke.de@ssh.strato.de:joomla-demo/joomla3/upload" keyfile="${user.home}/.ssh/id_rsa.deploy">
-			<fileset dir="${dir.base}/deploy">
-				<include name="*.zip" />
-			</fileset>
-		</scp>
+	<target name="copy2demohost" depends="version" description="Kopiert alle artefakts auf den Demo-Host">
+		<scp verbose="true" todir="www.neschke.de@ssh.strato.de:joomla-demo/joomla3/upload" 
+			keyfile="${user.home}/.ssh/id_rsa.deploy" 
+			file="${install.file}"/>
 	</target>
 
 	<!-- ================================= -->
 	<!-- = tag                           = -->
 	<!-- ================================= -->
-	<target name="tag" description="Tagt die Source-Dateinen">
+	<target name="tag" depends="version" description="Tagt die Source-Dateinen">
 
-		<property name="before" value="This is a value"/>
+		<property name="before" value="This is a value" />
 		<script language="javascript">
-		    var before = project.getProperty("VERSION");
+		    var before = project.getProperty("MY_VERSION");
 		    project.setProperty("CVS_TAG", before.replaceAll("\\.", "-"));
 		</script>
 
-		<echo message="CVS Tag: [${CVS_TAG}]"/>
-		<cvs>
+		<echo message="CVS Tag: [${CVS_TAG}]" />
+		<cvs failonerror="true" >
 			<commandline>
 				<argument value="tag" />
 				<argument value="-F" />
@@ -80,5 +185,33 @@
 			</commandline>
 		</cvs>
 	</target>
-
+	
+	<!-- ================================= -->
+	<!-- = release                       = -->
+	<!-- ================================= -->
+	<target name="release" depends="copy2outgoing,createUpdateXmlAndCopyToDemohost, copy2demohost, tag" description="Für die Schritte aus">
+	</target>
+	
+	
+	<!-- ================================= -->
+	<!-- = build                         = -->
+	<!-- ================================= -->
+	<target name="build" depends="version" description="Erstellt das Artefakt">
+		<exec executable="bash" dir="${dir.base}" failonerror="true">
+			<arg value="./bin/build.sh"/>
+		</exec>
+	</target>
+	
+	<!-- ================================= -->
+	<!-- = version                       = -->
+	<!-- ================================= -->
+	<target name="version" description="Ermittelt die Versionsnummer aus dem Eviroment: VERSION, BUILD_NUMBER oder wenn nichts gesetzt, ist der Wert HEAD">
+		<exec executable="bash" outputproperty="MY_VERSION" errorproperty="ERROR">
+			<arg value="build.sh"/>
+			<arg value="-b"/>
+		</exec>
+		<echo>MY_VERSION: [${MY_VERSION}]</echo>
+		<property name="install.file" value="${dir.base}/deploy/${ZIP_FILE_NAME}-${MY_VERSION}.zip"/>
+	</target>	
+	
 </project>
