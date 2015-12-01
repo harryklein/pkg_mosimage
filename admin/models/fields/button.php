@@ -1,6 +1,5 @@
 <?php
 /**
- * @version 2.0 $Id: button.php,v 1.4 2015/02/05 20:54:34 harry Exp $
  * @package Joomla.Administrator
  * @subpackage com_mosimage
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de

@@ -1,6 +1,5 @@
 <?php
 /**
- * @version 2.0 $Id: form.php,v 1.5 2015/02/05 22:11:06 harry Exp $
  * @package Joomla.Administrator
  * @subpackage com_mosimage
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
@@ -184,7 +183,7 @@ if ($app->isAdmin()) {
 <script type="text/javascript">
 	Mosimage.changeDynaList2( 'jform_imagefiles', folderimages, 'jform_folder' , 0, 0);
 
-	var messages = new Array("<?php echo JText::_('COM_MOSIMAGE_APLAY_CHANGED_VALUES');?>");
+	var messages = new Array("<?php echo JText::_('COM_MOSIMAGE_APLAY_CHANGED_VALUES');?>", "<?php echo JText::_('COM_MOSIMAGE_DISALLOW_CHANGED_VALUES');?>");
 	Mosimage.initShowImageProps( JOOMLA_ROOT + 'images/', messages );
 	Mosimage.previewImage('jform_imagefiles', 'jform_view_imagefiles', JOOMLA_ROOT + 'images/');
 </script>
