@@ -253,42 +253,34 @@ Mosimage.addSelectedToList2 = function (frmName, srcListName, tgtListName) {
 }
 
 
-Mosimage.moveInList = function (frmName, srcListName, to) {
-	var srcList = document.getElementById(srcListName); // eval( 'form.' +
-														// srcListName );
+Mosimage.moveInList = function (frmName, srcListName, to, event) {
+	
+	var srcList = document.getElementById(srcListName); 
+	
 	var total = srcList.options.length - 1;
-	var index = srcList.selectedIndex;
+	var currentIndex = srcList.selectedIndex;
 
-	if (index == -1) {
+	if (currentIndex == -1) {
 		return false;
 	}
-
-	if (to == 0) {
-		to = -1 * index;
-	}
-
-	if (to == 'end') {
-		to = total;
-	}
-
-	if (to > 0 && index == total) {
+	if (to > 0 && currentIndex == total) {
+		srcList.focus();
 		return false;
 	}
-	if (to < 0 && index == 0) {
+	if (to < 0 && currentIndex == 0) {
+		srcList.focus();
 		return false;
 	}
-
-	var fromIndex = index;
-	var toIndex = index + to;
-
-	/*
-	 * var options = new Array; for (i=total; i >= 0; i--) { options[i] =
-	 * srcList.options[i] } var element = options[fromIndex]
-	 * 
-	 * options.splice(fromIndex, 1); options.splice(toIndex, 0, element);
-	 * 
-	 * for (i = total; i >= 0; i--) { srcList.options[i] = options[i]; }
-	 */
+	
+	var fromIndex = currentIndex;
+	
+	if (to == 'begin') {
+		toIndex = 0;
+	} else if (to == 'end') {
+		toIndex = total;
+	} else {
+		toIndex = currentIndex + to;
+	}
 
 	var items = new Array;
 	var values = new Array;
@@ -312,7 +304,16 @@ Mosimage.moveInList = function (frmName, srcListName, to) {
 		}
 	}
 
-	srcList.selectedIndex = toIndex;
+	if ( (to == 'end') || (to == 'begin') ){
+		if (event.shiftKey) {
+			srcList.selectedIndex = toIndex;        
+	    } else {
+	    	srcList.selectedIndex = fromIndex;
+	    }
+	} else {
+		srcList.selectedIndex = toIndex;
+	}
+	
 	srcList.wasChanged = true;
 	srcList.focus();
 	return true;

@@ -67,10 +67,10 @@
 			onclick="Mosimage.addSelectedToList2('adminForm','jform_imagefiles','jform_imageslist');"></field>
 		<field name="remove" type="button" label="COM_MOSIMAGE_REMOVE_BUTTON_LABEL" description="COM_MOSIMAGE_REMOVE_BUTTON_LABEL_DESC" onclick="Mosimage.delSelectedFromList2('adminForm','jform_imageslist');"></field>
 				
-		<field name="pos1" type="button" label="COM_MOSIMAGE_POS1_LABEL" description="COM_MOSIMAGE_POS1_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_imageslist',0)"/>
-		<field name="up"   type="button" label="COM_MOSIMAGE_UP_LABEL"   description="COM_MOSIMAGE_UP_LABEL_DESC"   onclick="Mosimage.moveInList('adminForm','jform_imageslist',-1)"/>
-		<field name="down" type="button" label="COM_MOSIMAGE_DOWN_LABEL" description="COM_MOSIMAGE_DOWN_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_imageslist',+1)"/>
-		<field name="end"  type="button" label="COM_MOSIMAGE_END_LABEL"  description="COM_MOSIMAGE_END_LABEL_DESC"  onclick="Mosimage.moveInList('adminForm','jform_imageslist','end')"/>
+		<field name="pos1" type="button" label="COM_MOSIMAGE_POS1_LABEL" description="COM_MOSIMAGE_POS1_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_imageslist','begin',event)"/>
+		<field name="up"   type="button" label="COM_MOSIMAGE_UP_LABEL"   description="COM_MOSIMAGE_UP_LABEL_DESC"   onclick="Mosimage.moveInList('adminForm','jform_imageslist',-1,event)"/>
+		<field name="down" type="button" label="COM_MOSIMAGE_DOWN_LABEL" description="COM_MOSIMAGE_DOWN_LABEL_DESC" onclick="Mosimage.moveInList('adminForm','jform_imageslist',+1,event)"/>
+		<field name="end"  type="button" label="COM_MOSIMAGE_END_LABEL"  description="COM_MOSIMAGE_END_LABEL_DESC"  onclick="Mosimage.moveInList('adminForm','jform_imageslist','end',event)"/>
 		
 		<field name="buttonspacer" label="" hr="true" description="" type="spacer" />
 		<field name="applay" type="button" class="btn btn-primary" label="COM_MOSIMAGE_APPLY" onclick="Mosimage.applyImageProps()" />
