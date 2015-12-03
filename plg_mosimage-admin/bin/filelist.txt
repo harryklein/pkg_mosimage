@@ -1,0 +1,7 @@
+mosimageadmin.php
+mosimageadmin.xml
+mosimageadmin.css
+language/de-DE/de-DE.plg_editors-xtd_mosimageadmin.ini
+language/en-GB/en-GB.plg_editors-xtd_mosimageadmin.ini
+language/de-DE/de-DE.plg_editors-xtd_mosimageadmin.sys.ini
+language/en-GB/en-GB.plg_editors-xtd_mosimageadmin.sys.ini
