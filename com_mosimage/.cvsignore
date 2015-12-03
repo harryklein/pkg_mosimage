@@ -1,0 +1,11 @@
+.buildpath
+.project
+deploy
+tmp
+.settings
+release
+deploy-dist
+build
+report
+.gitignore
+.git
