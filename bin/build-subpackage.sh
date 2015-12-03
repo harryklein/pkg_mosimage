@@ -1,10 +1,10 @@
 #!/bin/bash
 
 function copyArtefactToSrc(){
-  local SRC_FILE="${ROOT_DIR}/../$item/deploy/${1}-${VERSION}.zip"
-  local DEST_FILE="${1}.zip"
-  echo "* Kopiere ${1}-${VERSION}.zip nach ${DEST_FILE}"  
-  cp  ${SRC_FILE} ${DEST_FILE}
+  local SRC_FILE="${ROOT_DIR}/$item/deploy/${1}-${VERSION}.zip"
+  local DEST_FILE="build/${1}.zip"
+  echo "* Kopiere ${1}-${VERSION}.zip nach $(pwd)/${DEST_FILE}"  
+cp  ${SRC_FILE} ${DEST_FILE}
   check_exit_code $? "Kann [${SRC_FILE}] nicht nach [${DEST_FILE}] kopieren"  
 }
 
@@ -26,7 +26,7 @@ buildAllSubPackage(){
       printf "==========================================\n"
       printf "= Baue SubPackage %-22s =\n" "[$item]"
       printf "==========================================\n"
-      local SUBPACKAGE_DIR="${ROOT_DIR}/../$item"
+      local SUBPACKAGE_DIR="${ROOT_DIR}/$item"
       cd ${SUBPACKAGE_DIR}
       check_exit_code $? "ERROR: Kann nicht in das Verzeichnis [${SUBPACKAGE_DIR}] wechseln. Abbruch"
       ./bin/build.sh

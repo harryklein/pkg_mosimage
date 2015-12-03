@@ -67,7 +67,7 @@ function trace(){
 	;;
 	
   esac
-  printf "${FORMAT}" "${VALUE}"
+  printf "[pkg-mosimage] ${FORMAT}" "${VALUE}"
   shift 1
   printf "$@" 
 }
@@ -179,7 +179,7 @@ function copyAllFileToBuildDirectory(){
   cp  "${ROOT_DIR}/bin/filelist.txt" "${BUILD_DIR}"
   check_exit_code $? "Kann [${ROOT_DIR}/bin/filelist.txt] nicht nach [${BUILD_DIR}] kopieren"
 
-  local FILES=$(cat "${ROOT_DIR}/bin/filelist.txt")
+  local FILES=$(cat "${ROOT_DIR}/bin/filelist.txt" | grep -v '\.zip *$')
   cp  --parent $FILES "${BUILD_DIR}"
   check_exit_code $? "Kann Dateien aus [${ROOT_DIR}/bin/filelist.txt] nicht nach [${BUILD_DIR}] kopieren"
 }
