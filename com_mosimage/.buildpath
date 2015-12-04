@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
-	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/cms"/>
-	<buildpathentry kind="src" path="site"/>
 	<buildpathentry kind="src" path="admin"/>
+	<buildpathentry kind="src" path="build/admin"/>
+	<buildpathentry kind="src" path="build/site"/>
+	<buildpathentry kind="src" path="site"/>
+	<buildpathentry kind="lib" path="deploy/com_mosimage-HEAD.zip"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 </buildpath>
