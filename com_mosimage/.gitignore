@@ -1,13 +1,6 @@
-.classpath
-.project
-.settings
-*~
-CVS/
-/deploy/
-/deploy-dist/
-/doc/
-/tmp/
-/report/
 /build/
+/deploy/
+/doc/
+/.settings/
 /.buildpath
-/.cvsignore
+/.project
