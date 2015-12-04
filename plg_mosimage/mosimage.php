@@ -74,7 +74,13 @@ class plgContentMosimage extends JPlugin {
 
 				preg_match_all( self::REGEX_DIR, $row->introtext, $matchesInIntro );
 				$introCount = count($matchesInIntro[0]);
-				preg_match_all( self::REGEX_DIR, $row->text, $matchesInText );
+				
+				if (empty($row->text)){
+				    $text='';
+				} else {
+				    $text=$row->text;
+				}
+				preg_match_all( self::REGEX_DIR, $text, $matchesInText );
 				$count = count( $matchesInText[0] );
 				if ($count || $introCount) {
 					$replaceMosimagePlaceholder = true;
@@ -90,7 +96,9 @@ class plgContentMosimage extends JPlugin {
 						$pattern[]=self::REGEX_DIR;
 					}
 					$row->introtext = preg_replace( $pattern, $images->introImages, $row->introtext,1 );
-					$row->text = preg_replace( $pattern, $images->images, $row->text,1  );
+					if (!empty($row->text)){
+					   $row->text = preg_replace( $pattern, $images->images, $row->text,1  );
+					}
 				}
 			}
 
@@ -101,7 +109,12 @@ class plgContentMosimage extends JPlugin {
 
 				preg_match_all( self::REGEX, $row->introtext, $matchesInIntro );
 				$introCount = count($matchesInIntro[0]);
-				preg_match_all( self::REGEX, $row->text, $matchesInText );
+				if (empty($row->text)){
+				    $text='';
+				} else {
+				    $text=$row->text;
+				}
+				preg_match_all( self::REGEX, $text, $matchesInText );
 				$count = count( $matchesInText[0] );
 
 				if ($count || $introCount) {
@@ -120,11 +133,15 @@ class plgContentMosimage extends JPlugin {
 					// $row->introtext = preg_replace( $pattern, $images->getIntroImages(), $row->introtext,1 );
 					// $row->text = preg_replace( $pattern, $images->getImages(), $row->text,1  );
 					$row->introtext = preg_replace( $pattern, $images->introImages, $row->introtext,1 );
-					$row->text = preg_replace( $pattern, $images->images, $row->text,1  );
+					if (!empty($row->text)){
+					   $row->text = preg_replace( $pattern, $images->images, $row->text,1  );
+					}
 				}
 			}
 			if ($replaceMosimagePlaceholder){
-				$row->text = $row->text . self::HTML_FOR_STOP_FLOATING;
+			    if (!empty($row->text)){
+				    $row->text = $row->text . self::HTML_FOR_STOP_FLOATING;
+			    }
 			}
 		} catch (Exception $e){
 			return;
@@ -133,12 +150,16 @@ class plgContentMosimage extends JPlugin {
 	}
 	
 	private function isTextContainIntroText(&$row){
-		if (strpos($row->text,$row->introtext) === 0) {
-			// im text ist der Intro nicht enthalten, daher beginnt die Anzeige der Bilder wieder bei 0
-			$textContainIntro =  true;
-		} else {
-			$textContainIntro =  false;
-		}
+	    if (empty($row->text)) {
+	        $textContainIntro =  false;
+	    } else {
+    		if (strpos($row->text,$row->introtext) === 0) {
+    			// im text ist der Intro nicht enthalten, daher beginnt die Anzeige der Bilder wieder bei 0
+    			$textContainIntro =  true;
+    		} else {
+    			$textContainIntro =  false;
+    		}
+	    }
 		if (empty ($row->fulltext)){
 			$textContainIntro =  false;
 		}
