@@ -300,13 +300,14 @@ checkAllBinFiles
 
 checkFilelistFile
 
-loadAndExecuteOtherScript build-subpackage.sh  "$@"
-
-loadAndExecuteOtherScript checkUnusedProperties "de-DE"
-
 createDepoloyDirectory
 createBuildDirectory
 createReportDirectory
+
+
+loadAndExecuteOtherScript build-subpackage.sh  "$@"
+
+loadAndExecuteOtherScript checkUnusedProperties "de-DE"
 
 copyAllFileToBuildDirectory
 
