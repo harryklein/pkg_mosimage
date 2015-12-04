@@ -1,7 +1,5 @@
-/.buildpath
-/.cvsignore
-/.project
-/.settings/
 /build/
 /deploy/
-/report/
+/.buildpath
+/.cvsignore
+/.settings/
