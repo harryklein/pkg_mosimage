@@ -65,4 +65,10 @@ img.mosimgage-inner,  span.mosimgage-inner-top, span.mosimgage-inner-bottom {
 	margin-right: 0px;
 	padding-left: 0px;
 	padding-right: 0px;
-}  
+} 
+
+a.mosimage{
+	height: 0px;
+	line-height: 0px;
+	font-size: 0px;
+} 
