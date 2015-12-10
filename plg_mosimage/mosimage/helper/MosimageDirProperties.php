@@ -144,7 +144,7 @@ class MosimageDirProperties
                     return $this->param[self::KEY_IMAGE_ALIGN];
             }
         }
-        return 'none';
+        return 'left';
     }
 
     /**
