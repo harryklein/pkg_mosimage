@@ -68,75 +68,9 @@ class plgContentMosimage extends JPlugin {
 			$replaceMosimagePlaceholder = false;
 			
 			if ($context =='com_content.featured' || $context == 'com_content.category' || $context == 'com_content.article'){
-				// text enthält auch das Intro, wenn es angezeigt werden soll.
-				// ohne Anzeige des Intros müssen die Bilder aus Intro übersprungen werden
-				// Intro: hier einfach alles ersetzten, auch wenn
-
-				preg_match_all( self::REGEX_DIR, $row->introtext, $matchesInIntro );
-				$introCount = count($matchesInIntro[0]);
-				
-				if (empty($row->text)){
-				    $text='';
-				} else {
-				    $text=$row->text;
-				}
-				preg_match_all( self::REGEX_DIR, $text, $matchesInText );
-				$count = count( $matchesInText[0] );
-				if ($count || $introCount) {
-					$replaceMosimagePlaceholder = true;
-					$config = new PluginConfiguration($this->params);
-					$this->addMosimageStyleSheet();
-					$this->addLightBoxStyleSheetAndScript($config);
-					$screenres = $this->getScreenSizeFromCookie();
-					$this->addScreenSizeCookie($config);	
-					$images = $this->processImagesDir( $row, $config, $matchesInIntro[0], $matchesInText[0], $screenres);
-
-					$pattern=array();
-					for ($i=0; $i<$count+$introCount;$i++){
-						$pattern[]=self::REGEX_DIR;
-					}
-					$row->introtext = preg_replace( $pattern, $images->introImages, $row->introtext,1 );
-					if (!empty($row->text)){
-					   $row->text = preg_replace( $pattern, $images->images, $row->text,1  );
-					}
-				}
-			}
-
-			if ($context =='com_content.featured' || $context == 'com_content.category' || $context == 'com_content.article'){
-				// text enthält auch das Intro, wenn es angezeigt werden soll.
-				// ohne Anzeige des Intros müssen die Bilder aus Intro übersprungen werden
-				// Intro: hier einfach alles ersetzten, auch wenn
-
-				preg_match_all( self::REGEX, $row->introtext, $matchesInIntro );
-				$introCount = count($matchesInIntro[0]);
-				if (empty($row->text)){
-				    $text='';
-				} else {
-				    $text=$row->text;
-				}
-				preg_match_all( self::REGEX, $text, $matchesInText );
-				$count = count( $matchesInText[0] );
-
-				if ($count || $introCount) {
-					$replaceMosimagePlaceholder = true;
-					$config = new PluginConfiguration($this->params);
-					$this->addMosimageStyleSheet();
-					$this->addLightBoxStyleSheetAndScript($config);
-					$screenres = $this->getScreenSizeFromCookie();
-					$this->addScreenSizeCookie($config);
-					$images = $this->processImages( $row, $config, $matchesInIntro[0], $matchesInText[0], $screenres, $params->get('show_intro'));
-
-					$pattern=array();
-					for ($i=0; $i<$count+$introCount;$i++){
-						$pattern[]=self::REGEX;
-					}
-					// $row->introtext = preg_replace( $pattern, $images->getIntroImages(), $row->introtext,1 );
-					// $row->text = preg_replace( $pattern, $images->getImages(), $row->text,1  );
-					$row->introtext = preg_replace( $pattern, $images->introImages, $row->introtext,1 );
-					if (!empty($row->text)){
-					   $row->text = preg_replace( $pattern, $images->images, $row->text,1  );
-					}
-				}
+			    $this->replacePlaceHolder($row, $params, self::REGEX_DIR, 'processImagesDir');
+			    $this->replacePlaceHolder($row, $params, self::REGEX, 'processImages');
+			    $this->replaceClearFlotingPlaceHolder($row);
 			}
 			if ($replaceMosimagePlaceholder){
 			    if (!empty($row->text)){
@@ -148,6 +82,51 @@ class plgContentMosimage extends JPlugin {
 		}
 		return;
 	}
+	
+	private function replaceClearFlotingPlaceHolder(&$row){
+	    $regex = '/{clear-floting}/i';
+	    $row->introtext = preg_replace($regex, self::HTML_FOR_STOP_FLOATING, $row->introtext);
+	    if (!empty($row->text)){
+	        $row->text =  preg_replace($regex, self::HTML_FOR_STOP_FLOATING, $row->text);
+	    }
+	}
+	
+	private function replacePlaceHolder(&$row, &$params, $regex, $processImagesFunction){
+	    // text enthält auch das Intro, wenn es angezeigt werden soll.
+	    // ohne Anzeige des Intros müssen die Bilder aus Intro übersprungen werden
+	    // Intro: hier einfach alles ersetzten, auch wenn
+	    
+	    preg_match_all( $regex, $row->introtext, $matchesInIntro );
+	    $introCount = count($matchesInIntro[0]);
+	    if (empty($row->text)){
+	        $text='';
+	    } else {
+	        $text=$row->text;
+	    }
+	    preg_match_all( $regex, $text, $matchesInText );
+	    $count = count( $matchesInText[0] );
+	    
+	    if ($count || $introCount) {
+	        $replaceMosimagePlaceholder = true;
+	        $config = new PluginConfiguration($this->params);
+	        $this->addMosimageStyleSheet();
+	        $this->addLightBoxStyleSheetAndScript($config);
+	        $screenres = $this->getScreenSizeFromCookie();
+	        $this->addScreenSizeCookie($config);
+	        $images = $this->$processImagesFunction( $row, $config, $matchesInIntro[0], $matchesInText[0], $screenres, $params->get('show_intro'));
+	    
+	        $pattern=array();
+	        for ($i=0; $i<$count+$introCount;$i++){
+	            $pattern[]=$regex;
+	        }
+	        $row->introtext = preg_replace( $pattern, $images->introImages, $row->introtext,1 );
+	        if (!empty($row->text)){
+	            $row->text = preg_replace( $pattern, $images->images, $row->text,1  );
+	        }
+	    }
+	    
+	}
+	
 	
 	private function isTextContainIntroText(&$row){
 	    if (empty($row->text)) {
@@ -215,7 +194,7 @@ class plgContentMosimage extends JPlugin {
 		return $param;
 	}
 
-	private function processImagesDir( &$row, PluginConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres ){
+	private function processImagesDir( &$row, PluginConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres, $showIntro = false ){
 		$images = array();
 		$introImages = array();
 
@@ -235,6 +214,7 @@ class plgContentMosimage extends JPlugin {
 		for ($i = 0; $i < count($matchesInText); $i++){
 			try {
 				$properies = MosimageDirProperties::parse($matchesInText[$i]);
+				$properies->align = 'left';
 				$imgagePropertiesAsArrayObject  = $properies->getImgagePropertiesAsArrayObject();
 				if ($imgagePropertiesAsArrayObject){
 					$images[] = HtmlHelper::createImageAndBuildHtmlFromArrayObject($imgagePropertiesAsArrayObject, $config, $screenres);
