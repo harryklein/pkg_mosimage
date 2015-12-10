@@ -23,7 +23,7 @@ class FancyLightbox implements LightBox
 
     public function getCssClassForImageLink ()
     {
-        return '';
+        return 'mosimage';
     }
 
     public function addScriptAndCssToDocument ()
