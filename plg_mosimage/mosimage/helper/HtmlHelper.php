@@ -99,18 +99,14 @@ class HtmlHelper
 	        } else {
 	            $cssDisplay = '';
 	        }
-	        $cssWidh = 'width: ' . $widthInner . 'px;';
 	        
-	        $caption_valign = $imgProperties->getCaptionPosition();
-	        
-	        if ($imgProperties->getImageAlgin() == "") {
-	            $cssClassOuter = 'mosimgage-outer-none';
-	        } else {
-	            $cssClassOuter = 'mosimgage-outer-' . $imgProperties->getImageAlgin();
-	        }
+	 
+	        $cssClassOuter = $imgProperties->getOuterCssClass();     
 	        $img = '<span class="' . $cssClassOuter . '" style="width: ' . $widthOuter . 'px;border-width:' . $imgProperties->getBorderWidth() . 'px;">';
 	        
 	        if ($imgProperties->isViewCaptionTextForThumbnail()) {
+	            $caption_valign = $imgProperties->getCaptionPosition();
+	            $cssWidh = 'width: ' . $widthInner . 'px;';
 	            $caption = '<span class="mosimgage-inner-' . $caption_valign . '" style="' . $cssWidh . $cssDisplay . '" ';
 	            $caption .= '>';
 	            $caption .= $imgProperties->getCaptionText();

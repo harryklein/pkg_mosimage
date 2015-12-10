@@ -53,6 +53,17 @@ class ImageProperties
         return ' style="float: none;"';
         ;
     }
+    
+    public function getOuterCssClass(){
+        $imageAlign = $this->getImageAlgin();
+        switch ($imageAlign) {
+            case 'left':
+            case 'right':
+                return 'mosimgage-outer-' . $imageAlign;
+                break;
+        }
+        return 'mosimgage-outer-none';        
+    }
 
     public function isViewCaptionTextForThumbnail ()
     {
