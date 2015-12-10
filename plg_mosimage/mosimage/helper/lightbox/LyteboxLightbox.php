@@ -28,8 +28,8 @@ class LyteboxLightbox implements LightBox
 
     public function addScriptAndCssToDocument ()
     {
-        $document = JFactory::getDocument();
         $baseUrl = JURI::base() . 'plugins/content/mosimage/mosimage/lytebox';
+        $document = JFactory::getDocument();
         $document->addScript($baseUrl . '/js/lytebox.js');
         $document->addStyleSheet($baseUrl . '/css/lytebox.css');
     }

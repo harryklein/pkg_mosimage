@@ -28,8 +28,6 @@ class Lightbox2Lightbox implements LightBox
 
     public function addScriptAndCssToDocument ()
     {
-        $document = JFactory::getDocument();
-        
         JHtml::_('jquery.framework');
         
         $lang = substr($document->getLanguage(), 0, 2);
@@ -39,6 +37,7 @@ class Lightbox2Lightbox implements LightBox
         if (JFolder::exists($baseLangUrl)) {
             $baseUrl = $baseLangUrl;
         }
+        $document = JFactory::getDocument();
         $document->addScript($baseUrl . '/js/lightbox-2.6.min.js');
         $document->addStyleSheet($baseUrl . '/css/lightbox.css');
     }

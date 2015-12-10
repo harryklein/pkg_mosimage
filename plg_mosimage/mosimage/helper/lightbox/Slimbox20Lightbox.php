@@ -28,10 +28,10 @@ class Slimbox20Lightbox implements LightBox
 
     public function addScriptAndCssToDocument ()
     {
-        $document = JFactory::getDocument();
-        
         JHtml::_('jquery.framework');
+        
         $baseUrl = JURI::base() . 'plugins/content/mosimage/mosimage/slimbox-2';
+        $document = JFactory::getDocument();
         $document->addScript($baseUrl . '/js/slimbox2.js');
         $document->addStyleSheet($baseUrl . '/css/slimbox2.css');
     }

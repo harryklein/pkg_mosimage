@@ -28,11 +28,10 @@ class FancyLightbox implements LightBox
 
     public function addScriptAndCssToDocument ()
     {
-        $document = JFactory::getDocument();
-        
         JHtml::_('jquery.framework');
+        
         $baseUrl = JURI::base() . 'plugins/content/mosimage/mosimage/fancybox';
-        // $document->addScript(JURI::base().'/media/jui/js/jquery.min.js');
+        $document = JFactory::getDocument();
         $document->addScript($baseUrl . '/fancybox/jquery.fancybox-1.3.4.pack.js');
         $document->addStyleSheet($baseUrl . '/fancybox/jquery.fancybox-1.3.4.css');
         $document->addScriptDeclaration(

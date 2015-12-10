@@ -28,8 +28,8 @@ class Lytebox5Lightbox implements LightBox
 
     public function addScriptAndCssToDocument ()
     {
-        $document = JFactory::getDocument();
         $baseUrl = JURI::base() . 'plugins/content/mosimage/mosimage/lytebox5';
+        $document = JFactory::getDocument();
         $primaryLanguage = substr($document->getLanguage(), 0, 2);
         switch ($primaryLanguage) {
             case 'de':

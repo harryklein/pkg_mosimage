@@ -28,12 +28,10 @@ class PrioboxLightbox implements LightBox
 
     public function addScriptAndCssToDocument ()
     {
-        $document = JFactory::getDocument();
-        
         JHtml::_('jquery.framework');
         
         $baseUrl = JURI::base() . 'plugins/content/mosimage/mosimage/priobox';
-        
+        $document = JFactory::getDocument();
         $document->addScript($baseUrl . '/js/pirobox_extended.js');
         $document->addScript($baseUrl . '/js/priobox_config.js');
         $document->addStyleSheet($baseUrl . '/css_pirobox/style_1/style.css');
