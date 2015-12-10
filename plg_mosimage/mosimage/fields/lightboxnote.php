@@ -27,22 +27,22 @@ class JFormFieldLightboxNote extends JFormFieldNote
                 array(
                         'Creative Commons Attribution 3.0 License' => 'http://creativecommons.org/licenses/by/3.0/'
                 ));
-        $list[] = new LightboxInfo(JFormFieldLightboxList::LIGHTBOX2, 'Lightbox 2', '2.6', 'jQuery >=1.10.2', 'http://lokeshdhakar.com/projects/lightbox2/', 
+        $list[] = new LightboxInfo(JFormFieldLightboxList::LIGHTBOX2, 'Lightbox 2', '2.6', 'jQuery (Joomla)', 'http://lokeshdhakar.com/projects/lightbox2/', 
                 'Lokesh Dhakar', 
                 array(
                         'Creative Commons Attribution 2.5 License' => 'http://creativecommons.org/licenses/by/2.5/'
                 ));
-        $list[] = new LightboxInfo(JFormFieldLightboxList::FANCYBOX, 'Famcybox', '1.3.4', 'jQuery', 'http://fancybox.net/blog', 'Janis Skarnelis', 
+        $list[] = new LightboxInfo(JFormFieldLightboxList::FANCYBOX, 'Fancybox', '1.3.4', 'jQuery (Joomla)', 'http://fancybox.net/blog', 'Janis Skarnelis', 
                 array(
                         'MIT License, ' => 'http://www.opensource.org/licenses/mit-license.php',
                         'GPL3' => 'http://www.gnu.org/licenses/gpl.html'
                 ));
-        $list[] = new LightboxInfo(JFormFieldLightboxList::SLIMBOX_20, 'Slimbox 2', '2.05', 'jQuery >=1.3', 'http://www.digitalia.be/software/slimbox2', 
+        $list[] = new LightboxInfo(JFormFieldLightboxList::SLIMBOX_20, 'Slimbox 2', '2.05', 'jQuery (Joomla)', 'http://www.digitalia.be/software/slimbox2', 
                 'Christophe Beyls', array(
                         'MIT License' => 'http://www.opensource.org/licenses/mit-license.php'
                 ));
         
-        $list[] = new LightboxInfo(JFormFieldLightboxList::PRIOBOX, 'PiroBox Extended', '1.0', 'jQuery >=1.8', 'http://www.pirolab.it/pirobox/',
+        $list[] = new LightboxInfo(JFormFieldLightboxList::PRIOBOX, 'PiroBox Extended', '1.0', 'jQuery (Joomla)', 'http://www.pirolab.it/pirobox/',
                 'Diego Valobra', array(
                         'CC-BY-SA' => 'http://creativecommons.org/licenses/by-sa/3/'
                 ));

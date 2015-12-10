@@ -30,18 +30,10 @@ class PrioboxLightbox implements LightBox
     {
         $document = JFactory::getDocument();
         
+        JHtml::_('jquery.framework');
+        
         $baseUrl = JURI::base() . 'plugins/content/mosimage/mosimage/priobox';
-        if (false) {
-            $document->addScript($baseUrl . '/js/jquery.min.js');
-            $document->addScript($baseUrl . '/js/jquery-ui-1.8.2.custom.min.js');
-        } else {
-            // $document->addScript(JURI::base() .
-            // 'media/jui/js/jquery.min.js');
-            // $document->addScript(JURI::base() .
-            // 'media/jui/js/jquery-noconflict.js');
-            // $document->addScript(JURI::base() .
-            // 'media/jui/js/jquery.ui.core.js');
-        }
+        
         $document->addScript($baseUrl . '/js/pirobox_extended.js');
         $document->addScript($baseUrl . '/js/priobox_config.js');
         $document->addStyleSheet($baseUrl . '/css_pirobox/style_1/style.css');
