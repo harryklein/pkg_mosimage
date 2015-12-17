@@ -8,8 +8,7 @@
 		<version>HEAD</version>
 		<infourl title="TITLE">DEMO_URL</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">http://mosimage3-demo.joomla-hklein.de/upload/ZIP_FILE_NAME-HEAD.zip
-			</downloadurl>
+			<downloadurl type="full" format="zip">http://mosimage3-demo.joomla-hklein.de/upload/ZIP_FILE_NAME-HEAD.zip</downloadurl>
 		</downloads>
 		<tags>
 			<tag>TAG</tag>

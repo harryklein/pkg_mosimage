@@ -25,7 +25,7 @@
 	</languages>
 	
 	<updateservers>
-		<server type="extension" priority="3" name="Mosimage Update Site">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update.xml</server>
+		<server type="extension" priority="3" name="Mosimage Update Site">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update-stable.xml</server>
 		<server type="extension" priority="2" name="Mosimage Update Site Beta">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update-beta.xml</server>
 		<server type="extension" priority="1" name="Mosimage Update Site Release Candidate">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update-rc.xml</server>
 	</updateservers>
