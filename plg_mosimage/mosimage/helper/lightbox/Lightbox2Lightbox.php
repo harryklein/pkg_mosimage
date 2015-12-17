@@ -30,6 +30,7 @@ class Lightbox2Lightbox implements LightBox
     {
         JHtml::_('jquery.framework');
         
+        $document = JFactory::getDocument();
         $lang = substr($document->getLanguage(), 0, 2);
         $baseUrl = JURI::base() . 'plugins/content/mosimage/mosimage/lightbox';
         $baseLangUrl = $baseUrl . '-' . $lang;
@@ -37,7 +38,6 @@ class Lightbox2Lightbox implements LightBox
         if (JFolder::exists($baseLangUrl)) {
             $baseUrl = $baseLangUrl;
         }
-        $document = JFactory::getDocument();
         $document->addScript($baseUrl . '/js/lightbox-2.6.min.js');
         $document->addStyleSheet($baseUrl . '/css/lightbox.css');
     }
