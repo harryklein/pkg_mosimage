@@ -45,8 +45,9 @@
 	<!-- ================================= -->
 	<target name="deploy-demo" depends="version" description="Deployt die Erweiterung auf dem demo-Server">
 		<echo>* Deploy von [${install.file}]</echo>
-		<echo>  - URL  : [${url.demo}]</echo> 
-		<echo>  - Login: [${login.demo}]</echo>
+		<echo>  - URL   : [${url.demo}]</echo> 
+		<echo>  - Login : [${login.demo}]</echo>
+		<echo>  - File  : [${install.file}]</echo>
 		<joomla-install-extension source="${install.file}" url="${url.demo}" adminlogin="${login.demo}" adminpassword="${password.demo}" ftplogin="${ftplogin}" ftppassword="${ftppassword}" debug="${debug}" />
 	</target>
 
