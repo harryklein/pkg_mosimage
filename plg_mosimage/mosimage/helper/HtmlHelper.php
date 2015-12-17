@@ -142,17 +142,16 @@ class HtmlHelper
      * @param Sring $param 
      * @return HTML zur Steuerung des Floatings
      */
-    public static function getHtmlForFloat ($param)
+    private static function getHtmlForFloat ($param)
     {
         switch ($param) {
             case 'clear':
             case 'clear=all':
-                return '<br clear="all">';
-            // return '<div style="clear:both;"/>';
+                return '<div style="clear:both;"/>';
             case 'clear=left':
-                return '<br clear="left">';
+                return '<div style="clear:left;"/>';
             case 'clear=right':
-                return '<br clear="right">';
+                return '<div style="clear:right;"/>';
             default:
                 return '';
         }
