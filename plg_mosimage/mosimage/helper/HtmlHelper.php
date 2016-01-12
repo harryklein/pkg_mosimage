@@ -147,11 +147,11 @@ class HtmlHelper
         switch ($param) {
             case 'clear':
             case 'clear=all':
-                return '<div style="clear:both;"/>';
+                return '<div style="clear:both;"></div>';
             case 'clear=left':
-                return '<div style="clear:left;"/>';
+                return '<div style="clear:left;"></div>';
             case 'clear=right':
-                return '<div style="clear:right;"/>';
+                return '<div style="clear:right;"></div>';
             default:
                 return '';
         }
