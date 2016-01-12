@@ -65,14 +65,12 @@ class plgContentMosimage extends JPlugin {
 			$registry->loadString($row->attribs);
 			$params->merge($registry);
 			
-			$replaceMosimagePlaceholder = false;
-			
 			if ($context =='com_content.featured' || $context == 'com_content.category' || $context == 'com_content.article'){
-			    $this->replacePlaceHolder($row, $params, self::REGEX_DIR, 'processImagesDir');
-			    $this->replacePlaceHolder($row, $params, self::REGEX, 'processImages');
+			    $isReplacePlaceholderDir = $this->replacePlaceHolder($row, $params, self::REGEX_DIR, 'processImagesDir');
+			    $isReplacePlaceholder = $this->replacePlaceHolder($row, $params, self::REGEX, 'processImages');
 			    $this->replaceClearFlotingPlaceHolder($row);
 			}
-			if ($replaceMosimagePlaceholder){
+			if ($isReplacePlaceholderDir || $isReplacePlaceholder){
 			    if (!empty($row->text)){
 				    $row->text = $row->text . self::HTML_FOR_STOP_FLOATING;
 			    }
@@ -91,6 +89,10 @@ class plgContentMosimage extends JPlugin {
 	    }
 	}
 	
+	/** 
+	 * 
+	 * @return liefert true, wenn Platzhalter ersetzt worden sind, sonst false
+	 */
 	private function replacePlaceHolder(&$row, &$params, $regex, $processImagesFunction){
 	    // text enthält auch das Intro, wenn es angezeigt werden soll.
 	    // ohne Anzeige des Intros müssen die Bilder aus Intro übersprungen werden
@@ -107,7 +109,6 @@ class plgContentMosimage extends JPlugin {
 	    $count = count( $matchesInText[0] );
 	    
 	    if ($count || $introCount) {
-	        $replaceMosimagePlaceholder = true;
 	        $config = new PluginConfiguration($this->params);
 	        $this->addMosimageStyleSheet();
 	        $this->addLightBoxStyleSheetAndScript($config);
@@ -123,8 +124,9 @@ class plgContentMosimage extends JPlugin {
 	        if (!empty($row->text)){
 	            $row->text = preg_replace( $pattern, $images->images, $row->text,1  );
 	        }
+	        return true;
 	    }
-	    
+	    return false;
 	}
 	
 	
