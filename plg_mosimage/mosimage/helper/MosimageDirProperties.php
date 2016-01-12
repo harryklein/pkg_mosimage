@@ -28,13 +28,13 @@ class MosimageDirProperties
     const KEY_COUNT_OF_IMAGES = '#';
 
     const DELEMITER = '=';
+    
+    const FILE_FILTER = '\.[gG][iI][fF]$|\.[jJ][pP][gG]$|\.[jJ][pP][eE][gG]$|\.[pP][nN][gG]$';
 
     private $param = array();
 
     /**
-     * Liefert die Information aus dem Platzhalter der Form
-     * {mosimage folder=[tt-hessen/module/Tanklager/] title=[Dauerleihgabe Tanklager] rand=[false] align=[left]}}
-     * @param string Platzhalter inkl. den arametern, der durch ein Bild oder mehrere Bilder ersetzt werden sollen.
+     * Object wird mittels @see MosimageDirProperties#parse($value) erzeugt. 
      */
     private function __construct ($value)
     {
@@ -52,7 +52,19 @@ class MosimageDirProperties
     }
 
     /**
+     * Liefert die Information aus dem Platzhalter der Form
+     * {mosimage folder=[tt-hessen/module/Tanklager/] title=[Dauerleihgabe Tanklager] random=[false] align=[left] border=[1] pos=[] #=[5]}}
      * 
+     * folder  Ordner relativ zu images/, der die Bilder enthält.
+     * title   (optional) Titel aller Bilder. Default ist der Name der folders.
+     * random  (optional) Bei true ist Reihenfolge der Bilder zufällig, ansonten nach Filename aufsteigend sortiert. Default ist true.
+     * align
+     * border
+     * pos
+     * #       miximale Anzahl Bilder, default ist 1
+     * 
+     * @param string Platzhalter inkl. den Parametern, der durch ein Bild oder mehrere Bilder ersetzt werden sollen.
+     *
      * @return MosimageDirProperties
      */
     public static function parse ($value)
@@ -158,9 +170,9 @@ class MosimageDirProperties
      *  (a)	random = true	=> alle sortiert
      * 	(b)	random = false  => alle, aber zuällig
      *  maxAmount = 1 
-     *  (c)	random = true	=> ein zufääligs Bild
-     * 	(d1)	random = false  => entwerder cover.jpg oder 
-     * 	(d2)                       das 1. Bild
+     *  (c)	random = true	=> ein zufälliges Bild
+     * 	(d1)random = false  => entwerder cover.jpg oder 
+     * 	(d2)                => das 1. Bild
      *  maxAmount > 1
      *  (e)	random = true   => zufällig maxAmount 
      * 	(f)	random = false  => die ersten maxAmount
@@ -178,58 +190,43 @@ class MosimageDirProperties
         }
         
         $files = array();
-        
-        // Abkürzung für d1
-        if ((! $this->isRandom()) && ($this->getMaxAmountImages() == 1)) {
-            jimport('joomla.filesystem.file');
-            if (JFile::exists($folder . '/cover.jpg')) {
-                $files[] = $this->getRelativeFolderName() . '/cover.jpg';
-                return $files;
-            }
-        }
-        
-        // Abkürzung für d2
-        if (($this->isRandom()) && ($this->getMaxAmountImages() == 1)) {
-            if (JFolder::exists($folder)) {
-                foreach (JFolder::files($folder) as $file) {
-                    if (preg_match('/\.gif$|.\jpg$|\.jpeg$|\.png$/i', $file)) {
-                        $files[] = $this->getRelativeFolderName() . '/' . $file;
-                        return $files;
-                    }
-                }
-            }
-        }
-        
-        if (JFolder::exists($folder)) {
-            $counter = 0;
-            foreach (JFolder::files($folder) as $file) {
-                if (preg_match('/\.gif$|.\jpg$|\.jpeg$|\.png$/i', $file)) {
+                
+        if ($this->getMaxAmountImages() == 1){  // c, d1, d2
+            if ( $this->isRandom()) { // c
+                $allFiles = JFolder::files($folder,self::FILE_FILTER);
+                shuffle($allFiles);
+                foreach ($allFiles as $file) {
                     $files[] = $this->getRelativeFolderName() . '/' . $file;
-                    $counter ++;
-                    // Vorzeiges Aussteigen bei f, wenn genügend Daten da
-                    if (! $this->isRandom() && $counter == $this->getMaxAmountImages()) {
-                        return $files;
-                    }
+                    return $files;
+                }
+            } else {                            // d1, d2
+                jimport('joomla.filesystem.file');
+                if (JFile::exists($folder . '/cover.jpg')) {
+                    $files[] = $this->getRelativeFolderName() . '/cover.jpg';
+                    return $files;
+                }
+                foreach (JFolder::files($folder,self::FILE_FILTER) as $file) {
+                    $files[] = $this->getRelativeFolderName() . '/' . $file;
+                    return $files;
                 }
             }
+            throw new Exception("Folder [$folder] don't exist.");
+        }
+        
+        // a, b, e, f
+        $f = JFolder::files($folder, self::FILE_FILTER);
+        if ($this->isRandom()) {
+            shuffle($f);
+        } 
+        $f = array_slice($f,0,$this->getMaxAmountImages());
+        
+        foreach ($f as $file) {
+            $files[] = $this->getRelativeFolderName() . '/' . $file;
         }
         
         if (count($files) == 0) {
-            $e = new Exception("Folder [$folder] don't contain any images.");
-            throw $e;
+            throw  new Exception("Folder [$folder] don't contain any images.");            
         }
-        
-        // Ergebis von a und e
-        if ($this->isRandom()) {
-            if ($this->getMaxAmountImages() == 0) {
-                $max = count($files);
-            } else {
-                $max = $this->getMaxAmountImages();
-            }
-            shuffle($files);
-            return array_slice($files, 0, $max);
-        }
-        // Ergebnis von b (wenn weniger Bilder da als gefordert) und f
         return $files;
     }
 
@@ -248,8 +245,8 @@ class MosimageDirProperties
     }
 
     /** 
-     * Liefert die maximale Anzahl Bilder, die angezeigt werden sollen. Default ist 1. Der Wert 0 steht für alle Bilder. Wenn der 
-     * Wert größer als MAX_AMOUNT_IMAGES ist, wird MAX_AMOUNT_IMAGES zurückgegeben.
+     * Liefert die maximale Anzahl Bilder, die angezeigt werden sollen. Default ist 1. 
+     * Der maximale Wert ist self::MAX_AMOUNT_IMAGES  
      *  
      * @return maximale Anzahl Bilder, die angezeigt werden soll.
      */
@@ -264,7 +261,7 @@ class MosimageDirProperties
         if ($value < 0) {
             return 1;
         }
-        if ($value > self::MAX_AMOUNT_IMAGES) {
+        if (($value > self::MAX_AMOUNT_IMAGES) || ($value == 0 )) {
             return self::MAX_AMOUNT_IMAGES;
         }
         return $value;
