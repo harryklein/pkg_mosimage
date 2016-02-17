@@ -9,3 +9,5 @@ language/de-DE/CVS/
 language/en-GB/CVS/
 demo.properties
 
+/.settings/
+/.buildpath
