@@ -352,7 +352,8 @@ class ThumbnailCreator
             $proportion = $this->config->getImageProportions();
         }
         $cacheFile = new CacheFile($imageProperties, $this->config, $proportion, $bgcolor);
-        if (file_exists($cacheFile->getAbsoluteCacheFile())) {
+        $cacheFileName = $cacheFile->getAbsoluteCacheFile();
+        if (file_exists($cacheFileName)  && filemtime($cacheFileName) > filemtime($cacheFile->getAbsoluteFile())) {
             // TODO das folgende ist etwas Magie: Bei auto-Breite wird das Bild ansonsten mit Breite 0 dargestellt
             $size = @getimagesize($cacheFile->getAbsoluteCacheFile());
             $cacheFile->setDisplaySize($size[0], $size[1]);
