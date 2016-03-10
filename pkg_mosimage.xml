@@ -18,6 +18,7 @@
 		<file type="component" id="com_mosimage">com_mosimage.zip</file>
 		<file type="plugin" id="mosimage" group="content">plg_mosimage.zip</file>
 		<file type="plugin" id="mosimageadmin" group="editors-xtd">plg_mosimage-admin.zip</file>
+		<file type="modul" id="mod_mosimage_random_image">mod_mosimage_random_image.zip</file>
 	</files>
 	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.pkg_mosimage.sys.ini</language>

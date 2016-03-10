@@ -1,0 +1,11 @@
+
+./tmpl/default.php
+./tmpl/index.html
+./helper.php
+./mod_mosimage_random_image.php
+./mod_mosimage_random_image.xml
+./index.html
+language/de-DE/de-DE.mod_mosimage_random_image.ini
+language/de-DE/de-DE.mod_mosimage_random_image.sys.ini
+language/en-GB/en-GB.mod_mosimage_random_image.ini
+language/en-GB/en-GB.mod_mosimage_random_image.sys.ini

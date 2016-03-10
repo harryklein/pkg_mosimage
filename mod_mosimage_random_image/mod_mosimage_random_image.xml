@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+	<name>MOD_MOSIMAGE_RANDOM_IMAGE</name>
+	<author>Harry Klein</author>
+	<creationDate>DATE</creationDate>
+	<copyright>Copyright (C) 2010-2014 Harry Klein. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>harry.klein@joomla-hklein.de</authorEmail>
+	<authorUrl>www.joomla-hklein.de</authorUrl>
+	<version>HEAD</version>
+	<description>MOD_MOSIMAGE_RANDOM_IMAGE_XML_DESCRIPTION</description>
+	<files>
+		<filename module="mod_mosimage_random_image">mod_mosimage_random_image.php</filename>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.mod_mosimage_random_image.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.mod_mosimage_random_image.sys.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.mod_mosimage_random_image.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.mod_mosimage_random_image.sys.ini</language>
+	</languages>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_RANDOM_IMAGE" />
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="catid"
+					type="category"
+					extension="com_content"
+					label="MOD_MOSIMAGE_RANDOM_IMAGE_CATEGORY"
+					description="MOD_MOSIMAGE_RANDOM_IMAGE_CATEGORY_DESC" />
+			<field name="view_link" type="radio" default="1" label="MOD_MOSIMAGE_RANDOM_IMAGE_VIEW_ARTICLE_LINK"
+					description="MOD_MOSIMAGE_RANDOM_IMAGE_VIEW_ARTICLE_LINK_DESC">
+					<option value="0">JNo</option>
+					<option value="1">JYes</option>
+				</field>
+				<field name="includeSubCategories" type="radio" default="1" label="MOD_MOSIMAGE_RANDOM_IMAGE_INCLUDE_SUB_CATEGORIES"
+					description="MOD_MOSIMAGE_RANDOM_IMAGE_INCLUDE_SUB_CATEGORIES_DESC">
+					<option value="0">JNo</option>
+					<option value="1">JYes</option>
+				</field>
+			</fieldset>
+			<fieldset
+				name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field
+					name="moduleclass_sfx"
+					type="textarea" rows="3"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

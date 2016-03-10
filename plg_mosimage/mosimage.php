@@ -36,6 +36,7 @@ class plgContentMosimage extends JPlugin {
 
 	const REGEX     = '/{mosimage\s*.*?}/i';
 	const REGEX_DIR = '/{mosimage\s*folder=.*?}/i';
+	const REGEX_RANDOM = '/{mosimage\s*random}/i';
 	
 	const HTML_FOR_STOP_FLOATING = '<div style="clear:both">&nbsp</div>';
 	 
@@ -66,11 +67,12 @@ class plgContentMosimage extends JPlugin {
 			$params->merge($registry);
 			
 			if ($context =='com_content.featured' || $context == 'com_content.category' || $context == 'com_content.article'){
+			    $isReplacePlaceholderRandom = $this->replacePlaceHolder($row, $params, self::REGEX_RANDOM, 'processImagesRandom');
 			    $isReplacePlaceholderDir = $this->replacePlaceHolder($row, $params, self::REGEX_DIR, 'processImagesDir');
 			    $isReplacePlaceholder = $this->replacePlaceHolder($row, $params, self::REGEX, 'processImages');
 			    $this->replaceClearFlotingPlaceHolder($row);
 			}
-			if ($isReplacePlaceholderDir || $isReplacePlaceholder){
+			if ($isReplacePlaceholderDir || $isReplacePlaceholder || $isReplacePlaceholderRandom){
 			    if (!empty($row->text)){
 				    $row->text = $row->text . self::HTML_FOR_STOP_FLOATING;
 			    }
@@ -196,6 +198,37 @@ class plgContentMosimage extends JPlugin {
 		return $param;
 	}
 
+	private function processImagesRandom( &$row, PluginConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres, $showIntro = false ){
+	    $images = array();
+	    $introImages = array();
+	   
+	    jimport('joomla.application.component.model');
+	    JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_mosimage/models');
+	    JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_mosimage/tables');
+	    $model = JModelLegacy::getInstance('Options', 'MosimageModel');
+	    
+	    $rowImage = $model->getItem($row->id);
+	    $jsonObjectsList = $this->convertJsonToObjectArray($rowImage->imageslist);
+	    
+	    $rowImageCount = count($jsonObjectsList);
+	    if ($rowImageCount == 0){
+	        $intoImages[] = HtmlHelper::createHtmlForNoneIntroImage(0);
+	        $images[] = HtmlHelper::createHtmlForNoneIntroImage(0);
+	    } else {
+	       $randIndex = rand(0,$rowImageCount-1);
+	       $imageData = $jsonObjectsList[$randIndex];
+	       $imageData->align = '';
+	       $randIndex = rand(0,$rowImageCount);
+	       $introImages[] = HtmlHelper::createImageAndBuildHtml($imageData, $config, $screenres);
+	       $images[] = HtmlHelper::createImageAndBuildHtml($imageData, $config, $screenres);
+	    }
+	    $result = new stdClass();
+	    $result->introImages = $introImages;
+	    $result->images = $images;
+	    return $result;
+	}
+	
+	
 	private function processImagesDir( &$row, PluginConfiguration $config, &$matchesInIntro, &$matchesInText, $screenres, $showIntro = false ){
 		$images = array();
 		$introImages = array();

@@ -4,3 +4,4 @@ pkg_mosimage.xml
 com_mosimage.zip
 plg_mosimage-admin.zip
 plg_mosimage.zip
+mod_mosimage_random_image.zip
