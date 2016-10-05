@@ -75,7 +75,7 @@
 					<option value="0">JNo</option>
 					<option value="1">JYes</option>
 				</field>
-				<field name="thumb_caption_align" type="list" default="buttom" label="MOSIMAGE_CAPTION_ALIGN"
+				<field name="thumb_caption_align" type="list" showon="thumb_caption:1" default="buttom" label="MOSIMAGE_CAPTION_ALIGN"
 					description="MOSIMAGE_CAPTION_ALIGN_DESC">
 					<option value="bottom">MOSIMAGE_BOTTOM</option>
 					<option value="top">MOSIMAGE_TOP</option>
@@ -138,19 +138,20 @@
 				</field>
 				
 				<field name="watermark_file" 
-					type="recursiveimagelist" 
+					type="recursiveimagelist"
+					showon="watermark:1" 
 					default="-" 
 					label="SELECT_IMAGE_FOR_WATERMARK" 
 					description="SELECT_IMAGE_FOR_WATERMARK_DESC" />
 				
-				<field name="watermark_left" type="list" default="center" label="LEFT_POSITION_OF_WATERMARK" 
+				<field name="watermark_left" type="list" showon="watermark:1" default="center" label="LEFT_POSITION_OF_WATERMARK" 
 					description="LEFT_POSITION_OF_WATERMARK_DESC" >
 					<option value="left">MOSIMAGE_WATERMARK_LEFT</option>
 					<option value="right">MOSIMAGE_WATERMARK_RIGHT</option>
 					<option value="center">MOSIMAGE_WATERMARK_CENTER</option>
 				</field>
 				
-				<field name="watermark_top" type="list" default="botton" label="TOP_POSITION_OF_WATERMARK" 
+				<field name="watermark_top" type="list" showon="watermark:1" default="botton" label="TOP_POSITION_OF_WATERMARK" 
 					description="TOP_POSITION_OF_WATERMARK_DESC" >
 					<option value="top">MOSIMAGE_WATERMARK_TOP</option>
 					<option value="bottom">MOSIMAGE_WATERMARK_BOTTOM</option>
@@ -158,16 +159,16 @@
 				</field>
 					
 					
-				<field name="transparency_type" type="list" default="alpha" label="TRANSPARENCY_TYPE"
+				<field name="transparency_type" type="list" showon="watermark:1" default="alpha" label="TRANSPARENCY_TYPE"
 					description="TRANSPARENCY_TYPE_DESC">
 					<option value="alpha">TRUE_ALPHA_BLENDING</option>
 					<option value="color">TRANSPARENT_BACKGROUND_COLOR</option>
 				</field>
 				
-				<field name="transparent_color" type="color" default="#000000" label="TRANSPARENT_COLOR_IGNORED_FOR_TRUE_ALPHA_BLENDING" 
+				<field name="transparent_color" type="color" showon="transparency_type:color" default="#000000" label="TRANSPARENT_COLOR_IGNORED_FOR_TRUE_ALPHA_BLENDING" 
 					description="TRANSPARENT_COLOR_IGNORED_FOR_TRUE_ALPHA_BLENDING_DESC" />
 					
-				<field name="transparency" type="integer" default="25" label="TRANSPARENCY_IN_PERCENT" 
+				<field name="transparency" type="integer" showon="transparency_type:color" default="25" label="TRANSPARENCY_IN_PERCENT" 
 					description="TRANSPARENCY_IN_PERCENT_DESC"
 					first="100"
 					last="0"

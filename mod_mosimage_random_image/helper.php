@@ -34,19 +34,21 @@ class ModMosimageRandomImageHelper
         $article->attribs = '{}';
         
         $db = JFactory::getDbo();
-        
+   
         $query = $db->getQuery(true)
-            ->select('m.content_id')
-            ->select('co.title')
+            ->select('mosimage.content_id')
+            ->select('content.title')
             ->from('#__categories cat');
+        $whereCategorie = array();
+        $whereCategorie[] = 'cat.id = '. $catid;
         if ($includeSubCategories) {
-            $query->join('inner', '#__content co ON (co.catid = cat.id)');
-        }
-        $query->join('inner', '#__mosimage m ON (co.id = m.content_id)')
-            ->where('cat.extension = \'com_content\' and (cat.id = '.$catid.' or cat.parent_id = '.$catid.' )')
+        	$whereCategorie[] = 'cat.parent_id = ' . $catid;
+        } 
+        $query->join('inner', '#__content content ON (content.catid = cat.id)');
+        $query->join('inner', '#__mosimage mosimage ON (content.id = mosimage.content_id)')
+            ->where('cat.extension = \'com_content\'')->extendWhere('AND', $whereCategorie, 'OR')
             ->order('rand()')
             ->setLimit(1);
-        
         $db->setQuery($query);
 
         try
