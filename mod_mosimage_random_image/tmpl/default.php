@@ -8,9 +8,6 @@
  */
 
 defined('_JEXEC') or die;
-
-
-
 ?>
 <div class="random-image<?php echo $moduleclass_sfx ?>">
 	<?php 
