@@ -1,5 +1,5 @@
 <!DOCTYPE project>
-<project>
+<project default="build">
 	<property name="cvs.base" value=".." />
 	<property name="dir.base" location=".." />
 
