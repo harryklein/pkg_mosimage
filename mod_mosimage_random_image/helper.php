@@ -19,6 +19,13 @@ defined('_JEXEC') or die();
 class ModMosimageRandomImageHelper
 {
 
+	/** Liefert einen zufälligen Artikel (id und title) einer Kategorie.
+	 * Der Artikel muss Bilder haben, die über mos_image eingebunden sind.
+	 * 
+	 * @param unknown $catid                Kategorie, aus der die Artikel ausgewählt wird
+	 * @param unknown $includeSubCategories Legt fest, ob auch Artikel einer Unterkategories ausgewählt werden kann  
+	 * @return void|stdClass
+	 */  
     public static function getRandomImage ($catid, $includeSubCategories)
     {
         $article = new stdClass();
@@ -29,14 +36,14 @@ class ModMosimageRandomImageHelper
         $db = JFactory::getDbo();
         
         $query = $db->getQuery(true)
-            ->select('content_id')
+            ->select('m.content_id')
             ->select('co.title')
-            ->from('#__categories c');
+            ->from('#__categories cat');
         if ($includeSubCategories) {
-            $query->join('inner', '#__content co ON (co.catid = c.id)');
+            $query->join('inner', '#__content co ON (co.catid = cat.id)');
         }
         $query->join('inner', '#__mosimage m ON (co.id = m.content_id)')
-            ->where('c.extension = \'com_content\' and (c.id = '.$catid.' or c.parent_id = '.$catid.' )')
+            ->where('cat.extension = \'com_content\' and (cat.id = '.$catid.' or cat.parent_id = '.$catid.' )')
             ->order('rand()')
             ->setLimit(1);
         
