@@ -16,7 +16,9 @@ class MosimageDirProperties
     const KEY_RANDOM = 'random';
 
     const KEY_FOLDER = 'folder';
-
+    
+    const KEY_FILE = 'file';
+	
     const KEY_TITLE = 'title';
 
     const KEY_BORDER = 'border';
@@ -84,6 +86,7 @@ class MosimageDirProperties
             foreach ($files as $file) {
                 $item = new stdClass();
                 $item->source = $file;
+                $item->file = $this->getFile();
                 $item->align = $this->getImageAlign();
                 $item->alt = $this->getTitle();
                 $item->border = $this->getBorder();
@@ -121,6 +124,18 @@ class MosimageDirProperties
         } else {
             return str_replace('_', ' ', basename('images/' . $this->getRelativeFolderName()));
         }
+    }
+    
+    /**
+     * Liefert den Paramter 'file'. Wenn nicht angegeben, wird 'cover.jpg' zurückgegeben.
+     */
+    private function getFile ()
+    {
+    	if (array_key_exists(self::KEY_FILE, $this->param)) {
+    		return $this->param[self::KEY_FILE];
+    	} else {
+    		return 'cover.jpg';
+    	}
     }
 
     private function getCaptionPosition ()
@@ -171,8 +186,8 @@ class MosimageDirProperties
      * 	(b)	random = false  => alle, aber zuällig
      *  maxAmount = 1 
      *  (c)	random = true	=> ein zufälliges Bild
-     * 	(d1)random = false  => entwerder cover.jpg oder 
-     * 	(d2)                => das 1. Bild
+     * 	(d1)random = false  => entwerder das mit file übergebene Datei, cover.jpg oder 
+     * 	(d2)                => das 1. Bild, wenn cover.jpg nicht exsitiert.
      *  maxAmount > 1
      *  (e)	random = true   => zufällig maxAmount 
      * 	(f)	random = false  => die ersten maxAmount
@@ -201,8 +216,8 @@ class MosimageDirProperties
                 }
             } else {                            // d1, d2
                 jimport('joomla.filesystem.file');
-                if (JFile::exists($folder . '/cover.jpg')) {
-                    $files[] = $this->getRelativeFolderName() . '/cover.jpg';
+                if (JFile::exists($folder . '/' . $this->getFile())) {
+                    $files[] = $this->getRelativeFolderName() . '/' . $this->getFile();
                     return $files;
                 }
                 foreach (JFolder::files($folder,self::FILE_FILTER) as $file) {
