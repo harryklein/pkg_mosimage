@@ -133,7 +133,7 @@ class plgContentMosimage extends JPlugin {
 	
 	
 	private function isTextContainIntroText(&$row){
-	    if (empty($row->text)) {
+	    if (empty($row->text) || empty($row->introtext)) {
 	        $textContainIntro =  false;
 	    } else {
     		if (strpos($row->text,$row->introtext) === 0) {
@@ -207,10 +207,20 @@ class plgContentMosimage extends JPlugin {
 	    JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_mosimage/tables');
 	    $model = JModelLegacy::getInstance('Options', 'MosimageModel');
 	    
+	    JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_content/models');
+	    $modelContent = JModelLegacy::getInstance('Article', 'ContentModel');
+	    
+	    $article = $modelContent->getItem($row->id);
+	    preg_match_all( self::REGEX, $article->introtext, $mIntro );
+	    preg_match_all( self::REGEX, $article->fulltext, $mFull );
+	    $full = count($mFull[0]);
+	    $intro = count($mIntro[0]);
+	    
+	    
 	    $rowImage = $model->getItem($row->id);
 	    $jsonObjectsList = $this->convertJsonToObjectArray($rowImage->imageslist);
 	    
-	    $rowImageCount = count($jsonObjectsList);
+	    $rowImageCount = min( count($jsonObjectsList), max($intro, $full));
 	    if ($rowImageCount == 0){
 	        $intoImages[] = HtmlHelper::createHtmlForNoneIntroImage(0);
 	        $images[] = HtmlHelper::createHtmlForNoneIntroImage(0);
