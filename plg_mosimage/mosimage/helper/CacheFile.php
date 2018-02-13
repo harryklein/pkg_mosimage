@@ -180,6 +180,10 @@ class CacheFile
     {
         return $this->origHeight;
     }
+    
+    public function flipOrigWidthWithHeight(){
+    	list($this->origWidth, $this->origHeight) = array($this->origHeight, $this->origWidth);
+    }
 
     /**
      * Offset des "Inhaltes"

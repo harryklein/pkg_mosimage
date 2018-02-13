@@ -93,12 +93,15 @@ class ThumbnailCreator
             $minWidth = 200; // Wert siehe mosimage.xml => full_width => min
         }
         
+        $src_img = &$this->loadImageFromFile($cacheFile);
+        
+        
         $origw = $cacheFile->origWidth();
         $origh = $cacheFile->origHeight();
         $displayWidth = $cacheFile->displayWidth();
         $displayHeight = $cacheFile->displayHeight();
         
-        $src_img = &$this->loadImageFromFile($cacheFile);
+        
         // Behandlung kleiner Bilder
         // - Die original-Höhe ist kleiner als die Zielhöhe. Zielhöhe kann nie 0 sein.
         // - Es bleibt diese Höhe erhalten und wir schneiden ggf. etwas von der Breite weg.
@@ -267,7 +270,7 @@ class ThumbnailCreator
         }
     }
 
-    private function &loadImageFromFile (CacheFile $cacheFile)
+    private function &loadImageFromFile (CacheFile &$cacheFile)
     {
         $ext = pathinfo($cacheFile->getAbsoluteFile(), PATHINFO_EXTENSION);
         switch (strtolower($ext)) {
@@ -280,6 +283,7 @@ class ThumbnailCreator
             default:
                 $src_img = imagecreatefromjpeg($cacheFile->getAbsoluteFile());
         }
+        $src_img = &$this->rotatedImage($cacheFile, $src_img);
         return $src_img;
     }
 
@@ -370,6 +374,32 @@ class ThumbnailCreator
             echo "[$filename] $msg<br />";
         }
         return;
+    }
+    
+    /**
+     * 
+     * @param CacheFile $cacheFile
+     * @param unknown $origImage
+     * @return unknown
+     */
+    private function &rotatedImage(CacheFile &$cacheFile, &$origImage){
+    	$exif = exif_read_data($cacheFile->getAbsoluteFile());
+    	if(!empty($exif['Orientation'])) {
+    		switch($exif['Orientation']) {
+    			case 8:
+    				$image = imagerotate($origImage,90,0);
+    				$cacheFile->flipOrigWidthWithHeight();
+    				return $image;
+    			case 3:
+    				$image = imagerotate($origImage,180,0);
+    				return $image;
+    			case 6:
+    				$image = imagerotate($origImage,-90,0);
+    				$cacheFile->flipOrigWidthWithHeight();
+    				return $image;
+    		}
+    	}
+    	return $origImage;
     }
 }
 
