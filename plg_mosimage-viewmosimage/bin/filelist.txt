@@ -1,0 +1,7 @@
+viewmosimage.php
+viewmosimage.xml
+viewmosimage.css
+language/de-DE/de-DE.plg_editors-xtd_viewmosimage.ini
+language/en-GB/en-GB.plg_editors-xtd_viewmosimage.ini
+language/de-DE/de-DE.plg_editors-xtd_viewmosimage.sys.ini
+language/en-GB/en-GB.plg_editors-xtd_viewmosimage.sys.ini

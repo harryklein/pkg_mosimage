@@ -45,7 +45,7 @@ class plgContentMosimage extends JPlugin {
 		$this->loadLanguage();
 	}
 
-	public function onContentBeforeDisplay($context, &$row, &$params, $page=0 ) {
+	public function onContentBeforeDisplay($context, &$row, $params, $page=0 ) {
 		try {
 			// Bemerkung zu $row
 			// Article
@@ -57,16 +57,38 @@ class plgContentMosimage extends JPlugin {
 			// introtext: Intro
 			// fulltext : nicht vorhanden
 			// text     : nicht vorhanden
+			
+		    // com_tags
+		    // introtext: nicht vorhanden
+		    // fulltext: nicht vorhannden
+		    // text: Intro oder Hauptext, wenn Intro nicht vorhanden
+		    
+		    
+		    if ($context =='com_content.featured' || $context == 'com_content.category' || $context == 'com_content.article' || $context == 'com_tags.tag'){
+		        // nur bei unterstützen contexten später etwas tun
+		    } else {
+		        return;
+		    }
+		    
 			if ($this->isNothingToDo($row)){
 				return;
 			}
-			$introCount = 0;
-
-			$registry = new JRegistry;
-			$registry->loadString($row->attribs);
-			$params->merge($registry);
 			
-			if ($context =='com_content.featured' || $context == 'com_content.category' || $context == 'com_content.article'){
+			$introCount = 0;
+			
+			if ($context == 'com_tags.tag') {
+			    $registry = new Registry;
+			    $registry->loadString($params);
+			    $params = $registry;
+			    $row->introtext = $row->text;
+			    
+			} else {
+			     $registry = new JRegistry;
+			     $registry->loadString($row->attribs);
+			     $params->merge($registry);
+			}
+			
+			if ($context =='com_content.featured' || $context == 'com_content.category' || $context == 'com_content.article' || $context == 'com_tags.tag'){
 			    $isReplacePlaceholderRandom = $this->replacePlaceHolder($row, $params, self::REGEX_RANDOM, 'processImagesRandom');
 			    $isReplacePlaceholderDir = $this->replacePlaceHolder($row, $params, self::REGEX_DIR, 'processImagesDir');
 			    $isReplacePlaceholder = $this->replacePlaceHolder($row, $params, self::REGEX, 'processImages');

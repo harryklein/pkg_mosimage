@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="editors-xtd" method="upgrade">
+	<name>CONTENT_VIEWMOSIMAGE</name>
+	<author>Harry Klein</author>
+	<creationDate>DATE</creationDate>
+	<copyright>Copyright (C) 2010-2017 Harry Klein. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>harry.klein@joomla-hklein.de</authorEmail>
+	<authorUrl>www.joomla-hklein.de</authorUrl>
+	<version>HEAD</version>
+	<description>PLG_VIEWMOSIMAGE</description>
+	<files>
+		<filename plugin="viewmosimage">viewmosimage.css</filename>
+		<filename plugin="viewmosimage">viewmosimage.php</filename>
+	</files>
+	<languages>
+   		<language tag="en-GB">language/en-GB/en-GB.plg_editors-xtd_viewmosimage.ini</language>
+   		<language tag="en-GB">language/en-GB/en-GB.plg_editors-xtd_viewmosimage.sys.ini</language>
+   		<language tag="de-DE">language/de-DE/de-DE.plg_editors-xtd_viewmosimage.ini</language>
+   		<language tag="de-DE">language/de-DE/de-DE.plg_editors-xtd_viewmosimage.sys.ini</language>
+	</languages>
+	<params />
+</extension>
