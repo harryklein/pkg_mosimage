@@ -17,7 +17,7 @@
 		<maintainerurl>http://www.joomla-hklein.de</maintainerurl>
 		<client_id>0</client_id>
 		<client>0</client>
-		<targetplatform name="joomla" version="3.[234]" />
+		<targetplatform name="joomla" version="3.[8]" />
 	</update>
 </updates>
 
