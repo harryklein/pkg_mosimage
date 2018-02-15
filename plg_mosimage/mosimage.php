@@ -77,7 +77,7 @@ class plgContentMosimage extends JPlugin {
 			$introCount = 0;
 			
 			if ($context == 'com_tags.tag') {
-			    $registry = new Registry;
+			    $registry = new JRegistry;
 			    $registry->loadString($params);
 			    $params = $registry;
 			    $row->introtext = $row->text;
