@@ -78,7 +78,7 @@ class ThumbnailCreator
     /**
      * Erzeugt ein verkleinertes Abbild des Originalbildes.
      */
-    private function generateResizedImage (CacheFile $cacheFile, $proportion, $thumbnailMode, $bgcolor = 0xff0000)
+    private function generateResizedImage (CacheFile $cacheFile, $proportion, $thumbnailMode, $backgroundColor = 0xff0000)
     {
         static $countGenerateImage;
         
@@ -144,6 +144,7 @@ class ThumbnailCreator
             }
             
             $dst_img = ImageCreateTrueColor($displayWidth, $displayHeight);
+            $bgcolor = $this->calcBackgoundColor($dst_img, $backgroundColor);
             imagefill($dst_img, 0, 0, $bgcolor);
             imagecopy($dst_img, $src_img, $offset_w, $offset_h, 0, 0, $src_w, $src_h);
             $this->watermarkCreator->writeWatermarkInfo($dst_img, $thumbnailMode, $cacheFile);
@@ -178,6 +179,7 @@ class ThumbnailCreator
             }
             
             $dst_img = ImageCreateTrueColor($displayWidth, $displayHeight);
+            $bgcolor = $this->calcBackgoundColor($dst_img, $backgroundColor);
             imagefill($dst_img, 0, 0, $bgcolor);
             
             imagecopy($dst_img, $src_img, $offset_w, $offset_h, 0, 0, $src_w, $src_h);
@@ -211,6 +213,7 @@ class ThumbnailCreator
             }
             
             $dst_img = ImageCreateTrueColor($displayWidth, $displayHeight);
+            $bgcolor = $this->calcBackgoundColor($dst_img, $backgroundColor);
             imagefill($dst_img, 0, 0, $bgcolor);
             imagecopyresampled($dst_img, $src_img, $offset_w, $offset_h, 0, 0, $w, $h, $origw, $origh);
             $this->watermarkCreator->writeWatermarkInfo($dst_img, $thumbnailMode, $cacheFile);
@@ -260,6 +263,7 @@ class ThumbnailCreator
             }
             
             $dst_img = ImageCreateTrueColor($displayWidth, $displayHeight);
+            $bgcolor = $this->calcBackgoundColor($dst_img, $backgroundColor);
             imagefill($dst_img, 0, 0, $bgcolor);
             imagecopyresampled($dst_img, $src_img, $offset_w, $offset_h, 0, 0, $w, $h, $origw, $origh);
             $this->watermarkCreator->writeWatermarkInfo($dst_img, $thumbnailMode, $cacheFile);
@@ -268,6 +272,16 @@ class ThumbnailCreator
             imagedestroy($dst_img);
             return $cacheFile;
         }
+    }
+    
+    
+    private function &calcBackgoundColor($dst_img, $backgoundColor){
+        $int = intval($backgoundColor);
+        $arr = array("red" => 0xFF & ($int >> 0x10),
+            "green" => 0xFF & ($int >> 0x8),
+            "blue" => 0xFF & $int);
+        $bgcolor = ImageColorAllocate($dst_img, $arr["red"], $arr["green"], $arr["blue"]);
+        return $bgcolor;
     }
 
     private function &loadImageFromFile (CacheFile &$cacheFile)
@@ -378,12 +392,9 @@ class ThumbnailCreator
     
     /**
      * 
-     * @param CacheFile $cacheFile
-     * @param unknown $origImage
-     * @return unknown
      */
     private function &rotatedImage(CacheFile &$cacheFile, &$origImage){
-    	$exif = exif_read_data($cacheFile->getAbsoluteFile());
+    	$exif = @exif_read_data($cacheFile->getAbsoluteFile());
     	if(!empty($exif['Orientation'])) {
     		switch($exif['Orientation']) {
     			case 8:
@@ -394,6 +405,9 @@ class ThumbnailCreator
     				$image = imagerotate($origImage,180,0);
     				return $image;
     			case 6:
+    			    if ($cacheFile->origHeight() > $cacheFile->origWidth()) {
+    			        return $origImage;
+    			    }
     				$image = imagerotate($origImage,-90,0);
     				$cacheFile->flipOrigWidthWithHeight();
     				return $image;

@@ -9,7 +9,10 @@ Nachbau des mosimage-Features aus Joomla 1.0 für Jommla 3.5
 
 ## Paket bauen
 Der Aufruf von 
-    ./bin/build
+    ant -f bin/build.xml
+baut das Paket. Mit
+    ant -f bin/build.xml deploy
+kann man es auch lokal installieren.
 
 Das installationsfähige Joomla-Paket befindet sich im Ordner ./deploy. Dieses Paket enthält alle nötiges inkl. der Sub-Packages.
 

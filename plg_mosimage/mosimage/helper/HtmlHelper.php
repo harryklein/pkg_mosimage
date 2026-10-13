@@ -139,8 +139,8 @@ class HtmlHelper
      * 
      * Alle anderen Paramter beeinflussen das Floating nicht.
      * 
-     * @param Sring $param 
-     * @return HTML zur Steuerung des Floatings
+     * @param string $param 
+     * @return string HTML zur Steuerung des Floatings
      */
     private static function getHtmlForFloat ($param)
     {

@@ -104,7 +104,7 @@ class MosimageDirProperties
     /**
      * Name des Folders, aus dem das Image kommen soll
      * @throws Exception Wenn Folder nicht angegeben
-     * @return Name des Folder
+     * @return string Name des Folder
      */
     private function getRelativeFolderName ()
     {
@@ -263,7 +263,7 @@ class MosimageDirProperties
      * Liefert die maximale Anzahl Bilder, die angezeigt werden sollen. Default ist 1. 
      * Der maximale Wert ist self::MAX_AMOUNT_IMAGES  
      *  
-     * @return maximale Anzahl Bilder, die angezeigt werden soll.
+     * @return integer maximale Anzahl Bilder, die angezeigt werden soll.
      */
     private function getMaxAmountImages ()
     {

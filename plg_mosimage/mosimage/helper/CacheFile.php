@@ -45,10 +45,10 @@ class CacheFile
      *            $proportion
      * @param
      *            $bgcolor
-     * @param $origWidth Breite
+     * @param integer $origWidth Breite
      *            des Original-Bildes, Wird, wenn nicht angegeben (bzw. wenn
      *            $origHeight nicht angegeben), zur Laufzeit ermittelt
-     * @param $origHeight Höhe
+     * @param integer $origHeight Höhe
      *            des Original-Bides. Wird, wenn nicht angegeben (bzw. wenn
      *            $origWidth nicht angegeben), zur Laufzeit ermiitelt.
      *            
@@ -86,7 +86,7 @@ class CacheFile
 
     /**
      *
-     * @param $language Sprache
+     * @param String $language Sprache
      *            für den Place-Holder-Text
      * @return CacheFile
      */
@@ -101,7 +101,7 @@ class CacheFile
 
     /**
      *
-     * @return Name des Cache-Files ohne Pfadangabe
+     * @return String Name des Cache-Files ohne Pfadangabe
      */
     public function getCacheFilename ()
     {
@@ -110,7 +110,7 @@ class CacheFile
 
     /**
      *
-     * @return Name des Cache-Files mit absoluter Pfadangabe
+     * @return String Name des Cache-Files mit absoluter Pfadangabe
      */
     public function getAbsoluteFile ()
     {

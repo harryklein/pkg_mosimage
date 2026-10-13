@@ -115,7 +115,7 @@ class plgContentMosimage extends JPlugin {
 	
 	/** 
 	 * 
-	 * @return liefert true, wenn Platzhalter ersetzt worden sind, sonst false
+	 * @return boolean liefert true, wenn Platzhalter ersetzt worden sind, sonst false
 	 */
 	private function replacePlaceHolder(&$row, &$params, $regex, $processImagesFunction){
 	    // text enthält auch das Intro, wenn es angezeigt werden soll.

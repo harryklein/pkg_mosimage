@@ -79,8 +79,8 @@ class PluginConfiguration
 
     public function getThumbnailBackgroundColor ()
     {
-        $colorAsHtml = $this->params->get('thumb_background_color', '#ffffff');
-        return str_replace('#', '0x', $colorAsHtml);
+        $colorAsHtml = $this->params->get('thumb_background_color', '#66ff00');
+        return hexdec($colorAsHtml);
     }
 
     public function getThumbnailCaptionAlign ()

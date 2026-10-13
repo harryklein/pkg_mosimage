@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 2.0 $Id: mosimageadmin.php,v 1.4 2015/02/01 00:33:09 harry Exp $
+ * @version 2.0 $Id: mosimageadmin.php,v 1.5 2021/08/19 22:28:47 harry Exp $
  * @package     Joomla.Plugin
  * @subpackage  Editors-xtd.mosimage-admin
  * @copyright (C) 2010-2014 Harry Klein - www.joomla-hklein.de
@@ -82,7 +82,7 @@ class plgButtonMosimageAdmin extends JPlugin
         $button->class = 'btn';
         $button->modal = true;
         $button->link = $link;
-        $button->options = "{ closeable: false , handler: 'iframe', size: {x: 1000, y: 675} , onClose: 'function(){ alert(); return false; }' , onOpen: 'function(){ alert(); return false; }' }";
+        $button->options = "{ closeable: false , handler: 'iframe', size: {x: 1000, y: 700} , onClose: 'function(){ alert(); return false; }' , onOpen: 'function(){ alert(); return false; }' }";
         $button->text = JText::_('PLG_MOSIMAGE_ADMIN_BUTTON');
         $button->name = 'mosimage';
         // $button->onClose='onClose: function(){Mosimage.revertChanges()}}';

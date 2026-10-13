@@ -22,7 +22,7 @@ class MosimageModelInfo extends JModelLegacy
     /**
      * Liefert die Gesamtanzahl der verfügbaren Dateien.
      *
-     * @return Liefert die Anzahl der verfügbaren Dateien
+     * @return integer Liefert die Anzahl der verfügbaren Dateien
      */
     public function getAmountCacheFiles ()
     {
@@ -49,7 +49,7 @@ class MosimageModelInfo extends JModelLegacy
     /**
      * Liefert eine Liste mit allen Files aus dem Cache-Ordner
      *
-     * @return number|Ambigous <multitype:, boolean>
+     * @return array mit der Liste alle Files aus dem Cache-Ordner
      */
     public function &getFileList ()
     {

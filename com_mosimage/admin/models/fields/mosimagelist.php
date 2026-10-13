@@ -48,12 +48,18 @@ class JFormFieldMosimageList extends JFormFieldList
         $options = array();
         $i = 0;
         
-        $jsonAsObjects = json_decode($value, false);
-        
+        if (is_array($value)){
+            $jsonAsObjects = $value;
+        } else {
+            $jsonAsObjects = json_decode($value, false);
+        }
         foreach ($jsonAsObjects as $obj) {
             $imageAttribuesAsJson = json_encode($obj);
             $filename = $this->stripTrailingSlashFromFilename($obj->source);
-            $options[] = JHTML::_('select.option', $imageAttribuesAsJson, $filename);
+            $attr = array();
+            $attr['option.title'] =  $filename;
+            $attr['option.label'] =  $filename;
+            $options[] = JHTML::_('select.option', $imageAttribuesAsJson, $filename, $attr);
             // 1. Zeile selektrieren
             if ($i == 0) {
                 $this->value = $imageAttribuesAsJson;

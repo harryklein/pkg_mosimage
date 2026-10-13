@@ -1,4 +1,3 @@
-<!DOCTYPE project>
 <project default="build">
 	<property name="cvs.base" value=".." />
 	<property name="dir.base" location=".." />
@@ -8,7 +7,6 @@
 
 	<property file="${dir.base}/demo.properties"/>
 
-	<property name="url" value="http://localhost/joomla-1.7.3-inst" />
 	<property name="login" value="admin" />
 	<property name="password" value="sonne80" />
 	<property name="ftplogin" value="" />
@@ -29,6 +27,14 @@
 	<taskdef name="joomla-remove-extension"  classname="com.joomboss.RemoveExtensionTask"  classpathref="ant-joomla.lib.path"/>
 
 	<echo message="Nutze Konfiguration [${dir.base}/${build.properties}]" />
+	<echo message="${env.JOOMLA_URL}" />
+
+	<property environment="env"/>
+	<condition property="url" value="${env.JOOMLA_URL}">
+		<isset property="env.JOOMLA_URL" />
+	</condition>
+	<property name="url" value="${url_localhost}" />
+	<echo message="${url}" />
 	
 	<!-- ================================= -->
 	<!-- = deploy                        = -->
@@ -37,6 +43,7 @@
 		<echo>* Deploy von [${install.file}</echo>
 		<echo>  - URL  : [${url}]</echo> 
 		<echo>  - Login: [${login}]</echo>
+		<echo>  - Conf : [${dir.base}/${build.properties}]</echo>
 		<joomla-install-extension source="${install.file}" url="${url}" adminlogin="${login}" adminpassword="${password}" ftplogin="${ftplogin}" ftppassword="${ftppassword}" debug="${debug}" />
 	</target>
 	
@@ -148,7 +155,7 @@
 
 		<!-- Updatefile auf Server kopieren -->
 		<move file="${build}/${update-filename}.xml" tofile="${dir.base}/deploy/${update_filename_tag}.xml" overwrite="true" verbose="true" />
-		<scp verbose="true" todir="www.neschke.de@ssh.strato.de:joomla-demo/joomla3/upload" keyfile="${user.home}/.ssh/id_rsa.deploy">
+		<scp verbose="true" todir="www.neschke.de@ssh.strato.de:joomla-demo/joomla3/upload" keyfile="${user.home}/.ssh/id_rsa.deploy" trust="true">
 			<fileset dir="${dir.base}/deploy">
 				<include name="${update_filename_tag}.xml" />
 			</fileset>
@@ -160,9 +167,10 @@
 	<!-- = copy2demohost                 = -->
 	<!-- ================================= -->
 	<target name="copy2demohost" depends="version" description="Kopiert alle artefakts auf den Demo-Host">
+		<echo>${user.home}/.ssh/id_rsa.deploy</echo>
 		<scp verbose="true" todir="www.neschke.de@ssh.strato.de:joomla-demo/joomla3/upload" 
 			keyfile="${user.home}/.ssh/id_rsa.deploy" 
-			file="${install.file}"/>
+			file="${install.file}" trust="true"/>
 	</target>
 
 	<!-- ================================= -->

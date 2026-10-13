@@ -1,5 +1,5 @@
 <?php
-use Symfony\Component\Yaml\Exception\RuntimeException;
+
 /**
  * @package     Joomla.Site
  * @subpackage  mod_random_image
@@ -22,8 +22,8 @@ class ModMosimageRandomImageHelper
 	/** Liefert einen zufälligen Artikel (id und title) einer Kategorie.
 	 * Der Artikel muss Bilder haben, die über mos_image eingebunden sind.
 	 * 
-	 * @param unknown $catid                Kategorie, aus der die Artikel ausgewählt wird
-	 * @param unknown $includeSubCategories Legt fest, ob auch Artikel einer Unterkategories ausgewählt werden kann  
+	 * @param mixed $catid                Kategorie, aus der die Artikel ausgewählt wird
+	 * @param mixed $includeSubCategories Legt fest, ob auch Artikel einer Unterkategories ausgewählt werden kann  
 	 * @return void|stdClass
 	 */  
     public static function getRandomImage ($catid, $includeSubCategories)

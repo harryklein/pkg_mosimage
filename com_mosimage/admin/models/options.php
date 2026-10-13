@@ -85,11 +85,12 @@ class MosimageModelOptions extends JModelAdmin
         $item = parent::getItem($pk);
         
         
-        if (empty($item->content_id ))
+        // if (empty($item->content_id ))
+        if (!is_object($this->item))
         {
-            
+            $item = (object) []; 
             $item->content_id = $this->getState('options.id');
-            $iten->images = json_encode(array());
+            $item->images = json_encode(array());
             /* // Wir legen den Mosimage-Eintrag schon mal an
             $newValue = new stdClass();
             $newValue->content_id = $this->getState('options.id');
@@ -146,7 +147,7 @@ class MosimageModelOptions extends JModelAdmin
     /**
      * Liefert die Imapge-Properties als valides Json.
      *
-     * @param $images Properies im Json bzw. '|'-Format
+     * @param mixed Properies im Json bzw. '|'-Format
      * @return array mit PHP-Objekten, die die jeweiligen Properties der Bilder enthält.
      */
     public function prepareJson ($images)
