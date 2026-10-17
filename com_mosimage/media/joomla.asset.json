@@ -1,0 +1,30 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_mosimage",
+  "version": "2.0.0",
+  "description": "Mosimage component assets",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "com_mosimage.edit",
+      "type": "script",
+      "uri": "com_mosimage/mosimage-edit.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "com_mosimage.edit",
+      "type": "style",
+      "uri": "com_mosimage/mosimage-edit.css"
+    },
+    {
+      "name": "com_mosimage.close",
+      "type": "script",
+      "uri": "com_mosimage/mosimage-close.js"
+    }
+  ]
+}

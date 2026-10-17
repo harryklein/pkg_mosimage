@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="package" version="3.0" method="upgrade">
+<extension type="package" method="upgrade">
 	<name>PKG_MOSIMAGE</name>
 	<packagename>mosimage</packagename>
 	<creationDate>DATE</creationDate>
 	<author>Harry Klein</author>
-    <authorEmail>harry.klein@joomla-hklein.de</authorEmail>
-    <authorUrl>http://www.joomla-hklein.de</authorUrl>
-    <copyright>(C) 2009-2015 Harry Klein. All rights reserved.</copyright>
-    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<packager>Joomla! Project</packager>
-	<copyright>(C) 2005 - 2014 Open Source Matters. All rights reserved.</copyright>
-	<packageremail>harry.klein@joomla-hklein.de</packageremail>
+	<authorEmail>harry.klein@joomla-hklein.de</authorEmail>
+	<authorUrl>http://www.joomla-hklein.de</authorUrl>
+	<copyright>(C) 2009-2026 Harry Klein. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<packager>Harry Klein</packager>
 	<packagerurl>www.joomla-hklein.de</packagerurl>
 	<version>HEAD</version>
 	<description>PKG_MOSIMAGE_XML_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
+	<blockChildUninstall>true</blockChildUninstall>
 	<files>
 		<file type="component" id="com_mosimage">com_mosimage.zip</file>
 		<file type="plugin" id="mosimage" group="content">plg_mosimage.zip</file>
 		<file type="plugin" id="mosimageadmin" group="editors-xtd">plg_mosimage-admin.zip</file>
 		<file type="plugin" id="viewmosimage" group="editors-xtd">plg_mosimage-viewmosimage.zip</file>
-		<file type="modul" id="mod_mosimage_random_image">mod_mosimage_random_image.zip</file>
+		<file type="module" id="mod_mosimage_random_image" client="site">mod_mosimage_random_image.zip</file>
 	</files>
 	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.pkg_mosimage.sys.ini</language>
-		<language tag="de-DE">de-DE/de-DE.pkg_mosimage.sys.ini</language>
+		<language tag="en-GB">en-GB/pkg_mosimage.sys.ini</language>
+		<language tag="de-DE">de-DE/pkg_mosimage.sys.ini</language>
 	</languages>
-	
+
 	<updateservers>
 		<server type="extension" priority="3" name="Mosimage Update Site">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update-stable.xml</server>
 		<server type="extension" priority="2" name="Mosimage Update Site Beta">http://mosimage3-demo.joomla-hklein.de/upload/mosimage-update-beta.xml</server>

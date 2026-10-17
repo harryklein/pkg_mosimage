@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<fieldset name="component" label="COM_MOSIMAGE_COMPONENT_LABEL" description="COM_MOSIMAGE_COMPONENT_DESC">
-		
+		<field name="mosimage_note" type="note" description="COM_MOSIMAGE_COMPONENT_DESC" />
 	</fieldset>
-	
-	
-	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC">
+	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL">
 		<field name="rules" type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
 			component="com_mosimage"
 			filter="rules"
 			validate="rules"
-			label="JCONFIG_PERMISSIONS_LABEL"
 			section="component" />
 	</fieldset>
 </config>

@@ -1,326 +1,146 @@
 #!/bin/bash
+#
+# Baut das Joomla-Paket pkg_mosimage inkl. aller Teil-Erweiterungen.
+#
+# Ergebnis: deploy/pkg_mosimage-VERSION.zip
+#
+# Es werden nur Dateien eingepackt, die von git verwaltet werden (bzw. neu und nicht ignoriert sind).
+#
 
-ROOT_DIR=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]})))
-REPORT_DIR=${ROOT_DIR}/report
-BUILD_DIR=${ROOT_DIR}/build
+ROOT_DIR=$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")")
+BUILD_DIR="${ROOT_DIR}/build"
+DEPLOY_DIR="${ROOT_DIR}/deploy"
 
->&2 echo "ROOT_DIR ....: [${ROOT_DIR}]"
->&2 echo "REPORT_DIR ..: [${REPORT_DIR}]"
->&2 echo "BUILD_DIR  ..: [${BUILD_DIR}]"
+PACKAGE_NAME=pkg_mosimage
+SUB_PACKAGES="com_mosimage plg_mosimage plg_mosimage-admin plg_mosimage-viewmosimage mod_mosimage_random_image"
 
-ERROR_COUNTER=0;
+# Dateien/Ordner der Teil-Erweiterungen, die nicht in die ZIP-Dateien gehören
+EXCLUDE_PATTERN='^(bin|doc|build|deploy|report)/|(^|/)(\.gitignore|build\.properties)$'
 
 function usage(){
 	echo ""
-	echo "Aufruf: $(basename $0) [--help] [--build-version|--build|-b] [--ignore-lang-error|-l] [--fast|-f]"
-	echo "Baut das Modul/Komponente in [${ROOT_DIR}]"
+	echo "Aufruf: $(basename "$0") [--help] [--build-version|--build|-b]"
+	echo "Baut das Paket in [${ROOT_DIR}]"
 	echo "   --build-version|--build|-b : Liefert die VERSIONS-Nummer des Builds"
-	echo "   --ignore-lang-error|-l     : Fehler in den Sprachfiles führen nicht zu einem"	
-	echo "                                Abbruch."   
-	echo "   --fast|-f                  : Keine Sprachfike-und Lint-Checks"   
-	echo "   --check|-c                 : Überprüft die Files in bin/ auf Veränderungen"                  
 	echo "   --help|-h                  : Diese Hilfe"
-	
 	echo ""
-	echo "Es werden folgende Skripte zusätzlich benutzt:"
-	for i in bin/*.sh
-	do
-	  local NAME=$(basename $i)
-	  if [ "${NAME}" == "build.sh" ]
-	  then
-	    :
-	  else 
-	    echo "* ${NAME}"
-	  fi
-	done
-}
-
-function debug(){
-  if [ "$DEBUG" == "1" ]
-  then
-    echo "DEBUG: $@"
-  fi
-}
-
-#
-# Ausgabe von Meldungen. Je nach Level wirde unterschiedliche Zeichen und Einrückungen ausgegeben
-# $1 : Level 1-3
-# $2 : printf-Format
-# $3-n : Parameter für das printf-Format
-#
-function trace(){
-  local FORMAT=""
-  local VALUE=""
-  case "${1}" in
-    1)
-	FORMAT='%1s '
-	VALUE='*'
-	;;
-    2)
-	FORMAT='%3s '
-	VALUE='-'
-	;;
-	
-    3) 
-	FORMAT='%5s '
-	VALUE='>'
-	;;
-	
-  esac
-  printf "[pkg-mosimage] ${FORMAT}" "${VALUE}"
-  shift 1
-  printf "$@" 
+	echo "Die Version wird aus der Umgebungsvariable VERSION bzw. BUILD_NUMBER ermittelt, sonst HEAD."
+	echo ""
 }
 
 function getVersionString(){
-  if [ "${VERSION}" == "" ]
-  then
-    if [ "${BUILD_NUMBER}" == "" ]
-    then
-	    VERSION="HEAD"
+	if [ -n "${VERSION}" ]; then
+		VERSION=$(echo "${VERSION}" | sed -e 's/-/./g')
+	elif [ -n "${BUILD_NUMBER}" ]; then
+		VERSION="build-${BUILD_NUMBER}"
 	else
-	    VERSION="build-${BUILD_NUMBER}"
-	fi
-  else
-  	VERSION=$(echo "${VERSION}" | sed -e s/'-'/'\.'/g)
-  fi
-}
-
-function getComamdLineParameter(){
-  while true
-  do
-    case "${1}" in
-            -h|--help)
-                    usage
-                    exit
-                    ;;
-            --build|-b)
-                    getVersionString
-                    echo $VERSION
-                    exit
-                    ;;
-            --ignore-lang-error|-l)
-                    IGNORE_LANG_ERROR=1
-                    ;;
-            --fast|-f)
-                    FAST=1
-                    ;;
-            --check|-c)
-            		CHECK_BIN_FILES=1
-            		;;
-            '')
-                  break
-                  ;;
-    esac
-    shift 1
-  done
-}
-
-function check_exit_code(){
-	EXIT_CODE=$1
-	shift 1
-	MSG=$@
-	
-	if [ $EXIT_CODE -ne 0 ]	
-	then
-		echo "ERROR: $MSG."
-		echo ""
-		echo "BUILD FAILED"
-		echo ""
-		exit 1
+		VERSION="HEAD"
 	fi
 }
 
-
-function loadConfiguration(){
-  local CONF_FILE="${ROOT_DIR}/build.properties"
-  if [ -f "${CONF_FILE}" -a -r  "${CONF_FILE}" ]
-  then
-    echo "INFO: Lade Konfiguration [${CONF_FILE}]"
-    . "${ROOT_DIR}/build.properties"
-    if [[ $(echo ${ZIP_FILE_NAME}) == "" ]]
-    then
-      check_exit_code 1 "ZIP_FILE_NAME ist nicht in [${CONF_FILE}] gesetzt oder leer"
-    fi
-  else
-    check_exit_code 1 "Kann Konfiguration [${CONF_FILE}] nicht laden"
-  fi
-  
-  if [ -z "${BUILD_FILE_MASTER}" ]
-  then
-  	BUILD_FILE_MASTER=../joomla-build
-  fi
-
-}
-
-function createBuildDirectory(){
-    if [ -d "${BUILD_DIR}" -o -f "${BUILD_DIR}" ]
-    then
-	    echo "INFO: Lösche Build-Verzeichnis [${BUILD_DIR}]."
-	    rm -rf "${BUILD_DIR}"
-    fi
-    echo "INFO: Lege Verzeichnis [${BUILD_DIR}] an."
-    mkdir -p "${BUILD_DIR}"
-}
-
-function createReportDirectory(){
-    if [ -d "${REPORT_DIR}" -o -f "${REPORT_DIR}" ]
-    then
-            echo "INFO: Lösche Build-Verzeichnis [${REPORT_DIR}]."
-            rm -rf "${REPORT_DIR}"
-    fi
-    echo "INFO: Lege Verzeichnis [${REPORT_DIR}] an."
-    mkdir -p "${REPORT_DIR}"
-}
-
-
-function copyAllFileToBuildDirectory(){
-  echo "INFO: kopiere Filelelist nach [${BUILD_DIR}]"
-  cp  "${ROOT_DIR}/bin/filelist.txt" "${BUILD_DIR}"
-  check_exit_code $? "Kann [${ROOT_DIR}/bin/filelist.txt] nicht nach [${BUILD_DIR}] kopieren"
-
-  local FILES=$(cat "${ROOT_DIR}/bin/filelist.txt" | grep -v '\.zip *$')
-  cp  --parent $FILES "${BUILD_DIR}"
-  check_exit_code $? "Kann Dateien aus [${ROOT_DIR}/bin/filelist.txt] nicht nach [${BUILD_DIR}] kopieren"
-}
-
-
-function replaceParameterInConfigFile(){
-  local CONFIG_FILE=$(ls *.xml)
-  if [ $(echo ${CONFIG_FILE} | wc -w) -ne 1 ]
-  then
-    check_exit_code 1 "Kann Konfigurationsdatei nicht ermmiteln: Gefunden wurde [$CONFIG_FILE]"
-  fi
-  sed -e s#'<version>.*</version>'#"<version>${VERSION}</version>"#g ${CONFIG_FILE}|\
-  sed -e s#'<creationDate>.*</creationDate>'#"<creationDate>$(date "+%d %b %Y")</creationDate>"#g > ${CONFIG_FILE}.tmp
-  mv ${CONFIG_FILE}.tmp ${CONFIG_FILE}
-}
-
-function buildArtefakct(){
-  changeIntoBuildDirectory
-  
-  echo "* Baue ZIP [${ZIP_FILE_NAME}-${VERSION}] in [$(pwd)]"
-  cat filelist.txt | zip "${ROOT_DIR}/deploy/${ZIP_FILE_NAME}-${VERSION}.zip" '-@'
-  check_exit_code $? "Datei $ROOT_DIR/deploy/${ZIP_FILE_NAME}-${VERSION}.zip konnte nicht erzeugt werden."
-
-  echo ""
-  echo "SUCCESS: Datei ${ROOT_DIR}/deploy/${ZIP_FILE_NAME}-${VERSION}.zip wurde erzeugt."
-}
-
-function changeIntoWorkingDirectory(){
-  cd "$ROOT_DIR"
-  check_exit_code $? "ERROR: Kann nicht in das Verzeichnis [${ROOT_DIR}] wechseln. Abbruch"
-}
-
-function checkFilelistFile(){
-  if [ ! -f "${ROOT_DIR}"/bin/filelist.txt ]
-  then
-    echo "ERROR: Kann Datei [${ROOT_DIR}/filelist.txt] nicht finden. Abbruch"
-    exit 1
-  fi
-}
-
-
-function createDepoloyDirectory(){
-  echo "* INFO: Lösche Deploy-Ordner [${ROOT_DIR}/deploy]"
-  rm -rf "${ROOT_DIR}/deploy"
-  check_exit_code $? "Kann Verzeichnis [${ROOT_DIR}/deploy] nicht löschen"
-
-  if [ ! -d deploy ]
-  then
-          mkdir deploy
-          check_exit_code $? "Kann Verzeichnis [${ROOT_DIR}/deploy] nicht anlegen"
-  fi
-}
-
-
-function changeIntoBuildDirectory(){
-  cd "${BUILD_DIR}"
-  check_exit_code $? "Kann nicht nach {${BUILD_DIR}] wechseln"
+function fail(){
+	echo "ERROR: $*"
+	echo ""
+	echo "BUILD FAILED"
+	exit 1
 }
 
 #
-# Versucht, die Datei bin/$1 zu laden und auszuführen.
-# Exsistiert die Datei nicht, so passiert schlicht nichts.
+# Listet alle Dateien eines Ordners, die von git verwaltet werden bzw. neu und nicht ignoriert sind.
 #
-# @param $1 Name der Datei, die geladen und ausgeführt werden soll
+# $1 Ordner relativ zu ROOT_DIR
 #
-function loadAndExecuteOtherScript(){
-  local FILE_NAME="${ROOT_DIR}/bin/${1}"
-  if [ -f "${FILE_NAME}" -a -r "${FILE_NAME}" ]
-  then
-    trace 1 "Laden Datei [${FILE_NAME}] und führe sie aus.\n"
-    shift 1
-    . "${FILE_NAME}"	
-  fi
+function listFiles(){
+	(cd "${ROOT_DIR}/$1" && git ls-files --cached --others --exclude-standard . | sort -u | while read -r f; do [ -f "$f" ] && echo "$f"; done)
 }
 
-function checkAllBinFiles(){
-	if [ "${CHECK_BIN_FILES}" != "1" ]
-	then
-		return
-	fi
-	trace 1 "Prüfe alle Build-Files auf Veränderung. Der Master liegt in [${BUILD_FILE_MASTER}]\n"
-	
-	[ -d ${BUILD_FILE_MASTER} ]
-	check_exit_code $? "[${BUILD_FILE_MASTER}] ist kein Verzeichnis. Abbruch"
-	
-	local FILES=$(find bin -maxdepth 1 -type f | grep -v filelist.txt | grep -v '^bin/\.')
-	local RESULT
-	local i
-	for i in $FILES
-	do
-		if [ -f ${BUILD_FILE_MASTER}/$i ]
-		then
-			trace 2 "%-60s" "$i"
-			diff -q $i ${BUILD_FILE_MASTER}/$i
-			RESULT=$?
-			if [ ${RESULT} -ne 0 ]
-			then
-				ERROR_COUNTER=$((ERROR_COUNTER+1))
-				diff -u $i ${BUILD_FILE_MASTER}/$i
-			else
-				echo "ok"
-			fi
-		fi
-	done
-	
-	check_exit_code ${ERROR_COUNTER} "Nicht alle Buildfiles sind gleich. Abbruch."
-
-
+#
+# Setzt Version und Erstellungsdatum im Manifest
+#
+# $1 Manifest-Datei
+#
+function replaceParameterInManifest(){
+	sed -i -e "s#<version>.*</version>#<version>${VERSION}</version>#" \
+	       -e "s#<creationDate>.*</creationDate>#<creationDate>$(date '+%Y-%m-%d')</creationDate>#" "$1"
 }
 
-getComamdLineParameter "$@"
+function checkPhpLint(){
+	local DIR=$1
+	local ERRORS=0
+	while read -r f; do
+		php -l "$f" > /dev/null 2>&1 || { php -l "$f"; ERRORS=$((ERRORS+1)); }
+	done < <(find "${DIR}" -name '*.php')
+	[ ${ERRORS} -eq 0 ] || fail "PHP-Syntaxfehler in [${DIR}]"
+}
 
-loadConfiguration
+#
+# Prüft die Sprachdateien so, wie Joomla sie liest (parse_ini_file im RAW-Modus)
+#
+function checkLanguageFiles(){
+	local DIR=$1
+	while read -r f; do
+		php -r 'exit(@parse_ini_file($argv[1], false, INI_SCANNER_RAW) === false ? 1 : 0);' "$f" || fail "Fehler in Sprachdatei [$f]"
+	done < <(find "${DIR}" -name '*.ini')
+}
+
+function buildSubPackage(){
+	local NAME=$1
+	local TARGET="${BUILD_DIR}/${NAME}"
+
+	echo "* Baue [${NAME}]"
+	mkdir -p "${TARGET}"
+	(cd "${ROOT_DIR}/${NAME}" && listFiles "${NAME}" | grep -Ev "${EXCLUDE_PATTERN}" | xargs -d '\n' cp --parents -t "${TARGET}") \
+		|| fail "Kann Dateien von [${NAME}] nicht kopieren"
+
+	local MANIFEST
+	MANIFEST=$(find "${TARGET}" -maxdepth 1 -name '*.xml')
+	[ "$(echo "${MANIFEST}" | wc -w)" -eq 1 ] || fail "Manifest von [${NAME}] nicht eindeutig: [${MANIFEST}]"
+	replaceParameterInManifest "${MANIFEST}"
+
+	checkPhpLint "${TARGET}"
+	checkLanguageFiles "${TARGET}"
+
+	(cd "${TARGET}" && zip -qr "${BUILD_DIR}/package/${NAME}.zip" .) || fail "Kann [${NAME}.zip] nicht erzeugen"
+}
+
+function buildPackage(){
+	local TARGET="${BUILD_DIR}/package"
+
+	cp "${ROOT_DIR}/pkg_mosimage.xml" "${ROOT_DIR}/script.php" "${TARGET}" || fail "Kann Paket-Manifest nicht kopieren"
+	(cd "${ROOT_DIR}" && listFiles language | sed 's#^#language/#' | xargs -d '\n' cp --parents -t "${TARGET}") \
+		|| fail "Kann Sprachdateien nicht kopieren"
+	replaceParameterInManifest "${TARGET}/pkg_mosimage.xml"
+	checkPhpLint "${TARGET}"
+	checkLanguageFiles "${TARGET}/language"
+
+	(cd "${TARGET}" && zip -qr "${DEPLOY_DIR}/${PACKAGE_NAME}-${VERSION}.zip" .) || fail "Kann Paket nicht erzeugen"
+}
+
+case "$1" in
+	-h|--help)
+		usage
+		exit 0
+		;;
+	-b|--build|--build-version)
+		getVersionString
+		echo "${VERSION}"
+		exit 0
+		;;
+esac
+
 getVersionString
-changeIntoWorkingDirectory
 
-checkAllBinFiles
+command -v zip > /dev/null || fail "zip ist nicht installiert"
+command -v php > /dev/null || fail "php ist nicht installiert"
 
-checkFilelistFile
+rm -rf "${BUILD_DIR}" "${DEPLOY_DIR}"
+mkdir -p "${BUILD_DIR}/package" "${DEPLOY_DIR}"
 
-createDepoloyDirectory
-createBuildDirectory
-createReportDirectory
+for SUB_PACKAGE in ${SUB_PACKAGES}; do
+	buildSubPackage "${SUB_PACKAGE}"
+done
 
+buildPackage
 
-loadAndExecuteOtherScript build-subpackage.sh  "$@"
-
-loadAndExecuteOtherScript checkUnusedProperties "de-DE"
-
-copyAllFileToBuildDirectory
-
-changeIntoBuildDirectory
-replaceParameterInConfigFile
-
-loadAndExecuteOtherScript replaceCopyrightInfo "$@"
-
-loadAndExecuteOtherScript checkPhpLint  "$@"
-
-changeIntoBuildDirectory
-buildArtefakct
-
-loadAndExecuteOtherScript checkAllLanguageFiles "$@"
-
-loadAndExecuteOtherScript build-ext.sh  "$@"
+echo ""
+echo "SUCCESS: Datei ${DEPLOY_DIR}/${PACKAGE_NAME}-${VERSION}.zip wurde erzeugt."

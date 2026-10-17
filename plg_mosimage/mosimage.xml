@@ -1,29 +1,39 @@
-<?xml version="1.0"?>
-<extension version="3.0" type="plugin" group="content" client="site" method="upgrade">
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="content" method="upgrade">
 	<name>PLG_CONTENT_MOSIMAGE</name>
 	<author>Harry Klein</author>
 	<creationDate>DATE</creationDate>
-	<copyright>(C) 2010 Harry Klein. All rights reserved.</copyright>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<copyright>(C) 2010-2026 Harry Klein. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>harry.klein@joomla-hklein.de</authorEmail>
 	<authorUrl>www.joomla-hklein.de</authorUrl>
 	<version>HEAD</version>
 	<description>PLG_CONTENT_PLUGIN_MOSIMAGE</description>
+	<namespace path="src">HKlein\Plugin\Content\Mosimage</namespace>
 	<files>
-		<filename plugin="mosimage">mosimage.php</filename>
-		<folder>mosimage</folder>
+		<folder plugin="mosimage">services</folder>
+		<folder>src</folder>
 	</files>
-	<languages>
-   		<language tag="en-GB">language/en-GB/en-GB.plg_content_mosimage.ini</language>
-   		<language tag="en-GB">language/en-GB/en-GB.plg_content_mosimage.sys.ini</language>
-   		<language tag="de-DE">language/de-DE/de-DE.plg_content_mosimage.ini</language>
-   		<language tag="de-DE">language/de-DE/de-DE.plg_content_mosimage.sys.ini</language>
+	<media destination="plg_content_mosimage" folder="media">
+		<filename>joomla.asset.json</filename>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>lightbox</folder>
+		<folder>lytebox</folder>
+		<folder>lytebox5</folder>
+		<folder>slimbox-2</folder>
+	</media>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/plg_content_mosimage.ini</language>
+		<language tag="en-GB">en-GB/plg_content_mosimage.sys.ini</language>
+		<language tag="de-DE">de-DE/plg_content_mosimage.ini</language>
+		<language tag="de-DE">de-DE/plg_content_mosimage.sys.ini</language>
 	</languages>
-	<config addrulepath="/plugins/content/mosimage/mosimage/rules">
-		<fields name="params">
+	<config>
+		<fields name="params" addfieldprefix="HKlein\Plugin\Content\Mosimage\Field" addruleprefix="HKlein\Plugin\Content\Mosimage\Rule">
 			<fieldset name="basic">
-				<field name="maxResizeImagePerRequest" type="list" default="10" label="NUMBER_OF_MAX_GENERATE_IMAGES_PER_REQUEST" 
-					description="NUMBER_OF_MAX_GENERATE_IMAGES_PER_REQUEST_DESC" >
+				<field name="maxResizeImagePerRequest" type="list" default="10" label="NUMBER_OF_MAX_GENERATE_IMAGES_PER_REQUEST"
+					description="NUMBER_OF_MAX_GENERATE_IMAGES_PER_REQUEST_DESC" validate="options">
 					<option value="2">2</option>
 					<option value="10">10</option>
 					<option value="15">15</option>
@@ -31,9 +41,9 @@
 					<option value="25">25</option>
 					<option value="30">30</option>
 				</field>
-					
-				<field name="quality" type="list" size="5" default="80" label="JPG_QUALITY" 
-					description="JPG_QUALITY_DESC">
+
+				<field name="quality" type="list" default="80" label="JPG_QUALITY"
+					description="JPG_QUALITY_DESC" validate="options">
 					<option value="100">100</option>
 					<option value="90">90</option>
 					<option value="80">80</option>
@@ -42,40 +52,48 @@
 					<option value="65">65</option>
 					<option value="60">60</option>
 				</field>
-					
+
 				<field name="scramble" type="list" default="md5" label="SCRAMBLE_IMAGE_NAMES"
-					description="SCRAMBLE_IMAGE_NAMES_DESC">
+					description="SCRAMBLE_IMAGE_NAMES_DESC" validate="options">
 					<option value="off">JOFF</option>
 					<option value="md5">MD5</option>
 					<option value="crc32">CRC32</option>
 				</field>
+
 				<field name="debug" type="radio" default="0" label="MOSIMAGE_DEBUG"
-					description="MOSIMAGE_DEBUG_DESC">
-					<option value="0">JNo</option>
-					<option value="1">JYes</option>
+					description="MOSIMAGE_DEBUG_DESC" layout="joomla.form.field.radio.switcher">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
 			</fieldset>
+
 			<fieldset name="MOSIMAGE_THUMBNAIL">
-				<field name="thumb_width" type="text" default="150" label="MOSIMAGE_THUMBNAIL_WIDTH" 
-					description="MOSIMAGE_THUMBNAIL_WIDTH_DESC" 
+				<field name="thumb_width" type="text" default="150" label="MOSIMAGE_THUMBNAIL_WIDTH"
+					description="MOSIMAGE_THUMBNAIL_WIDTH_DESC"
 					validate="thumbnailsize"
-					min="50" 
-					max="300" 
-					class="required validate-numeric" 
+					min="50"
+					max="300"
+					required="true"
+					class="validate-numeric"
+					filter="integer"
 				/>
-				<field name="thumb_height" type="text" default="100" label="MOSIMAGE_THUMBNAIL_HEIGHT" 
-					description="MOSIMAGE_THUMBNAIL_HEIGHT_DESC" 
-					validate="thumbnailsize" 
-					min="50" 
-					max="300"  
-					class="required validate-numeric" />
-                <field name="thumb_background_color" type="color" default="#ffffff" label="MOSIMAGE_THUMBNAIL_BACKGROUND_COLOR" description="MOSIMAGE_THUMBNAIL_BACKGROUND_COLOR_DESC"/>
+				<field name="thumb_height" type="text" default="100" label="MOSIMAGE_THUMBNAIL_HEIGHT"
+					description="MOSIMAGE_THUMBNAIL_HEIGHT_DESC"
+					validate="thumbnailsize"
+					min="50"
+					max="300"
+					required="true"
+					class="validate-numeric"
+					filter="integer"
+				/>
+				<field name="thumb_background_color" type="color" default="#ffffff" label="MOSIMAGE_THUMBNAIL_BACKGROUND_COLOR"
+					description="MOSIMAGE_THUMBNAIL_BACKGROUND_COLOR_DESC"/>
 				<field name="thumb_caption" type="radio" default="0" label="MOSIMAGE_VIEW_CAPTION_FOR_THUMBNAILS"
-					description="MOSIMAGE_VIEW_CAPTION_FOR_THUMBNAILS_DESC" >
-					<option value="0">JNo</option>
-					<option value="1">JYes</option>
+					description="MOSIMAGE_VIEW_CAPTION_FOR_THUMBNAILS_DESC" layout="joomla.form.field.radio.switcher">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field name="thumb_caption_align" type="list" showon="thumb_caption:1" default="buttom" label="MOSIMAGE_CAPTION_ALIGN"
+				<field name="thumb_caption_align" type="list" showon="thumb_caption:1" default="bottom" label="MOSIMAGE_CAPTION_ALIGN"
 					description="MOSIMAGE_CAPTION_ALIGN_DESC">
 					<option value="bottom">MOSIMAGE_BOTTOM</option>
 					<option value="top">MOSIMAGE_TOP</option>
@@ -90,89 +108,86 @@
 			</fieldset>
 
 			<fieldset name="FULLSIZE_IMAGE">
-				<field name="lightbox-type" type="lightboxlist"  label="SELECT_LIGHTBOX_TYPE" 
-						description="SELECT_LIGHTBOX_TYPE_DESC"  />
-				<field name="lightbox-node" type="lightboxnote" label="MOSIMAGE_LIGHTBOX_DESCRIPTION" description="" /> 
-				<field name="full_width" type="percentorabsolute" default="800" label="FULL_SIZE_WIDTH_IN_PIXELS_OR_PERCENT" 
-						description="FULL_SIZE_WIDTH_IN_PIXELS_OR_PERCENT_DESC"
-						validate="imagesize"
-						min="200" 
-						max="1000"
-						pmin="50" 
-						pmax="100"
-						class="required validate-percentorabsolute"/>
-				<field name="full_height" type="percentorabsolute" default="600" label="FULL_SIZE_HEIGHT_IN_PIXELS_OR_PERCENT" 
-						description="FULL_SIZE_HEIGHT_IN_PIXELS_OR_PERCENT_DESC"
-						validate="imagesize" 
-						min="200" 
-						max="800"
-						pmin="50" 
-						pmax="100" 
-						class="required validate-percentorabsolute"/>
-                <field name="image_background_color" type="color" default="#000000" label="FULL_SIZE_BACKGROUND_COLOR" description="FULL_SIZE_BACKGROUND_COLOR_DESC"/>
-				<field name="image_proportions" type="list" default="bestfit_top" size="50" label="FULL_SIZE_IMAGE_PROPORTIONS"
+				<field name="lightbox-type" type="lightboxlist" default="slimbox-2.04" label="SELECT_LIGHTBOX_TYPE"
+					description="SELECT_LIGHTBOX_TYPE_DESC"/>
+				<field name="lightbox-note" type="lightboxnote" label="MOSIMAGE_LIGHTBOX_DESCRIPTION"/>
+				<field name="full_width" type="percentorabsolute" default="800" label="FULL_SIZE_WIDTH_IN_PIXELS_OR_PERCENT"
+					description="FULL_SIZE_WIDTH_IN_PIXELS_OR_PERCENT_DESC"
+					validate="imagesize"
+					min="200"
+					max="1000"
+					pmin="50"
+					pmax="100"
+					required="true"
+					class="validate-percentorabsolute"/>
+				<field name="full_height" type="percentorabsolute" default="600" label="FULL_SIZE_HEIGHT_IN_PIXELS_OR_PERCENT"
+					description="FULL_SIZE_HEIGHT_IN_PIXELS_OR_PERCENT_DESC"
+					validate="imagesize"
+					min="200"
+					max="800"
+					pmin="50"
+					pmax="100"
+					required="true"
+					class="validate-percentorabsolute"/>
+				<field name="image_background_color" type="color" default="#000000" label="FULL_SIZE_BACKGROUND_COLOR"
+					description="FULL_SIZE_BACKGROUND_COLOR_DESC"/>
+				<field name="image_proportions" type="list" default="bestfit_top" label="FULL_SIZE_IMAGE_PROPORTIONS"
 					description="FULL_SIZE_IMAGE_PROPORTIONS_DESC">
 					<option value="bestfit_top">BEST_FIT_TOP_KEEP_PROPORTIONS</option>
 					<option value="bestfit_middle">BEST_FIT_MIDDLE_KEEP_PROPORTIONS</option>
 					<option value="bestfit_bottom">BEST_FIT_BOTTOM_KEEP_PROPORTIONS</option>
-<!--					
-					<option value="crop">CROP_TO_FIT_CUT_ONE_SIDE</option>
-		            <option value="fill">FILL_OUT_WITH_BACKGROUND_COLOR</option>
-		            <option value="stretch">STRECHT_TO_FIT</option>-->
 				</field>
-                <field name="image_background_color" type="color" default="#ffffff" label="FULL_SIZE_BACKGROUND_COLOR" description="FULL_SIZE_BACKGROUND_COLOR_DESC"/>
 				<field name="full_caption" type="radio" default="1" label="VIEW_CAPTION_FOR_FULL_SIZE_IMAGES"
-					description="VIEW_CAPTION_FOR_FULL_SIZE_IMAGES_DESC">
-					<option value="0">JNo</option>
-					<option value="1">JYes</option>
+					description="VIEW_CAPTION_FOR_FULL_SIZE_IMAGES_DESC" layout="joomla.form.field.radio.switcher">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				
-				<!-- Advanced image options -->
 			</fieldset>
-			
-			<fieldset name="WATERMARK" addfieldpath="/plugins/content/mosimage/mosimage/fields">
+
+			<fieldset name="WATERMARK">
 				<field name="watermark" type="radio" default="0" label="USE_WATERMARKS"
-					description="USE_WATERMARKS_DESC">
-					<option value="0">JNo</option>
-					<option value="1">JYes</option>
+					description="USE_WATERMARKS_DESC" layout="joomla.form.field.radio.switcher">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				
-				<field name="watermark_file" 
+
+				<field name="watermark_file"
 					type="recursiveimagelist"
-					showon="watermark:1" 
-					default="-" 
-					label="SELECT_IMAGE_FOR_WATERMARK" 
-					description="SELECT_IMAGE_FOR_WATERMARK_DESC" />
-				
-				<field name="watermark_left" type="list" showon="watermark:1" default="center" label="LEFT_POSITION_OF_WATERMARK" 
-					description="LEFT_POSITION_OF_WATERMARK_DESC" >
+					showon="watermark:1"
+					default="-"
+					label="SELECT_IMAGE_FOR_WATERMARK"
+					description="SELECT_IMAGE_FOR_WATERMARK_DESC"/>
+
+				<field name="watermark_left" type="list" showon="watermark:1" default="center" label="LEFT_POSITION_OF_WATERMARK"
+					description="LEFT_POSITION_OF_WATERMARK_DESC">
 					<option value="left">MOSIMAGE_WATERMARK_LEFT</option>
 					<option value="right">MOSIMAGE_WATERMARK_RIGHT</option>
 					<option value="center">MOSIMAGE_WATERMARK_CENTER</option>
 				</field>
-				
-				<field name="watermark_top" type="list" showon="watermark:1" default="botton" label="TOP_POSITION_OF_WATERMARK" 
-					description="TOP_POSITION_OF_WATERMARK_DESC" >
+
+				<field name="watermark_top" type="list" showon="watermark:1" default="bottom" label="TOP_POSITION_OF_WATERMARK"
+					description="TOP_POSITION_OF_WATERMARK_DESC">
 					<option value="top">MOSIMAGE_WATERMARK_TOP</option>
 					<option value="bottom">MOSIMAGE_WATERMARK_BOTTOM</option>
 					<option value="middle">MOSIMAGE_WATERMARK_MIDDLE</option>
 				</field>
-					
-					
+
 				<field name="transparency_type" type="list" showon="watermark:1" default="alpha" label="TRANSPARENCY_TYPE"
 					description="TRANSPARENCY_TYPE_DESC">
 					<option value="alpha">TRUE_ALPHA_BLENDING</option>
 					<option value="color">TRANSPARENT_BACKGROUND_COLOR</option>
 				</field>
-				
-				<field name="transparent_color" type="color" showon="transparency_type:color" default="#000000" label="TRANSPARENT_COLOR_IGNORED_FOR_TRUE_ALPHA_BLENDING" 
-					description="TRANSPARENT_COLOR_IGNORED_FOR_TRUE_ALPHA_BLENDING_DESC" />
-					
-				<field name="transparency" type="integer" showon="transparency_type:color" default="25" label="TRANSPARENCY_IN_PERCENT" 
+
+				<field name="transparent_color" type="color" showon="watermark:1[AND]transparency_type:color" default="#000000"
+					label="TRANSPARENT_COLOR_IGNORED_FOR_TRUE_ALPHA_BLENDING"
+					description="TRANSPARENT_COLOR_IGNORED_FOR_TRUE_ALPHA_BLENDING_DESC"/>
+
+				<field name="transparency" type="integer" showon="watermark:1[AND]transparency_type:color" default="25"
+					label="TRANSPARENCY_IN_PERCENT"
 					description="TRANSPARENCY_IN_PERCENT_DESC"
 					first="100"
 					last="0"
-					step="-5" />
+					step="-5"/>
 			</fieldset>
 		</fields>
 	</config>

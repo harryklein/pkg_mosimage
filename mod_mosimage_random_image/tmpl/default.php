@@ -1,26 +1,30 @@
 <?php
+
 /**
  * @package     Joomla.Site
  * @subpackage  mod_mosimage_random_image
- *
- * @copyright (C) 2015-2016 Harry Klein - www.joomla-hklein.de
- * @license GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright   (C) 2015-2026 Harry Klein - www.joomla-hklein.de
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
+
+/** @var \stdClass|null $article */
+/** @var \Joomla\Registry\Registry $params */
+
+if (!$article) {
+    return;
+}
 ?>
-<div class="random-image<?php echo $moduleclass_sfx ?>">
-	<?php 
-	echo $article->text; 
-	$jinput = JFactory::getApplication()->input;
-	$Itemid     = $jinput->getInt('Itemid');
-    if ($params->get('view_link')): 
-        $url = 'index.php?option=com_content&view=article&id=' . $article->id;
-    	if ($Itemid)
-    	{
-        	$url .= '&Itemid=' . $Itemid;
-		}?>
-    	<p><a title="<?php echo $article->title;?>"  href="<?php echo JRoute::_($url); ?>"><?php echo JText::_('MOD_MOSIMAGE_RANDOM_IMAGE_READMORE')?></a>
-    <?php 
-    endif;?>
+<div class="random-image<?php echo htmlspecialchars($params->get('moduleclass_sfx', ''), ENT_COMPAT, 'UTF-8'); ?>">
+	<?php echo $article->text; ?>
+	<?php if ($params->get('view_link')) : ?>
+		<p>
+			<a title="<?php echo htmlspecialchars($article->title, ENT_COMPAT, 'UTF-8'); ?>" href="<?php echo $article->link; ?>">
+				<?php echo Text::_('MOD_MOSIMAGE_RANDOM_IMAGE_READMORE'); ?>
+			</a>
+		</p>
+	<?php endif; ?>
 </div>

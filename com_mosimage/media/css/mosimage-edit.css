@@ -1,0 +1,19 @@
+/**
+ * @package     Joomla.Administrator
+ * @subpackage  com_mosimage
+ * @copyright   (C) 2010-2026 Harry Klein - www.joomla-hklein.de
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+.mosimage-edit img.mosimage-preview {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.mosimage-edit select[multiple] {
+  min-height: 15rem;
+  width: 100%;
+}
+
+.mosimage-edit .control-group {
+  margin-bottom: .75rem;
+}

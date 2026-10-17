@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "plg_content_mosimage",
+  "version": "2.0.0",
+  "description": "Mosimage content plugin assets",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "plg_content_mosimage.mosimage",
+      "type": "style",
+      "uri": "plg_content_mosimage/mosimage.css"
+    },
+    {
+      "name": "plg_content_mosimage.percentorabsolute",
+      "type": "script",
+      "uri": "plg_content_mosimage/percentorabsolute.js",
+      "dependencies": [
+        "form.validate"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "plg_content_mosimage.slimbox",
+      "type": "style",
+      "uri": "media/plg_content_mosimage/slimbox-2/css/slimbox2.css"
+    },
+    {
+      "name": "plg_content_mosimage.slimbox",
+      "type": "script",
+      "uri": "media/plg_content_mosimage/slimbox-2/js/slimbox2.js",
+      "dependencies": [
+        "jquery"
+      ]
+    },
+    {
+      "name": "plg_content_mosimage.lightbox2",
+      "type": "style",
+      "uri": "media/plg_content_mosimage/lightbox/css/lightbox.css"
+    },
+    {
+      "name": "plg_content_mosimage.lightbox2",
+      "type": "script",
+      "uri": "media/plg_content_mosimage/lightbox/js/lightbox-2.6.min.js",
+      "dependencies": [
+        "jquery"
+      ]
+    },
+    {
+      "name": "plg_content_mosimage.lytebox",
+      "type": "style",
+      "uri": "media/plg_content_mosimage/lytebox/css/lytebox.css"
+    },
+    {
+      "name": "plg_content_mosimage.lytebox",
+      "type": "script",
+      "uri": "media/plg_content_mosimage/lytebox/js/lytebox.js"
+    },
+    {
+      "name": "plg_content_mosimage.lytebox5",
+      "type": "style",
+      "uri": "media/plg_content_mosimage/lytebox5/lytebox.css"
+    },
+    {
+      "name": "plg_content_mosimage.lytebox5",
+      "type": "script",
+      "uri": "media/plg_content_mosimage/lytebox5/lytebox.js"
+    },
+    {
+      "name": "plg_content_mosimage.lytebox5-de",
+      "type": "script",
+      "uri": "media/plg_content_mosimage/lytebox5/lytebox-de.js"
+    }
+  ]
+}
