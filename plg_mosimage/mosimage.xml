@@ -131,11 +131,11 @@
 					class="validate-percentorabsolute"/>
 				<field name="image_background_color" type="color" default="#000000" label="FULL_SIZE_BACKGROUND_COLOR"
 					description="FULL_SIZE_BACKGROUND_COLOR_DESC"/>
-				<field name="image_proportions" type="list" default="bestfit_top" label="FULL_SIZE_IMAGE_PROPORTIONS"
+				<field name="image_proportions" type="list" default="top" label="FULL_SIZE_IMAGE_PROPORTIONS"
 					description="FULL_SIZE_IMAGE_PROPORTIONS_DESC">
-					<option value="bestfit_top">BEST_FIT_TOP_KEEP_PROPORTIONS</option>
-					<option value="bestfit_middle">BEST_FIT_MIDDLE_KEEP_PROPORTIONS</option>
-					<option value="bestfit_bottom">BEST_FIT_BOTTOM_KEEP_PROPORTIONS</option>
+					<option value="top">BEST_FIT_TOP_KEEP_PROPORTIONS</option>
+					<option value="middle">BEST_FIT_MIDDLE_KEEP_PROPORTIONS</option>
+					<option value="bottom">BEST_FIT_BOTTOM_KEEP_PROPORTIONS</option>
 				</field>
 				<field name="full_caption" type="radio" default="1" label="VIEW_CAPTION_FOR_FULL_SIZE_IMAGES"
 					description="VIEW_CAPTION_FOR_FULL_SIZE_IMAGES_DESC" layout="joomla.form.field.radio.switcher">

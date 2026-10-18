@@ -331,12 +331,12 @@ class ThumbnailCreator
     private function calcProportion($value, $imageValue, string $proportion)
     {
         switch ($proportion) {
-            case 'bestfit_top':
+            case 'top':
                 return 0;
-            case 'bestfit_bottom':
+            case 'bottom':
                 return $value - $imageValue;
-            case 'bestfit':
-            case 'bestfit_middle':
+            case 'none':
+            case 'middle':
             default:
                 return ($value - $imageValue) / 2;
         }
@@ -344,7 +344,7 @@ class ThumbnailCreator
 
     private function getResizedImage(ImageDisplayProperties $imageProperties, bool $thumbnailMode, int $bgcolor): CacheFile
     {
-        $proportion = $thumbnailMode ? 'bestfit' : $this->config->getImageProportions();
+        $proportion = $thumbnailMode ? 'none' : $this->config->getImageProportions();
 
         $cacheFile     = new CacheFile($imageProperties, $this->config, $proportion, $bgcolor);
         $cacheFileName = $cacheFile->getAbsoluteCacheFile();

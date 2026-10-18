@@ -171,7 +171,7 @@ class PluginConfiguration
 
     public function getImageProportions(): string
     {
-        return (string) $this->params->get('image_proportions', 'bestfit');
+        return (string) $this->params->get('image_proportions', 'none');
     }
 
     public function getMaxResizedImagePerRequest(): int

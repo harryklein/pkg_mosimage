@@ -51,7 +51,7 @@ class CacheFileNameBuilder
 
     public function addProportionInfo(string $proportion): self
     {
-        $this->proportionInfo = substr($proportion, 0, 1);
+        $this->proportionInfo = $proportion;
 
         return $this;
     }

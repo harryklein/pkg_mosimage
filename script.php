@@ -15,6 +15,8 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Log\Log;
 use Joomla\Database\DatabaseInterface;
 use Joomla\Database\ParameterType;
+use Joomla\Filesystem\Folder;
+use Joomla\Registry\Registry;
 
 return new class () implements InstallerScriptInterface {
     private string $minimumJoomla = '6.0.0';
@@ -61,6 +63,11 @@ return new class () implements InstallerScriptInterface {
     {
         if ($type === 'install' || $type === 'discover_install' || $type === 'update') {
             $this->upgradeTable();
+
+            // Die Cache-Dateien tragen die Einpassung im Namen; nach der Umstellung werden die alten nicht mehr benutzt
+            if ($this->migrateImageProportions()) {
+                $this->clearImageCache();
+            }
         }
 
         if ($type === 'install' || $type === 'discover_install') {
@@ -103,6 +110,76 @@ return new class () implements InstallerScriptInterface {
                     ->execute();
             }
         } catch (\RuntimeException $e) {
+            Log::add('Mosimage: ' . $e->getMessage(), Log::WARNING, 'jerror');
+        }
+    }
+
+    /**
+     * Bis Version 1.x hieß die Einpassung des Content-Plugins (image_proportions) bestfit_top, bestfit_middle
+     * und bestfit_bottom, ab Version 2.0.0 top, middle und bottom. Gespeicherte Werte werden umgestellt.
+     *
+     * @return bool true, wenn ein alter Wert umgestellt wurde
+     */
+    private function migrateImageProportions(): bool
+    {
+        $mapping = ['bestfit_top' => 'top', 'bestfit_middle' => 'middle', 'bestfit_bottom' => 'bottom'];
+        $db      = Factory::getContainer()->get(DatabaseInterface::class);
+
+        try {
+            $query = $db->getQuery(true)
+                ->select($db->quoteName(['extension_id', 'params']))
+                ->from($db->quoteName('#__extensions'))
+                ->where($db->quoteName('type') . ' = ' . $db->quote('plugin'))
+                ->where($db->quoteName('folder') . ' = ' . $db->quote('content'))
+                ->where($db->quoteName('element') . ' = ' . $db->quote('mosimage'));
+            $plugin = $db->setQuery($query)->loadObject();
+
+            if (!$plugin) {
+                return false;
+            }
+
+            $params     = new Registry($plugin->params);
+            $proportion = (string) $params->get('image_proportions', '');
+
+            if (!isset($mapping[$proportion])) {
+                return false;
+            }
+
+            $params->set('image_proportions', $mapping[$proportion]);
+            $json = $params->toString();
+            $id   = (int) $plugin->extension_id;
+
+            $query = $db->getQuery(true)
+                ->update($db->quoteName('#__extensions'))
+                ->set($db->quoteName('params') . ' = :params')
+                ->where($db->quoteName('extension_id') . ' = :id')
+                ->bind(':params', $json, ParameterType::STRING)
+                ->bind(':id', $id, ParameterType::INTEGER);
+
+            $db->setQuery($query)->execute();
+
+            return true;
+        } catch (\RuntimeException $e) {
+            Log::add('Mosimage: ' . $e->getMessage(), Log::WARNING, 'jerror');
+
+            return false;
+        }
+    }
+
+    /**
+     * Leert den Bild-Cache des Content-Plugins (wie "Cache leeren" auf der Info-Seite der Komponente).
+     */
+    private function clearImageCache(): void
+    {
+        $cacheDirectory = JPATH_SITE . '/cache/mosimage-cache';
+
+        try {
+            if (is_dir($cacheDirectory)) {
+                Folder::delete($cacheDirectory);
+            }
+
+            Folder::create($cacheDirectory);
+        } catch (\Exception $e) {
             Log::add('Mosimage: ' . $e->getMessage(), Log::WARNING, 'jerror');
         }
     }
